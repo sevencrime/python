@@ -1,0 +1,128 @@
+BeautifulSoup	Crawl_img.py	/^from bs4 import BeautifulSoup	#BeautifulSoup：HTML的解析库$/;"	i
+BytesIO	Crawl_img.py	/^from io import BytesIO$/;"	i
+HTML	Crawl_img.py	/^from bs4 import BeautifulSoup	#BeautifulSoup：HTML的解析库$/;"	i
+Image	Crawl_img.py	/^from PIL import Image$/;"	i
+Pool	Crawl_img.py	/^from multiprocessing import Pool$/;"	i
+get_href	Crawl_img.py	/^def get_href(i):$/;"	f
+get_img	Crawl_img.py	/^def get_img(href):$/;"	f
+io	Crawl_img.py	/^import io$/;"	i
+p	Crawl_img.py	/^	p = Pool(4)$/;"	v
+requests	Crawl_img.py	/^import requests $/;"	i
+save_img	Crawl_img.py	/^def save_img(title,data_src):$/;"	f
+sys	Crawl_img.py	/^import sys$/;"	i
+time	Crawl_img.py	/^import time$/;"	i
+BeautifulSoup	Crawl_img_pool.py	/^from bs4 import BeautifulSoup	#BeautifulSoup：HTML的解析库$/;"	i
+BytesIO	Crawl_img_pool.py	/^from io import BytesIO$/;"	i
+HTML	Crawl_img_pool.py	/^from bs4 import BeautifulSoup	#BeautifulSoup：HTML的解析库$/;"	i
+Image	Crawl_img_pool.py	/^from PIL import Image$/;"	i
+Pool	Crawl_img_pool.py	/^from multiprocessing import Pool$/;"	i
+get_href	Crawl_img_pool.py	/^def get_href():$/;"	f
+get_img	Crawl_img_pool.py	/^def get_img(href):$/;"	f
+href	Crawl_img_pool.py	/^		href = i['href']$/;"	v
+io	Crawl_img_pool.py	/^import io$/;"	i
+mkdir	Crawl_img_pool.py	/^def mkdir(path):$/;"	f
+os	Crawl_img_pool.py	/^    import os$/;"	i
+os	Crawl_img_pool.py	/^import os$/;"	i
+p	Crawl_img_pool.py	/^	p = Pool(8)$/;"	v
+requests	Crawl_img_pool.py	/^import requests $/;"	i
+save_img	Crawl_img_pool.py	/^def save_img(title,data_src):$/;"	f
+sys	Crawl_img_pool.py	/^import sys$/;"	i
+time	Crawl_img_pool.py	/^import time$/;"	i
+title_url	Crawl_img_pool.py	/^	title_url = get_href()$/;"	v
+BytesIO	ʹ��PIL+requests����ͼƬ.py	/^from io import BytesIO$/;"	i
+Image	ʹ��PIL+requests����ͼƬ.py	/^from PIL import Image$/;"	i
+image	ʹ��PIL+requests����ͼƬ.py	/^image = Image.open(BytesIO(resp.content))$/;"	v
+requests	ʹ��PIL+requests����ͼƬ.py	/^import requests$/;"	i
+resizedim	ʹ��PIL+requests����ͼƬ.py	/^resizedim = image.resize((234,180))$/;"	v
+resp	ʹ��PIL+requests����ͼƬ.py	/^resp = requests.get(url)$/;"	v
+t	ʹ��PIL+requests����ͼƬ.py	/^t = time.strftime('%Y%m%d_%H%M%S',time.localtime(time.time()))$/;"	v
+time	ʹ��PIL+requests����ͼƬ.py	/^import time$/;"	i
+url	ʹ��PIL+requests����ͼƬ.py	/^url = 'http:\/\/pic1.win4000.com\/wallpaper\/2018-05-17\/5afd488a87d34.jpg'$/;"	v
+BeautifulSoup	ץȡһ��С˵.py	/^from bs4 import BeautifulSoup$/;"	i
+Pool	ץȡһ��С˵.py	/^from multiprocessing import Pool$/;"	i
+author	ץȡһ��С˵.py	/^author = info[0].text.replace("\\u00a0", " ") 	#作者，需要去掉&nbsp$/;"	v
+bookname	ץȡһ��С˵.py	/^bookname = str(re.findall('(?<=<h1>).+(?=<\/h1>)', str(name)))$/;"	v
+conn	ץȡһ��С˵.py	/^conn = mysql.connector.connect(user='root', password='123456', database='fiction', use_unicode=True)$/;"	v
+connector	ץȡһ��С˵.py	/^import mysql.connector$/;"	i
+content	ץȡһ��С˵.py	/^content = soup.select('div #content > p')$/;"	v
+cursor	ץȡһ��С˵.py	/^cursor = conn.cursor()$/;"	v
+html	ץȡһ��С˵.py	/^from lxml import html$/;"	i
+info	ץȡһ��С˵.py	/^info = soup.select('#wrapper .box_con #maininfo #info p')$/;"	v
+intro	ץȡһ��С˵.py	/^intro = soup.select('#wrapper .box_con #maininfo #intro')[0].text.strip()	#小说简介$/;"	v
+io	ץȡһ��С˵.py	/^import io$/;"	i
+mysql	ץȡһ��С˵.py	/^import mysql.connector$/;"	i
+name	ץȡһ��С˵.py	/^name = soup.select('div .bookname > h1')$/;"	v
+re	ץȡһ��С˵.py	/^import re$/;"	i
+requests	ץȡһ��С˵.py	/^import requests $/;"	i
+resp	ץȡһ��С˵.py	/^resp = requests.get(url)$/;"	v
+soup	ץȡһ��С˵.py	/^soup = BeautifulSoup(resp.text,'lxml')$/;"	v
+sys	ץȡһ��С˵.py	/^import sys$/;"	i
+text	ץȡһ��С˵.py	/^text = str(content).replace('<p>','\\r\\n').replace('<\/p>,','')$/;"	v
+update	ץȡһ��С˵.py	/^update = info[2].text.replace("最后更新：","") 	#更新时间$/;"	v
+url	ץȡһ��С˵.py	/^url = 'https:\/\/www.biquge5200.cc\/52_52542\/'$/;"	v
+values	ץȡһ��С˵.py	/^values = cursor.fetchall()$/;"	v
+BeautifulSoup	ץȡ��Ȥ��.py	/^from bs4 import BeautifulSoup$/;"	i
+Pool	ץȡ��Ȥ��.py	/^from multiprocessing import Pool$/;"	i
+connector	ץȡ��Ȥ��.py	/^import mysql.connector$/;"	i
+data	ץȡ��Ȥ��.py	/^	data = get_url()$/;"	v
+get_chapter	ץȡ��Ȥ��.py	/^def get_chapter(data,title):$/;"	f
+get_url	ץȡ��Ȥ��.py	/^def get_url():$/;"	f
+html	ץȡ��Ȥ��.py	/^from lxml import html$/;"	i
+io	ץȡ��Ȥ��.py	/^import io$/;"	i
+mysql	ץȡ��Ȥ��.py	/^import mysql.connector$/;"	i
+p	ץȡ��Ȥ��.py	/^	p = Pool(16)$/;"	v
+re	ץȡ��Ȥ��.py	/^import re$/;"	i
+requests	ץȡ��Ȥ��.py	/^import requests $/;"	i
+save_sql	ץȡ��Ȥ��.py	/^def save_sql(title,author,updates,lately,intro):$/;"	f
+sys	ץȡ��Ȥ��.py	/^import sys$/;"	i
+dict1	ץ��������ӿ��ĵ������Ա�\���.py	/^	dict1 = get_param(str1)$/;"	v
+get_param	ץ��������ӿ��ĵ������Ա�\���.py	/^def get_param(str1):$/;"	f
+request	ץ��������ӿ��ĵ������Ա�\���.py	/^import urllib.request$/;"	i
+urllib	ץ��������ӿ��ĵ������Ա�\���.py	/^import urllib.request$/;"	i
+BeautifulSoup	��С˵Դ��.py	/^from bs4 import BeautifulSoup$/;"	i
+get_txt	��С˵Դ��.py	/^def get_txt(txt_id):$/;"	f
+os	��С˵Դ��.py	/^import os$/;"	i
+re	��С˵Դ��.py	/^import re$/;"	i
+req_header	��С˵Դ��.py	/^req_header={$/;"	v
+req_url_base	��С˵Դ��.py	/^req_url_base='http:\/\/www.qu.la\/book\/'           #小说主地址$/;"	v
+requests	��С˵Դ��.py	/^import  requests$/;"	i
+sys	��С˵Դ��.py	/^import sys$/;"	i
+threading	��С˵Դ��.py	/^import threading$/;"	i
+time	��С˵Դ��.py	/^import time$/;"	i
+BeautifulSoup	���ӿ��ĵ�\��ȡ�ӿڲ����ֶ�.py	/^from bs4 import BeautifulSoup$/;"	i
+driver	���ӿ��ĵ�\��ȡ�ӿڲ����ֶ�.py	/^driver = webdriver.Chrome('C:\/Program Files (x86)\/Google\/Chrome\/Application\/chromedriver')$/;"	v
+html	���ӿ��ĵ�\��ȡ�ӿڲ����ֶ�.py	/^html = driver.page_source	#打印出网站的html$/;"	v
+interface_list	���ӿ��ĵ�\��ȡ�ӿڲ����ֶ�.py	/^interface_list = []		#存放爬取出来的参数$/;"	v
+interface_name	���ӿ��ĵ�\��ȡ�ӿڲ����ֶ�.py	/^interface_name = 'addCommodity'		#需要查询的接口名$/;"	v
+list1	���ӿ��ĵ�\��ȡ�ӿڲ����ֶ�.py	/^		list1 = []$/;"	v
+list1	���ӿ��ĵ�\��ȡ�ӿڲ����ֶ�.py	/^list1 = []$/;"	v
+parameter	���ӿ��ĵ�\��ȡ�ӿڲ����ֶ�.py	/^	parameter = re.findall('<td.+>(.+?)<\/td>',str(tables[i]))$/;"	v
+parameter	���ӿ��ĵ�\��ȡ�ӿڲ����ֶ�.py	/^parameter = []$/;"	v
+re	���ӿ��ĵ�\��ȡ�ӿڲ����ֶ�.py	/^import re$/;"	i
+requests	���ӿ��ĵ�\��ȡ�ӿڲ����ֶ�.py	/^import requests $/;"	i
+search_bar	���ӿ��ĵ�\��ȡ�ӿڲ����ֶ�.py	/^search_bar = driver.find_element_by_name('keyword')		#搜索输入框$/;"	v
+search_btn	���ӿ��ĵ�\��ȡ�ӿڲ����ֶ�.py	/^search_btn = driver.find_element_by_class_name('icon-search')		#搜索按钮$/;"	v
+soup	���ӿ��ĵ�\��ȡ�ӿڲ����ֶ�.py	/^soup = BeautifulSoup(html,'lxml')$/;"	v
+tables	���ӿ��ĵ�\��ȡ�ӿڲ����ֶ�.py	/^tables = soup.select('table:nth-of-type(1) > tbody > tr > td')	#获取页面中table标签下面的tr标签0$/;"	v
+time	���ӿ��ĵ�\��ȡ�ӿڲ����ֶ�.py	/^import time$/;"	i
+webdriver	���ӿ��ĵ�\��ȡ�ӿڲ����ֶ�.py	/^from selenium import webdriver$/;"	i
+Analysis	�򷱶Ա�.py	/^    def Analysis(self, herf):$/;"	m	class:Contrast_reptile
+BeautifulSoup	�򷱶Ա�.py	/^from bs4 import BeautifulSoup$/;"	i
+Contrast_reptile	�򷱶Ա�.py	/^class Contrast_reptile:$/;"	c
+HanziConv	�򷱶Ա�.py	/^from hanziconv import HanziConv$/;"	i
+Request	�򷱶Ա�.py	/^    def Request(self, url):$/;"	m	class:Contrast_reptile
+__init__	�򷱶Ա�.py	/^    def __init__(self):$/;"	m	class:Contrast_reptile
+comparison	�򷱶Ա�.py	/^    def comparison(self, soup):$/;"	m	class:Contrast_reptile
+cr	�򷱶Ա�.py	/^    cr = Contrast_reptile()$/;"	v	class:Contrast_reptile
+get_Url	�򷱶Ա�.py	/^    def get_Url(self, url_dict):$/;"	m	class:Contrast_reptile
+process	�򷱶Ա�.py	/^    def process(self, all_herf, link_herf):$/;"	m	class:Contrast_reptile
+re	�򷱶Ա�.py	/^import re$/;"	i
+requests	�򷱶Ա�.py	/^import requests$/;"	i
+url_dict	�򷱶Ա�.py	/^    url_dict = {$/;"	v	class:Contrast_reptile
+url_zh_CN	�򷱶Ա�.py	/^    url_zh_CN = 'https:\/\/www.eddidholdings.com\/zh-hans\/'  # 简体$/;"	v	class:Contrast_reptile
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_PROGRAM_VERSION	5.8	//
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/

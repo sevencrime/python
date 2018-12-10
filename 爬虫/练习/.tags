@@ -1,0 +1,128 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Analysis	.\¼ò·±¶Ô±È.py	/^    def Analysis(self, herf):$/;"	m	class:Contrast_reptile
+BeautifulSoup	.\Crawl_img.py	/^from bs4 import BeautifulSoup	#BeautifulSoupï¼šHTMLçš„è§£æåº“$/;"	i
+BeautifulSoup	.\Crawl_img_pool.py	/^from bs4 import BeautifulSoup	#BeautifulSoupï¼šHTMLçš„è§£æåº“$/;"	i
+BeautifulSoup	.\¼ò·±¶Ô±È.py	/^from bs4 import BeautifulSoup$/;"	i
+BeautifulSoup	.\ÅÀ½Ó¿ÚÎÄµµ\»ñÈ¡½Ó¿Ú²ÎÊı×Ö¶Î.py	/^from bs4 import BeautifulSoup$/;"	i
+BeautifulSoup	.\ÅÀĞ¡ËµÔ´Âë.py	/^from bs4 import BeautifulSoup$/;"	i
+BeautifulSoup	.\×¥È¡±ÊÈ¤¸ó.py	/^from bs4 import BeautifulSoup$/;"	i
+BeautifulSoup	.\×¥È¡Ò»±¾Ğ¡Ëµ.py	/^from bs4 import BeautifulSoup$/;"	i
+BytesIO	.\Crawl_img.py	/^from io import BytesIO$/;"	i
+BytesIO	.\Crawl_img_pool.py	/^from io import BytesIO$/;"	i
+BytesIO	.\Ê¹ÓÃPIL+requests±£´æÍ¼Æ¬.py	/^from io import BytesIO$/;"	i
+Contrast_reptile	.\¼ò·±¶Ô±È.py	/^class Contrast_reptile:$/;"	c
+HTML	.\Crawl_img.py	/^from bs4 import BeautifulSoup	#BeautifulSoupï¼šHTMLçš„è§£æåº“$/;"	i
+HTML	.\Crawl_img_pool.py	/^from bs4 import BeautifulSoup	#BeautifulSoupï¼šHTMLçš„è§£æåº“$/;"	i
+HanziConv	.\¼ò·±¶Ô±È.py	/^from hanziconv import HanziConv$/;"	i
+Image	.\Crawl_img.py	/^from PIL import Image$/;"	i
+Image	.\Crawl_img_pool.py	/^from PIL import Image$/;"	i
+Image	.\Ê¹ÓÃPIL+requests±£´æÍ¼Æ¬.py	/^from PIL import Image$/;"	i
+Pool	.\Crawl_img.py	/^from multiprocessing import Pool$/;"	i
+Pool	.\Crawl_img_pool.py	/^from multiprocessing import Pool$/;"	i
+Pool	.\×¥È¡±ÊÈ¤¸ó.py	/^from multiprocessing import Pool$/;"	i
+Pool	.\×¥È¡Ò»±¾Ğ¡Ëµ.py	/^from multiprocessing import Pool$/;"	i
+Request	.\¼ò·±¶Ô±È.py	/^    def Request(self, url):$/;"	m	class:Contrast_reptile
+__init__	.\¼ò·±¶Ô±È.py	/^    def __init__(self):$/;"	m	class:Contrast_reptile
+author	.\×¥È¡Ò»±¾Ğ¡Ëµ.py	/^author = info[0].text.replace("\\u00a0", " ") 	#ä½œè€…ï¼Œéœ€è¦å»æ‰&nbsp$/;"	v
+bookname	.\×¥È¡Ò»±¾Ğ¡Ëµ.py	/^bookname = str(re.findall('(?<=<h1>).+(?=<\/h1>)', str(name)))$/;"	v
+comparison	.\¼ò·±¶Ô±È.py	/^    def comparison(self, soup):$/;"	m	class:Contrast_reptile
+conn	.\×¥È¡Ò»±¾Ğ¡Ëµ.py	/^conn = mysql.connector.connect(user='root', password='123456', database='fiction', use_unicode=True)$/;"	v
+connector	.\×¥È¡±ÊÈ¤¸ó.py	/^import mysql.connector$/;"	i
+connector	.\×¥È¡Ò»±¾Ğ¡Ëµ.py	/^import mysql.connector$/;"	i
+content	.\×¥È¡Ò»±¾Ğ¡Ëµ.py	/^content = soup.select('div #content > p')$/;"	v
+cr	.\¼ò·±¶Ô±È.py	/^    cr = Contrast_reptile()$/;"	v	class:Contrast_reptile
+cursor	.\×¥È¡Ò»±¾Ğ¡Ëµ.py	/^cursor = conn.cursor()$/;"	v
+data	.\×¥È¡±ÊÈ¤¸ó.py	/^	data = get_url()$/;"	v
+dict1	.\×¥°ü²ÎÊıÓë½Ó¿ÚÎÄµµ²ÎÊı¶Ô±È\½áºÏ.py	/^	dict1 = get_param(str1)$/;"	v
+driver	.\ÅÀ½Ó¿ÚÎÄµµ\»ñÈ¡½Ó¿Ú²ÎÊı×Ö¶Î.py	/^driver = webdriver.Chrome('C:\/Program Files (x86)\/Google\/Chrome\/Application\/chromedriver')$/;"	v
+get_Url	.\¼ò·±¶Ô±È.py	/^    def get_Url(self, url_dict):$/;"	m	class:Contrast_reptile
+get_chapter	.\×¥È¡±ÊÈ¤¸ó.py	/^def get_chapter(data,title):$/;"	f
+get_href	.\Crawl_img.py	/^def get_href(i):$/;"	f
+get_href	.\Crawl_img_pool.py	/^def get_href():$/;"	f
+get_img	.\Crawl_img.py	/^def get_img(href):$/;"	f
+get_img	.\Crawl_img_pool.py	/^def get_img(href):$/;"	f
+get_param	.\×¥°ü²ÎÊıÓë½Ó¿ÚÎÄµµ²ÎÊı¶Ô±È\½áºÏ.py	/^def get_param(str1):$/;"	f
+get_txt	.\ÅÀĞ¡ËµÔ´Âë.py	/^def get_txt(txt_id):$/;"	f
+get_url	.\×¥È¡±ÊÈ¤¸ó.py	/^def get_url():$/;"	f
+href	.\Crawl_img_pool.py	/^		href = i['href']$/;"	v
+html	.\ÅÀ½Ó¿ÚÎÄµµ\»ñÈ¡½Ó¿Ú²ÎÊı×Ö¶Î.py	/^html = driver.page_source	#æ‰“å°å‡ºç½‘ç«™çš„html$/;"	v
+html	.\×¥È¡±ÊÈ¤¸ó.py	/^from lxml import html$/;"	i
+html	.\×¥È¡Ò»±¾Ğ¡Ëµ.py	/^from lxml import html$/;"	i
+image	.\Ê¹ÓÃPIL+requests±£´æÍ¼Æ¬.py	/^image = Image.open(BytesIO(resp.content))$/;"	v
+info	.\×¥È¡Ò»±¾Ğ¡Ëµ.py	/^info = soup.select('#wrapper .box_con #maininfo #info p')$/;"	v
+interface_list	.\ÅÀ½Ó¿ÚÎÄµµ\»ñÈ¡½Ó¿Ú²ÎÊı×Ö¶Î.py	/^interface_list = []		#å­˜æ”¾çˆ¬å–å‡ºæ¥çš„å‚æ•°$/;"	v
+interface_name	.\ÅÀ½Ó¿ÚÎÄµµ\»ñÈ¡½Ó¿Ú²ÎÊı×Ö¶Î.py	/^interface_name = 'addCommodity'		#éœ€è¦æŸ¥è¯¢çš„æ¥å£å$/;"	v
+intro	.\×¥È¡Ò»±¾Ğ¡Ëµ.py	/^intro = soup.select('#wrapper .box_con #maininfo #intro')[0].text.strip()	#å°è¯´ç®€ä»‹$/;"	v
+io	.\Crawl_img.py	/^import io$/;"	i
+io	.\Crawl_img_pool.py	/^import io$/;"	i
+io	.\×¥È¡±ÊÈ¤¸ó.py	/^import io$/;"	i
+io	.\×¥È¡Ò»±¾Ğ¡Ëµ.py	/^import io$/;"	i
+list1	.\ÅÀ½Ó¿ÚÎÄµµ\»ñÈ¡½Ó¿Ú²ÎÊı×Ö¶Î.py	/^		list1 = []$/;"	v
+list1	.\ÅÀ½Ó¿ÚÎÄµµ\»ñÈ¡½Ó¿Ú²ÎÊı×Ö¶Î.py	/^list1 = []$/;"	v
+mkdir	.\Crawl_img_pool.py	/^def mkdir(path):$/;"	f
+mysql	.\×¥È¡±ÊÈ¤¸ó.py	/^import mysql.connector$/;"	i
+mysql	.\×¥È¡Ò»±¾Ğ¡Ëµ.py	/^import mysql.connector$/;"	i
+name	.\×¥È¡Ò»±¾Ğ¡Ëµ.py	/^name = soup.select('div .bookname > h1')$/;"	v
+os	.\Crawl_img_pool.py	/^    import os$/;"	i
+os	.\Crawl_img_pool.py	/^import os$/;"	i
+os	.\ÅÀĞ¡ËµÔ´Âë.py	/^import os$/;"	i
+p	.\Crawl_img.py	/^	p = Pool(4)$/;"	v
+p	.\Crawl_img_pool.py	/^	p = Pool(8)$/;"	v
+p	.\×¥È¡±ÊÈ¤¸ó.py	/^	p = Pool(16)$/;"	v
+parameter	.\ÅÀ½Ó¿ÚÎÄµµ\»ñÈ¡½Ó¿Ú²ÎÊı×Ö¶Î.py	/^	parameter = re.findall('<td.+>(.+?)<\/td>',str(tables[i]))$/;"	v
+parameter	.\ÅÀ½Ó¿ÚÎÄµµ\»ñÈ¡½Ó¿Ú²ÎÊı×Ö¶Î.py	/^parameter = []$/;"	v
+process	.\¼ò·±¶Ô±È.py	/^    def process(self, all_herf, link_herf):$/;"	m	class:Contrast_reptile
+re	.\¼ò·±¶Ô±È.py	/^import re$/;"	i
+re	.\ÅÀ½Ó¿ÚÎÄµµ\»ñÈ¡½Ó¿Ú²ÎÊı×Ö¶Î.py	/^import re$/;"	i
+re	.\ÅÀĞ¡ËµÔ´Âë.py	/^import re$/;"	i
+re	.\×¥È¡±ÊÈ¤¸ó.py	/^import re$/;"	i
+re	.\×¥È¡Ò»±¾Ğ¡Ëµ.py	/^import re$/;"	i
+req_header	.\ÅÀĞ¡ËµÔ´Âë.py	/^req_header={$/;"	v
+req_url_base	.\ÅÀĞ¡ËµÔ´Âë.py	/^req_url_base='http:\/\/www.qu.la\/book\/'           #å°è¯´ä¸»åœ°å€$/;"	v
+request	.\×¥°ü²ÎÊıÓë½Ó¿ÚÎÄµµ²ÎÊı¶Ô±È\½áºÏ.py	/^import urllib.request$/;"	i
+requests	.\Crawl_img.py	/^import requests $/;"	i
+requests	.\Crawl_img_pool.py	/^import requests $/;"	i
+requests	.\¼ò·±¶Ô±È.py	/^import requests$/;"	i
+requests	.\ÅÀ½Ó¿ÚÎÄµµ\»ñÈ¡½Ó¿Ú²ÎÊı×Ö¶Î.py	/^import requests $/;"	i
+requests	.\ÅÀĞ¡ËµÔ´Âë.py	/^import  requests$/;"	i
+requests	.\Ê¹ÓÃPIL+requests±£´æÍ¼Æ¬.py	/^import requests$/;"	i
+requests	.\×¥È¡±ÊÈ¤¸ó.py	/^import requests $/;"	i
+requests	.\×¥È¡Ò»±¾Ğ¡Ëµ.py	/^import requests $/;"	i
+resizedim	.\Ê¹ÓÃPIL+requests±£´æÍ¼Æ¬.py	/^resizedim = image.resize((234,180))$/;"	v
+resp	.\Ê¹ÓÃPIL+requests±£´æÍ¼Æ¬.py	/^resp = requests.get(url)$/;"	v
+resp	.\×¥È¡Ò»±¾Ğ¡Ëµ.py	/^resp = requests.get(url)$/;"	v
+save_img	.\Crawl_img.py	/^def save_img(title,data_src):$/;"	f
+save_img	.\Crawl_img_pool.py	/^def save_img(title,data_src):$/;"	f
+save_sql	.\×¥È¡±ÊÈ¤¸ó.py	/^def save_sql(title,author,updates,lately,intro):$/;"	f
+search_bar	.\ÅÀ½Ó¿ÚÎÄµµ\»ñÈ¡½Ó¿Ú²ÎÊı×Ö¶Î.py	/^search_bar = driver.find_element_by_name('keyword')		#æœç´¢è¾“å…¥æ¡†$/;"	v
+search_btn	.\ÅÀ½Ó¿ÚÎÄµµ\»ñÈ¡½Ó¿Ú²ÎÊı×Ö¶Î.py	/^search_btn = driver.find_element_by_class_name('icon-search')		#æœç´¢æŒ‰é’®$/;"	v
+soup	.\ÅÀ½Ó¿ÚÎÄµµ\»ñÈ¡½Ó¿Ú²ÎÊı×Ö¶Î.py	/^soup = BeautifulSoup(html,'lxml')$/;"	v
+soup	.\×¥È¡Ò»±¾Ğ¡Ëµ.py	/^soup = BeautifulSoup(resp.text,'lxml')$/;"	v
+sys	.\Crawl_img.py	/^import sys$/;"	i
+sys	.\Crawl_img_pool.py	/^import sys$/;"	i
+sys	.\ÅÀĞ¡ËµÔ´Âë.py	/^import sys$/;"	i
+sys	.\×¥È¡±ÊÈ¤¸ó.py	/^import sys$/;"	i
+sys	.\×¥È¡Ò»±¾Ğ¡Ëµ.py	/^import sys$/;"	i
+t	.\Ê¹ÓÃPIL+requests±£´æÍ¼Æ¬.py	/^t = time.strftime('%Y%m%d_%H%M%S',time.localtime(time.time()))$/;"	v
+tables	.\ÅÀ½Ó¿ÚÎÄµµ\»ñÈ¡½Ó¿Ú²ÎÊı×Ö¶Î.py	/^tables = soup.select('table:nth-of-type(1) > tbody > tr > td')	#è·å–é¡µé¢ä¸­tableæ ‡ç­¾ä¸‹é¢çš„træ ‡ç­¾0$/;"	v
+text	.\×¥È¡Ò»±¾Ğ¡Ëµ.py	/^text = str(content).replace('<p>','\\r\\n').replace('<\/p>,','')$/;"	v
+threading	.\ÅÀĞ¡ËµÔ´Âë.py	/^import threading$/;"	i
+time	.\Crawl_img.py	/^import time$/;"	i
+time	.\Crawl_img_pool.py	/^import time$/;"	i
+time	.\ÅÀ½Ó¿ÚÎÄµµ\»ñÈ¡½Ó¿Ú²ÎÊı×Ö¶Î.py	/^import time$/;"	i
+time	.\ÅÀĞ¡ËµÔ´Âë.py	/^import time$/;"	i
+time	.\Ê¹ÓÃPIL+requests±£´æÍ¼Æ¬.py	/^import time$/;"	i
+title_url	.\Crawl_img_pool.py	/^	title_url = get_href()$/;"	v
+update	.\×¥È¡Ò»±¾Ğ¡Ëµ.py	/^update = info[2].text.replace("æœ€åæ›´æ–°ï¼š","") 	#æ›´æ–°æ—¶é—´$/;"	v
+url	.\Ê¹ÓÃPIL+requests±£´æÍ¼Æ¬.py	/^url = 'http:\/\/pic1.win4000.com\/wallpaper\/2018-05-17\/5afd488a87d34.jpg'$/;"	v
+url	.\×¥È¡Ò»±¾Ğ¡Ëµ.py	/^url = 'https:\/\/www.biquge5200.cc\/52_52542\/'$/;"	v
+url_dict	.\¼ò·±¶Ô±È.py	/^    url_dict = {$/;"	v	class:Contrast_reptile
+url_zh_CN	.\¼ò·±¶Ô±È.py	/^    url_zh_CN = 'https:\/\/www.eddidholdings.com\/zh-hans\/'  # ç®€ä½“$/;"	v	class:Contrast_reptile
+urllib	.\×¥°ü²ÎÊıÓë½Ó¿ÚÎÄµµ²ÎÊı¶Ô±È\½áºÏ.py	/^import urllib.request$/;"	i
+values	.\×¥È¡Ò»±¾Ğ¡Ëµ.py	/^values = cursor.fetchall()$/;"	v
+webdriver	.\ÅÀ½Ó¿ÚÎÄµµ\»ñÈ¡½Ó¿Ú²ÎÊı×Ö¶Î.py	/^from selenium import webdriver$/;"	i
