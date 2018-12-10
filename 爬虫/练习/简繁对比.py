@@ -13,21 +13,19 @@ import re
 
 class Contrast_reptile:
 
-    def __init__(self):
+    alls_url = []
+
+    def __init__(self, url_dict):
         # 请求头
         self.headers = {
-            'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36'
         }
 
         self.proxies = {
             'http': '192.168.218.246:8628'
         }
-        # url主题
-        self.path = ''
-        # print("path = ", self.path)
-        # url主页面
-        self.url_zh_TW = 'https://www.eddidholdings.com/zh-hant/'  # 繁体
+        for v in url_dict.items():
+            self.alls_url.append(v)
 
     def Request(self, url):
 
@@ -62,13 +60,13 @@ class Contrast_reptile:
 
     # 解析()
     def Analysis(self, herf):
-        # import pdb
-        # pdb.set_trace()
-        temp = []
+
+        temp = []  #存放筛选后的数据,暂不能全局
         # 存放所有的链接
         for i in herf:
             # 筛选出所有herf
-            if i['href'] != '#' and i['href'] != '#top':
+            if i['href'] != '#' and i['href'] != '#top' and \
+            i['href'] != self.path+self.address and i['href'] != self.address :
                 if str(i['href']).find(self.path):
                     # print("N0: ",i['href'])
                     temp.append(self.path + i['href'])
@@ -80,26 +78,27 @@ class Contrast_reptile:
                     # print("正在请求子链接 :", i['href'])
                     # soup = self.Request(i['href'])
 
-        for i in set(temp):
-            if i != self.path + self.address and i.find('@') == -1 and i != self.url_zh_TW:
+        print("这是temp信息", set(temp))
+        # for i in set(temp):
+        #     if i != self.path + self.address and i.find('@') == -1 and i != self.url_zh_TW:
 
-                print("正在请求子链接 :", i)
+        #         print("正在请求子链接 :", i)
 
-                soup = self.Request(i)
-                print("title:", soup.title)
+        #         soup = self.Request(i)
+        #         print("title:", soup.title)
 
-                # print(content_list)
-                # 对比
-                self.comparison(soup)
+        #         # print(content_list)
+        #         # 对比
+        #         self.comparison(soup)
 
-                # 子页面所有的a标签
-                link_herf = soup.select("a")
+        #         # 子页面所有的a标签
+        #         link_herf = soup.select("a")
 
-                # 两个list相交,所有的herf
-                diff_herf = self.process(herf, link_herf)
+        #         # 两个list相交,所有的herf
+        #         diff_herf = self.process(herf, link_herf)
 
-                if len(diff_herf) != 0:
-                    Analysis(diff_herf)
+        #         if len(diff_herf) != 0:
+        #             Analysis(diff_herf)
 
     # 处理数据
     def process(self, all_herf, link_herf):
@@ -145,14 +144,14 @@ class Contrast_reptile:
 
 
 if __name__ == '__main__':
-    url_zh_CN = 'https://www.eddidholdings.com/zh-hans/'  # 简体
+    # url_zh_CN = 'https://www.eddidholdings.com/zh-hans/'  # 简体
     # url_zh_CN = 'https://www.eddidtrust.com/zh-hans/'  # 简体
     # url_zh_TW = 'https://www.eddidholdings.com/zh-hant/'  # 繁体
 
     url_dict = {
         'url_zh_CN': 'https://www.eddidholdings.com/zh-hans/',
-        'url_zh_TW': 'https://www.eddidholdings.com/zh-hant/'
+        'url_zh_TW': 'https://www.eddidholdings.com/zh-hant/',
     }
 
-    cr = Contrast_reptile()
+    cr = Contrast_reptile(url_dict)
     cr.get_Url(url_dict)
