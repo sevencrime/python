@@ -12,7 +12,7 @@ import sys
 import os
 import requests 
 from bs4 import BeautifulSoup	#BeautifulSoup：HTML的解析库
-from PIL import Image
+from PIL import Imagen,
 from io import BytesIO
 import time
 from multiprocessing import Pool
