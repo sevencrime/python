@@ -70,15 +70,20 @@ class ViedeoCrawler():
         m3u8Obj = m3u8.load("temp.m3u8")
         print("解析完成.")
         # return m3u8Obj.segments
-        import pdb; pdb.set_trace()
-        # 创建表
-        self.cursor.execute("create table temp(id varchar(20) primary key, Url varchar(255), isGet int))")
+        # import pdb; pdb.set_trace()
+        # 创建表, 判断是否重复IF NOT EXISTS
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS temp(id INTEGER PRIMARY KEY AUTOINCREMENT, Url VARCHAR(255) NOT NULL, isGet INT NOT NULL);")
+        # c = self.cursor.execute("select count(*) from sqlite_master where type='table' and name = 'temp';")
+        print("m3u8Obj的长度为 : {}".format(len(m3u8Obj.segments)))
+        index = 0
         for key in m3u8Obj.segments:
-
+            index += 1
             tsurl = "https://videozm.dlyilian.com:8091/20191020/dXw6R6VB/1000kb/hls/{}".format(key.uri)
             # 插入记录
-            self.cursor.execute("insert into temp (id, Url, isGet) value (index, tsurl, 0)")
+            # self.cursor.execute("INSERT OR IGNORE INTO temp (id, Url, isGet) VALUES (?, ?, ?);", (None, tsurl, 0))
+            self.cursor.execute("INSERT INTO temp (id, Url, isGet) VALUES (?, ?, ?);", (None, tsurl, 0))
 
+        print(index, "33333333333333333333333333333333")
         self.cursor.close()
         self.conn.commit()
         self.conn.close()
@@ -94,7 +99,7 @@ class ViedeoCrawler():
         # 为chrome启动时设置代理
         chrome_options.add_argument('--proxy-server={0}'.format(proxy.proxy))
         # 静默模式, 不显示浏览器
-        chrome_options.add_argument('headless')
+        # chrome_options.add_argument('headless')
         driver = webdriver.Chrome(
             executable_path='C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe',
             chrome_options=chrome_options)
@@ -123,8 +128,6 @@ class ViedeoCrawler():
         server.stop()
         driver.quit()
 
-        import pdb; pdb.set_trace()
-
         if len(m3u8UrlSet) == 0:
             raise ConnectionError("请求报错")
 
@@ -132,7 +135,7 @@ class ViedeoCrawler():
             return m3u8UrlSet
 
 
-    def run(self, file_m3u8):
+    def run(self):
         print("Start!")
         start_time = time.time()
         os.chdir(self.down_path)
@@ -145,6 +148,7 @@ class ViedeoCrawler():
         proxies = self.get_random_ip(ip_list)
         uriList = self.get_uri_from_m3u8(fileUrlSet)
         i = 1   # count
+        import pdb; pdb.set_trace()
         for key in uriList:
             # print("开始循环下载")
             if i%50==0:
@@ -192,6 +196,5 @@ class ViedeoCrawler():
 
 if __name__=='__main__':
     url = r"https://www.kpl052.com/Watch-online/146998-1-1.html"
-    file_m3u8 = r"D:/private/爬虫/index.m3u8"
     crawler = ViedeoCrawler(url)
-    crawler.run(file_m3u8)
+    crawler.run()
