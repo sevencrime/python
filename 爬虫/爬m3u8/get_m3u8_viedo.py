@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+import multiprocessing
 import requests
 from bs4 import BeautifulSoup
 import os
@@ -17,8 +17,9 @@ class ViedeoCrawler():
 
     MYSQL = False
 
-    def __init__(self, url):
+    def __init__(self, url, func):
         self.url = url
+        self.code = code
         self.down_path = r"D:\\private\\爬虫"
         self.final_path = r"D:\\private"
         try:
@@ -63,33 +64,48 @@ class ViedeoCrawler():
         print("代理设置成功.")
         return proxies
 
-    def get_uri_from_m3u8(self,fileUrl):
+    def get_uri_from_m3u8(self):
         print("正在解析真实下载地址...")
-        with open('temp.m3u8', 'wb') as file:
-            file.write(requests.get("".join(fileUrl)).content)
-        m3u8Obj = m3u8.load("temp.m3u8")
-        print("解析完成.")
-        # return m3u8Obj.segments
-        # import pdb; pdb.set_trace()
-        # 创建表, 判断是否重复IF NOT EXISTS
-        self.cursor.execute("CREATE TABLE IF NOT EXISTS temp(id INTEGER PRIMARY KEY AUTOINCREMENT, Url VARCHAR(255) NOT NULL, isGet INT NOT NULL);")
-        # c = self.cursor.execute("select count(*) from sqlite_master where type='table' and name = 'temp';")
-        print("m3u8Obj的长度为 : {}".format(len(m3u8Obj.segments)))
-        index = 0
-        for key in m3u8Obj.segments:
-            index += 1
-            tsurl = "https://videozm.dlyilian.com:8091/20191020/dXw6R6VB/1000kb/hls/{}".format(key.uri)
-            # 插入记录
-            # self.cursor.execute("INSERT OR IGNORE INTO temp (id, Url, isGet) VALUES (?, ?, ?);", (None, tsurl, 0))
-            self.cursor.execute("INSERT INTO temp (id, Url, isGet) VALUES (?, ?, ?);", (None, tsurl, 0))
+        torrentNamelist = []
 
-        print(index, "33333333333333333333333333333333")
-        self.cursor.close()
+        # 遍历torrent 未保存成文件的数据
+        for data in self.cursor.execute("SELECT * FROM torrent WHERE isGet=0"):
+            print(data)
+            torrentName = ''.join(re.findall(r'[A-Za-z]+-\d+', data[1])).replace('-', '_')
+            self.cursor.execute("CREATE TABLE IF NOT EXISTS {torrentName} (id INTEGER PRIMARY KEY AUTOINCREMENT, Url VARCHAR(255) NOT NULL, isGet INT NOT NULL);".format(torrentName=torrentName))
+
+            with open(torrentName+'.m3u8', 'wb') as file:
+                file.write(requests.get("".join(data[2])).content)
+
+            m3u8Obj = m3u8.load(torrentName+'.m3u8')
+            print("解析完成.")
+            # return m3u8Obj.segments
+            # 创建表, 判断是否重复IF NOT EXISTS
+            # c = self.cursor.execute("select count(*) from sqlite_master where type='table' and name = 'temp';")
+            print("m3u8Obj的长度为 : {}".format(len(m3u8Obj.segments)))
+            # 提取URL连接地址
+            path = ''.join(re.findall(r".*(?=\/)/", "".join(data[2])))
+            for key in m3u8Obj.segments:
+                tsurl = path + key.uri
+                # 插入记录
+                # self.cursor.execute("INSERT OR IGNORE INTO temp (id, Url, isGet) VALUES (?, ?, ?);", (None, tsurl, 0))
+                self.cursor.execute("INSERT OR IGNORE INTO {torrentName} (id, Url, isGet) VALUES (?, ?, ?);".format(torrentName=torrentName), (None, tsurl, 0))
+
+            # 改变torrent表的isGet, 表示已爬取过
+            self.cursor.execute("UPDATE torrent set isGet = 1 where id={}".format(data[0]))
+            torrentNamelist.append(torrentName)
+
+        # 提交事务
         self.conn.commit()
-        self.conn.close()
+        # 删除m3u8文件
+        try:
+            os.remove(torrentName +'.m3u8')
+        except:
+            pass
 
 
     def get_viedo_downURL(self):
+        print("开始请求资源网站")
         # 建立browsermobproxy服务, 需指定browsermob-proxy, 类似chromedriver
         server = Server("D:/下载/browsermob-proxy-2.1.4/bin/browsermob-proxy.bat")
         server.start()
@@ -100,24 +116,31 @@ class ViedeoCrawler():
         chrome_options.add_argument('--proxy-server={0}'.format(proxy.proxy))
         # 静默模式, 不显示浏览器
         # chrome_options.add_argument('headless')
+
         driver = webdriver.Chrome(
             executable_path='C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe',
             chrome_options=chrome_options)
 
+        # driver.set_script_timeout(3)
+
         # 这设置了要记录的新HAR(HTTP Archive format(HAR文件)，是用来记录浏览器加载网页时所消耗的时间的工具)
         proxy.new_har(ref="HAR啦", options={'captureHeaders': True, 'captureContent': True}, title="标题")
         driver.get(self.url)
-
+        title = driver.title
         # 获取HAR
         result = proxy.har
         print(result)
-        m3u8UrlSet = set()
+        # m3u8UrlSet = set()
+        # 把爬取的链接和标题存入数据库
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS torrent(id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(255) NOT NULL, fileUrl VARCHAR(255) NOT NULL, isGet INT NOT NULL);")
         for entry in result['log']['entries']:
             _url = entry['request']['url']
             # 根据URL找到数据接口
             if "m3u8" in _url:
-                m3u8UrlSet.add(_url)
+                print("找到M3U8文件了")
                 print(_url)
+                self.cursor.execute("INSERT INTO torrent(id, title, fileUrl, isGet) VALUES (?, ?, ?, ?);", (None, title, _url, 0))
+                # m3u8UrlSet.add(_url)
 
             # 判断响应是否存在error
             if "_error" in entry['response'].keys():
@@ -125,14 +148,36 @@ class ViedeoCrawler():
 
         # print(m3u8UrlSet)
         # 代理需要关闭
+        print("已经要关闭啦!!!!")
         server.stop()
         driver.quit()
 
-        if len(m3u8UrlSet) == 0:
-            raise ConnectionError("请求报错")
+        torrentName = ''.join(re.findall(r'[A-Za-z]+-\d+', title)).replace('-', '_')
 
-        else:
-            return m3u8UrlSet
+        return torrentName
+
+    def get_viedo(self, key, ip, proxies):
+        import pdb; pdb.set_trace()
+
+        if key[0] % 20 == 0:
+            print("休眠10s")
+            time.sleep(10)
+        if key[0] % 50 == 0:
+            print("更换代理IP")
+            proxies = self.get_random_ip(ip)
+        try:
+            # 存入数据库
+            resp = requests.get(key[1], headers=self.headers, proxies=proxies)
+        except Exception as e:
+            print(e, "222222222")
+            return
+
+        name = ('clip_{}.ts'.format(key[0]))
+        print('开始下载{}'.format(name))
+        with open(name, 'wb') as f:
+            f.write(resp.content)
+            # f.flush()
+            # os.fsync(f)
 
 
     def run(self):
@@ -140,45 +185,37 @@ class ViedeoCrawler():
         start_time = time.time()
         os.chdir(self.down_path)
 
-        # 获取真实下载地址
+        fileUrlSet = ""
 
-
-        fileUrlSet = self.get_viedo_downURL()
         ip_list = self.get_ip_list()
         proxies = self.get_random_ip(ip_list)
-        uriList = self.get_uri_from_m3u8(fileUrlSet)
-        i = 1   # count
-        import pdb; pdb.set_trace()
-        for key in uriList:
-            # print("开始循环下载")
-            if i%50==0:
-                print("休眠10s")
-                time.sleep(10)
-            if i%120==0:
-                print("更换代理IP")
-                proxies = self.get_random_ip(ip_list)
-            try:
-                # 存入数据库
-                tsurl = "https://videozm.dlyilian.com:8091/20191020/dXw6R6VB/1000kb/hls/{}".format(key.uri)
-                # print("https://videozm.dlyilian.com:8091/20191020/dXw6R6VB/1000kb/hls/{}".format(key.uri), "444444")
-                resp = requests.get(tsurl, headers = self.headers, proxies=proxies)
-            except Exception as e:
-                print(e, "222222222")
-                return
-            if i < 10:
-                name = ('clip00%d.ts' % i)
-            elif i > 100:
-                name = ('clip%d.ts' % i)
-            else:
-                name = ('clip0%d.ts' % i)
 
-            print('开始下载clip%d' % i)
-            with open(name,'wb') as f:
-                f.write(resp.content)
-                # f.flush()
-                # os.fsync(f)
-                
-            i = i+1
+        # isFile = True
+        # for i in os.listdir(self.down_path):
+        #     if os.path.splitext(i)[1].find("m3u8") != -1:
+        #         isFile = False
+        #
+        # if isFile:
+        # torrentName = self.get_viedo_downURL()
+        # self.get_uri_from_m3u8()
+        # i = 1   # count
+        torrentName = "SDMU_638"
+        # datalist = self.cursor.execute('SELECT * FROM {}'.format(torrentName))
+        datalist = self.cursor.execute('SELECT * FROM {}'.format(torrentName))
+        results = []
+        p = multiprocessing.Pool(4)
+        for key in datalist:
+            print("开始进入线程池_{}".format(key))
+            # p.apply_async(self.get_viedo, args=(key, ip_list, proxies, ))
+            results.append(p.apply_async(self.get_viedo, args=(key, ip_list, proxies, )))
+
+        for res in results:
+            print(res.get())
+
+        p.close()
+        p.join()
+        self.cursor.close()
+        self.conn.close()
 
         print("下载完成！总共耗时 %d s" % (time.time()-start_time))
         print("接下来进行合并……")
@@ -194,7 +231,13 @@ class ViedeoCrawler():
         else:
             print("不删除，程序结束。")
 
+
+def long_time_task_wrapper(cls_instance, i):
+    return cls_instance.get_viedo(i)
+
+
 if __name__=='__main__':
     url = r"https://www.kpl052.com/Watch-online/146998-1-1.html"
+    code = "hello12200"
     crawler = ViedeoCrawler(url)
     crawler.run()
