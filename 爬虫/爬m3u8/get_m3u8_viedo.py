@@ -173,18 +173,18 @@ class ViedeoCrawler():
         return torrentName
 
 
-    def generateFile(self, key):
+    def generateFile(self, key, s):
 
         if key[0] % 20 == 0:
             print("休眠10s")
             time.sleep(10)
-        if key[0] % 40 == 0:
+        if key[0] % 50 == 0:
             print("更换代理IP")
             self.proxies = self.get_random_ip(self.ip_list)
         try:
-            resp = requests.get(key[1], headers=self.headers, proxies=self.proxies)
+            resp = s.get(key[1], headers=self.headers, proxies=self.proxies, timeout=(3,10))
         except Exception as e:
-            print(e, "文件 {} 没有下载".format(key[0]))
+            print(e, "文件 {} 没有下载, 报错状态码为: {}".format(key[0], resp.status_code))
             return True
 
         name = 'clip_{}.ts'.format(str(key[0]).zfill(6))
@@ -201,15 +201,15 @@ class ViedeoCrawler():
         print("接下来进行合并……")
         os.system('copy/b %s\\*.ts %s\\%s.ts' % (self.down_path,self.final_path, torrentName))
         print("合并完成，请您欣赏！")
-        y = input("请检查文件完整性，并确认是否要删除碎片源文件？(y/n)")
-        if y=='y':
-            files = os.listdir(self.down_path)
-            for filena in files:
-                del_file = self.down_path + "\\" + filena
-                os.remove(del_file)
-            print("碎片文件已经删除完成")
-        else:
-            print("不删除，程序结束。")
+        # y = input("请检查文件完整性，并确认是否要删除碎片源文件？(y/n)")
+        # if y=='y':
+        #     files = os.listdir(self.down_path)
+        #     for filena in files:
+        #         del_file = self.down_path + "\\" + filena
+        #         os.remove(del_file)
+        #     print("碎片文件已经删除完成")
+        # else:
+        #     print("不删除，程序结束。")
 
 
 if __name__=='__main__':
@@ -220,11 +220,11 @@ if __name__=='__main__':
 
     torrentName = crawler.run(cursor)
     torrentName = 'SDMU_638'
-
-    p = Pool(32)
+    s = requests.session()
+    p = Pool(40)
     start = time.time()
     for key in cursor.execute("SELECT * FROM {}".format(torrentName)):
-        p.apply_async(crawler.generateFile, args=(key,))
+        p.apply_async(crawler.generateFile, args=(key, s, ))
 
     p.close()
     p.join()
