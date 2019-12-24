@@ -13,6 +13,7 @@ import sqlite3
 from selenium import webdriver
 from browsermobproxy import Server
 from selenium.webdriver.chrome.options import Options
+from Crypto.Cipher import AES
 
 
 class ViedeoCrawler():
@@ -67,13 +68,16 @@ class ViedeoCrawler():
         torrentNamelist = []
 
         # 遍历torrent 未保存成文件的数据
-        for data in cursor.execute("SELECT * FROM torrent WHERE isGet != 1"):
+        for data in cursor.execute("SELECT * FROM torrent"):
             print(data)
             torrentName = ''.join(re.findall(r'[A-Za-z]+-\d+', data[1])).replace('-', '_')
-            cursor.execute("CREATE TABLE IF NOT EXISTS {torrentName} (id INTEGER PRIMARY KEY AUTOINCREMENT, Url VARCHAR(255) NOT NULL, isGet INT NOT NULL);".format(torrentName=torrentName))
+            cursor.execute("CREATE TABLE IF NOT EXISTS {torrentName} (id INTEGER PRIMARY KEY AUTOINCREMENT, Url VARCHAR(255) NOT NULL, isGet INT NOT NULL, keyURI VARCHAR(255) NOT NULL);".format(torrentName=torrentName))
+
+            resp = requests.get("".join(data[2]))
+
 
             with open(torrentName+'.m3u8', 'wb') as file:
-                file.write(requests.get("".join(data[2])).content)
+                file.write(resp.content)
 
             m3u8Obj = m3u8.load(torrentName+'.m3u8')
             print("解析完成.")
@@ -83,11 +87,15 @@ class ViedeoCrawler():
             print("m3u8Obj的长度为 : {}".format(len(m3u8Obj.segments)))
             # 提取URL连接地址
             path = ''.join(re.findall(r".*(?=\/)/", "".join(data[2])))
-            for key in m3u8Obj.segments:
-                tsurl = path + key.uri
+            key = ''.join(re.findall(r'AES.+URI="(.*key)', resp.text))
+            key_uri = path + key
+            print(key_uri)
+            key_bytes = requests.get(key_uri).content
+            for ts in m3u8Obj.segments:
+                tsurl = path + ts.uri
                 # 插入记录
                 # self.cursor.execute("INSERT OR IGNORE INTO temp (id, Url, isGet) VALUES (?, ?, ?);", (None, tsurl, 0))
-                cursor.execute("INSERT OR IGNORE INTO {torrentName} (id, Url, isGet) VALUES (?, ?, ?);".format(torrentName=torrentName), (None, tsurl, 0))
+                cursor.execute("INSERT OR IGNORE INTO {torrentName} (id, Url, isGet, keyURI) VALUES (?, ?, ?, ?);".format(torrentName=torrentName), (None, tsurl, 0, key_bytes))
 
             # 改变torrent表的isGet, 表示已爬取过
             cursor.execute("UPDATE torrent set isGet = 1 where id={}".format(data[0]))
@@ -166,7 +174,6 @@ class ViedeoCrawler():
         # torrentName = self.get_viedo_downURL(cursor)
         # # 解析M3U8文件
         # self.get_uri_from_m3u8(cursor)
-
         self.ip_list = self.get_ip_list()
         self.proxies = self.get_random_ip(self.ip_list)
 
@@ -174,25 +181,30 @@ class ViedeoCrawler():
 
 
     def generateFile(self, key, s):
-
         if key[0] % 20 == 0:
             print("休眠10s")
             time.sleep(10)
         if key[0] % 50 == 0:
             print("更换代理IP")
             self.proxies = self.get_random_ip(self.ip_list)
+
+        sprytor = AES.new(key[3], AES.MODE_CBC, IV=key[3])
+
         try:
-            resp = s.get(key[1], headers=self.headers, proxies=self.proxies, timeout=(3,10))
+            ts = s.get(key[1], headers=self.headers, proxies=self.proxies, timeout=(3,10))
         except Exception as e:
-            print(e, "文件 {} 没有下载, 报错状态码为: {}".format(key[0], resp.status_code))
+            print(e, "文件 {} 没有下载, 报错状态码为: {}".format(key[0], ts.status_code))
             return True
+
+        while len(ts.content) % 16 != 0:
+            ts += b"0"
 
         name = 'clip_{}.ts'.format(str(key[0]).zfill(6))
         print('开始下载{}'.format(name))
         with open(name, 'wb') as f:
-            f.write(resp.content)
-            # f.flush()
-            # os.fsync(f)
+            # f.write(ts.content)
+            f.write(sprytor.decrypt(ts.content))
+
 
     def mergeFile(self, torrentName, start_time= 0):
         print("下载完成！总共耗时 %d s" % (time.time()-start_time))
@@ -221,7 +233,7 @@ if __name__=='__main__':
     torrentName = crawler.run(cursor)
     torrentName = 'SDMU_638'
     s = requests.session()
-    p = Pool(40)
+    p = Pool(50)
     start = time.time()
     for key in cursor.execute("SELECT * FROM {}".format(torrentName)):
         p.apply_async(crawler.generateFile, args=(key, s, ))
