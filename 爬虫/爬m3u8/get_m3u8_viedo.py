@@ -75,7 +75,6 @@ class ViedeoCrawler():
 
             resp = requests.get("".join(data[2]))
 
-
             with open(torrentName+'.m3u8', 'wb') as file:
                 file.write(resp.content)
 
@@ -171,9 +170,9 @@ class ViedeoCrawler():
 
         torrentName = ''
         # # 开始请求资源网站
-        # torrentName = self.get_viedo_downURL(cursor)
+        torrentName = self.get_viedo_downURL(cursor)
         # # 解析M3U8文件
-        # self.get_uri_from_m3u8(cursor)
+        self.get_uri_from_m3u8(cursor)
         self.ip_list = self.get_ip_list()
         self.proxies = self.get_random_ip(self.ip_list)
 
