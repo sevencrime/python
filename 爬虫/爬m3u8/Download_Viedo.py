@@ -16,11 +16,11 @@ from multiprocess.pool import Pool
 class Download_Viedo():
 
     # 传入一个m3u8地址, 一个名字(可选)
-    def __init__(self, downUrl, filename='index'):
+    def __init__(self, downUrl, filename="Test"):
         self.downUrl = downUrl
         self.filename = filename
         self.down_viedo = r"D:\\private\\viedo"     # 存放最后完整的视频
-        self.down_torrent = r"D:\\private\\file"    # 存放保存的m3u8文件
+        self.down_torrent = r"D:\\private\\m3u8file"    # 存放保存的m3u8文件
         self.down_final = r"D:\\private\\final"     # 存放爬取的视频分段
 
         self.headers = {
@@ -78,28 +78,31 @@ class Download_Viedo():
         print("m3u8文件的keyURI为 : {}".format(key_uri))
         # 获取key的16位bytes
         key_bytes = requests.get(key_uri).content
-
+        torrentName = ''.join(re.findall(r'[A-Za-z]+-\d+', self.filename)).replace('-', '_')
         # 创建数据表
         cursor.execute(
             "CREATE TABLE IF NOT EXISTS {torrentName} (id INTEGER PRIMARY KEY AUTOINCREMENT, URI VARCHAR(255) NOT NULL, keyUri VARCHAR(255) NOT NULL);".format(
-                torrentName=self.filename))
+                torrentName=torrentName))
 
         # 遍历m3u8文件
         for ts in m3u8Obj.segments:
             tsurl = path + ts.uri
-            # 存入数据库
-            cursor.execute("INSERT OR IGNORE INTO {torrentName} (id, URI, keyUri) VALUES (?, ?, ?, ?);".format(
-                torrentName=self.filename), (None, tsurl, key_bytes))
+            # 查询是否重复, 不重复则存入数据库
+            if [d for d in cursor.execute("SELECT * FROM {0} WHERE URI='{1}';".format(torrentName, tsurl))] == []:
+                cursor.execute("INSERT OR IGNORE INTO {torrentName} (id, URI, keyUri) VALUES (?, ?, ?);".format(
+                    torrentName=torrentName), (None, tsurl, key_bytes))
+
+        return torrentName
 
     def download_ViedoFile(self, key, s):
-        import pdb; pdb.set_trace()
         if key[0] % 20 == 0:
             print("休眠10s")
             time.sleep(10)
-        if key[0] % 50 == 0:
+        if key[0] % 50 == 0 or key[0] == 1:
             print("更换代理IP")
             proxies = self.get_random_ip(self.ip_list)
 
+        # 解析m3u8的key
         sprytor = AES.new(key[2], AES.MODE_CBC, IV=key[2])
 
         try:
@@ -137,9 +140,10 @@ class Download_Viedo():
         cursor = conn.cursor()
         os.chdir(self.down_torrent)
         # 请求m3u8文件, 并保存到本地
-        # 解析3eu8文件, 并把加密key和ts存入数据库
-        self.get_downUrl_m3u8(cursor)
-        conn.commit()
+        # 解析3eu8文件, 并把加密key和ts存入数据库, 返回一个数据表的名字
+        torrentName = "AP_702"
+        # torrentName = self.get_downUrl_m3u8(cursor)
+        # conn.commit()
 
         # 读取数据库, 请求ts, 并保存到本地
         os.chdir(self.down_final)
@@ -149,9 +153,10 @@ class Download_Viedo():
         p = Pool(4)
         # 查询数据库
         start = time.time()
-        for key in cursor.execute("SELECT * FROM {}".format(self.filename)):
+        for key in cursor.execute("SELECT * FROM {}".format(torrentName)):
             # self.download_ViedoFile(key, s)
-            p.apply_async(self.download_ViedoFile, args=(key, s, ))
+            # p.apply_async(self.download_ViedoFile, args=(key, s, ))
+            p.apply_async(down, args=(self, key, s, ))
 
         cursor.close()
         conn.close()
@@ -159,7 +164,14 @@ class Download_Viedo():
         # 合并ts文件, 并删除ts
         self.mergeFile(self.filename, start)
 
+
+def down(cls_instance, key, s):
+    return cls_instance.download_ViedoFile(key, s)
+
+
 if __name__ == '__main__':
-    url = r"https://www.kpl052.com/Watch-online/146998-1-1.html"
-    dv = Download_Viedo(url)
+    # url = r"https://www.kpl052.com/Watch-online/146998-1-1.html"
+    url = r"https://videozmcdn.stz8.com:8091/20191105/fhRbUe03/1000kb/hls/index.m3u8"
+    name = "AP-702 只能服从没有选择的继女们"
+    dv = Download_Viedo(url, name)
     dv.run()
