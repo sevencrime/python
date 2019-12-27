@@ -30,7 +30,7 @@ class Download_Viedo():
             'Accept-Language': 'en-US,en;q=0.8,zh-Hans-CN;q=0.5,zh-Hans;q=0.3',
             'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36'
         }
-        requests.adapters.DEFAULT_RETRIES = 5
+        # requests.adapters.DEFAULT_RETRIES = 5
 
 
     def get_ip_list(self):
@@ -105,28 +105,41 @@ class Download_Viedo():
         # 解析m3u8的key
         sprytor = AES.new(key[2], AES.MODE_CBC, IV=key[2])
 
-        try:
-            ts = s.get(key[1], headers=self.headers, proxies=proxies, timeout=(3,10))
+        start = time.time()
+        while True:
+            try:
+                ts = s.get(key[1], headers=self.headers, proxies=proxies, timeout=(3,10))
 
-        except requests.exceptions.ConnectionError:
-            print("文件 {} 没有下载, 报错状态码为: Connection refused".format(key[0]))
+            except requests.exceptions.ConnectionError:
+                ts.status_code = "Connection refused"
+                if time.time() - start > 180:
+                    print("文件 {} 没有下载, 报错状态码为: Connection refused".format(key[0]))
+                    break
+                time.sleep(25)
+                continue
 
-        except Exception as e:
-            print(e, "文件 {} 没有下载, 报错状态码为: {}".format(key[0], ts.status_code))
-            return True
+            except Exception as e:
+                ts.status_code = "Connection refused"
+                if time.time() - start > 180:
+                    print(e, "文件 {} 没有下载, 报错状态码为: {}".format(key[0], ts.status_code))
+                    break
+                time.sleep(25)
+                continue
 
-        while len(ts.content) % 16 != 0:
-            ts += b"0"
+            while len(ts.content) % 16 != 0:
+                ts += b"0"
 
-        name = 'clip_{}.ts'.format(str(key[0]).zfill(6))
-        print('开始下载{}'.format(name))
-        with open(name, 'wb') as f:
-            # f.write(ts.content)
-            f.write(sprytor.decrypt(ts.content))
+            name = 'clip_{}.ts'.format(str(key[0]).zfill(6))
+            print('开始下载{}'.format(name))
+            with open(name, 'wb') as f:
+                # f.write(ts.content)
+                f.write(sprytor.decrypt(ts.content))
+
+            # 能走到这里, 直接退出循环
+            break
 
     def mergeFile(self, start_time= 0):
         print("下载完成！总共耗时 %d s" % (time.time()-start_time))
-        import pdb; pdb.set_trace()
         os.chdir(self.down_viedo)
         print("接下来进行合并……")
         os.system('copy/b {0}\\*.ts {1}\\{2}.ts'.format(self.down_final, self.down_viedo, self.filename))
@@ -154,7 +167,7 @@ class Download_Viedo():
         poollist = []
         s = requests.session()
         # 创建进程池
-        p = multiprocessing.Pool(60)
+        p = multiprocessing.Pool(100)
         # 查询数据库
         start = time.time()
         for key in cursor.execute("SELECT * FROM {}".format(torrentName)):
@@ -172,7 +185,6 @@ class Download_Viedo():
 
         # 合并ts文件, 并删除ts
         self.mergeFile(start)
-
 
 
 if __name__ == '__main__':
