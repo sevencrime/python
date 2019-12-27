@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import multiprocessing
 import random
 import sqlite3
 import time
@@ -10,7 +11,6 @@ import re
 
 from Crypto.Cipher import AES
 from bs4 import BeautifulSoup
-from multiprocess.pool import Pool
 
 
 class Download_Viedo():
@@ -19,7 +19,7 @@ class Download_Viedo():
     def __init__(self, downUrl, filename="Test"):
         self.downUrl = downUrl
         self.filename = filename
-        self.down_viedo = r"D:\\private\\viedo"     # 存放最后完整的视频
+        self.down_viedo = r"D:\\private\\Video"     # 存放最后完整的视频
         self.down_torrent = r"D:\\private\\m3u8file"    # 存放保存的m3u8文件
         self.down_final = r"D:\\private\\final"     # 存放爬取的视频分段
 
@@ -94,19 +94,23 @@ class Download_Viedo():
 
         return torrentName
 
-    def download_ViedoFile(self, key, s):
+    def download_ViedoFile(self, key, s, ip_list, proxies):
         if key[0] % 20 == 0:
             print("休眠10s")
             time.sleep(10)
-        if key[0] % 50 == 0 or key[0] == 1:
+        if key[0] % 50 == 0:
             print("更换代理IP")
-            proxies = self.get_random_ip(self.ip_list)
+            proxies = self.get_random_ip(ip_list)
 
         # 解析m3u8的key
         sprytor = AES.new(key[2], AES.MODE_CBC, IV=key[2])
 
         try:
             ts = s.get(key[1], headers=self.headers, proxies=proxies, timeout=(3,10))
+
+        except requests.exceptions.ConnectionError:
+            print("文件 {} 没有下载, 报错状态码为: Connection refused".format(key[0]))
+
         except Exception as e:
             print(e, "文件 {} 没有下载, 报错状态码为: {}".format(key[0], ts.status_code))
             return True
@@ -120,58 +124,60 @@ class Download_Viedo():
             # f.write(ts.content)
             f.write(sprytor.decrypt(ts.content))
 
-    def mergeFile(self, torrentName, start_time= 0):
+    def mergeFile(self, start_time= 0):
         print("下载完成！总共耗时 %d s" % (time.time()-start_time))
         import pdb; pdb.set_trace()
-        os.chdir(self.down_path)
+        os.chdir(self.down_viedo)
         print("接下来进行合并……")
-        os.system('copy/b %s\\*.ts %s\\%s.ts' % (self.down_path,self.final_path, torrentName))
+        os.system('copy/b {0}\\*.ts {1}\\{2}.ts'.format(self.down_final, self.down_viedo, self.filename))
         print("合并完成，请您欣赏！")
 
 
     def run(self):
 
         # 获取代理IP列表
-        self.ip_list = self.get_ip_list()
+        ip_list = self.get_ip_list()
         # 设置随机代理
-        # self.proxies = self.get_random_ip(self.ip_list)
+        proxies = self.get_random_ip(ip_list)
 
         conn = sqlite3.connect("viedo_ts.db")
         cursor = conn.cursor()
         os.chdir(self.down_torrent)
         # 请求m3u8文件, 并保存到本地
         # 解析3eu8文件, 并把加密key和ts存入数据库, 返回一个数据表的名字
-        torrentName = "AP_702"
-        # torrentName = self.get_downUrl_m3u8(cursor)
-        # conn.commit()
+        torrentName = self.get_downUrl_m3u8(cursor)
+        conn.commit()
 
         # 读取数据库, 请求ts, 并保存到本地
         os.chdir(self.down_final)
 
+        poollist = []
         s = requests.session()
         # 创建进程池
-        p = Pool(4)
+        p = multiprocessing.Pool(60)
         # 查询数据库
         start = time.time()
         for key in cursor.execute("SELECT * FROM {}".format(torrentName)):
             # self.download_ViedoFile(key, s)
-            # p.apply_async(self.download_ViedoFile, args=(key, s, ))
-            p.apply_async(down, args=(self, key, s, ))
+            p.apply_async(self.download_ViedoFile, args=(key, s, ip_list, proxies))
+            # poollist.append(p.apply_async(self.download_ViedoFile, args=(key, s, ip_list, proxies)))
 
+        # for i in poollist:
+        #     print(i.get() or '')
+
+        p.close()
+        p.join()
         cursor.close()
         conn.close()
 
         # 合并ts文件, 并删除ts
-        self.mergeFile(self.filename, start)
+        self.mergeFile(start)
 
-
-def down(cls_instance, key, s):
-    return cls_instance.download_ViedoFile(key, s)
 
 
 if __name__ == '__main__':
     # url = r"https://www.kpl052.com/Watch-online/146998-1-1.html"
     url = r"https://videozmcdn.stz8.com:8091/20191105/fhRbUe03/1000kb/hls/index.m3u8"
-    name = "AP-702 只能服从没有选择的继女们"
+    name = "AP-702只能服从没有选择的继女们"
     dv = Download_Viedo(url, name)
     dv.run()
