@@ -112,18 +112,18 @@ class Download_Viedo():
 
             except requests.exceptions.ConnectionError:
                 ts.status_code = "Connection refused"
-                if time.time() - start > 180:
+                if time.time() - start > 200:
                     print("文件 {} 没有下载, 报错状态码为: Connection refused".format(key[0]))
                     break
-                time.sleep(25)
+                time.sleep(30)
                 continue
 
             except Exception as e:
                 ts.status_code = "Connection refused"
-                if time.time() - start > 180:
+                if time.time() - start > 200:
                     print(e, "文件 {} 没有下载, 报错状态码为: {}".format(key[0], ts.status_code))
                     break
-                time.sleep(25)
+                time.sleep(30)
                 continue
 
             while len(ts.content) % 16 != 0:
@@ -141,9 +141,27 @@ class Download_Viedo():
     def mergeFile(self, start_time= 0):
         print("下载完成！总共耗时 %d s" % (time.time()-start_time))
         os.chdir(self.down_viedo)
+
+        # 校验文件是否缺少
+        dirlist = os.listdir(self.down_final)
+        for i in range(len(os.listdir(self.down_final))):
+            try:
+                import pdb;
+                assert 'clip_{}.ts'.format(str(i+1).zfill(6)) == dirlist[i]
+            except AssertionError:
+                print("当 i == {0} 时, {1} 和 {2} 不一致, 文件片段有问题".format(i, 'clip_{}.ts'.format(str(i+1).zfill(6)), dirlist[i]))
+                continue
+
         print("接下来进行合并……")
         os.system('copy/b {0}\\*.ts {1}\\{2}.ts'.format(self.down_final, self.down_viedo, self.filename))
         print("合并完成，请您欣赏！")
+
+        pdb.set_trace() # 循环从0开始, 固要+1
+        # 删除片段
+        for filename in dirlist:
+            del_file = self.down_final + "\\" + filename
+            os.remove(del_file)
+        print("视频片段已全部删除")
 
 
     def run(self):
@@ -192,4 +210,5 @@ if __name__ == '__main__':
     url = r"https://videozmcdn.stz8.com:8091/20191105/fhRbUe03/1000kb/hls/index.m3u8"
     name = "AP-702只能服从没有选择的继女们"
     dv = Download_Viedo(url, name)
-    dv.run()
+    # dv.run()
+    dv.mergeFile()
