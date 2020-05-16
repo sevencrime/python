@@ -152,7 +152,7 @@ class Download_Viedo():
         print("下载完成！总共耗时 %d s" % (time.time()-start_time))
         os.chdir(self.down_viedo)
 
-        self.m3u8_len = 6756
+        # self.m3u8_len = 6756
         # 通过m3u8文件长度, 创建一个全list, 用于判断缺少的数
         m3u8list = ['clip_{}.ts'.format(str(n+1).zfill(6)) for n in range(self.m3u8_len)]
         # 获取文件夹中的所有文件, list
