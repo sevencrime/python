@@ -19,7 +19,7 @@ class Download_Viedo():
     def __init__(self, downUrl, filename="Test"):
         self.downUrl = downUrl
         self.filename = filename
-        self.down_viedo = r"D:\\private\\Video"     # 存放最后完整的视频
+        self.down_viedo = r"D:\\private\\video"     # 存放最后完整的视频
         self.down_torrent = r"D:\\private\\m3u8file"    # 存放保存的m3u8文件
         self.down_final = r"D:\\private\\final"     # 存放爬取的视频分段
 
@@ -31,7 +31,7 @@ class Download_Viedo():
             'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36'
         }
         # requests.adapters.DEFAULT_RETRIES = 5
-
+        self.iskey = True
 
     def get_ip_list(self):
         print("正在获取代理列表...")
@@ -69,20 +69,28 @@ class Download_Viedo():
         print("m3u8文件已经保存")
         # 解析m3u8文件
         m3u8Obj = m3u8.load(self.filename + '.m3u8')
+        self.m3u8_len = len(m3u8Obj.segments)
         print("M3U8文件的长度为 : {}".format(len(m3u8Obj.segments)))
 
         # 正则提取下载地址
         path = ''.join(re.findall(r".*(?=\/)/", self.downUrl))
-        # 正则提取m3u8文件加密的地址key_uri
-        key_uri = path + ''.join(re.findall(r'AES.+URI="(.*key)', resp.text))
-        print("m3u8文件的keyURI为 : {}".format(key_uri))
-        # 获取key的16位bytes
-        key_bytes = requests.get(key_uri).content
+        key_bytes = ''
+        if self.iskey:
+            # 正则提取m3u8文件加密的地址key_uri
+            key_uri = path + ''.join(re.findall(r'AES.+URI="(.*key)', resp.text))
+            print("m3u8文件的keyURI为 : {}".format(key_uri))
+            # 获取key的16位bytes
+            key_bytes = requests.get(key_uri).content
+            print("key 为: {}".format(key_bytes))
         torrentName = ''.join(re.findall(r'[A-Za-z]+-\d+', self.filename)).replace('-', '_')
+        if torrentName == "":
+            torrentName = "viedom3u8" 
+
+        print("torrentName : {}".format(torrentName) )
         # 创建数据表
+        cursor.execute("DROP TABLE IF EXISTS {};".format(torrentName))
         cursor.execute(
-            "CREATE TABLE IF NOT EXISTS {torrentName} (id INTEGER PRIMARY KEY AUTOINCREMENT, URI VARCHAR(255) NOT NULL, keyUri VARCHAR(255) NOT NULL);".format(
-                torrentName=torrentName))
+            "CREATE TABLE IF NOT EXISTS {torrentName} (id INTEGER PRIMARY KEY AUTOINCREMENT, URI VARCHAR(255) NOT NULL, keyUri VARCHAR(255) NOT NULL );".format(torrentName=torrentName))
 
         # 遍历m3u8文件
         for ts in m3u8Obj.segments:
@@ -96,23 +104,23 @@ class Download_Viedo():
 
     def download_ViedoFile(self, key, s, ip_list, proxies):
         if key[0] % 20 == 0:
-            print("休眠10s")
+            # print("休眠10s")
             time.sleep(10)
         if key[0] % 50 == 0:
-            print("更换代理IP")
+            # print("更换代理IP")
             proxies = self.get_random_ip(ip_list)
 
-        # 解析m3u8的key
-        sprytor = AES.new(key[2], AES.MODE_CBC, IV=key[2])
+        if self.iskey:
+            # 解析m3u8的key
+            sprytor = AES.new(key[2], AES.MODE_CBC, IV=key[2])
 
         start = time.time()
         while True:
             try:
                 ts = s.get(key[1], headers=self.headers, proxies=proxies, timeout=(3,10))
-
             except requests.exceptions.ConnectionError:
                 ts.status_code = "Connection refused"
-                if time.time() - start > 200:
+                if time.time() - start > 300:
                     print("文件 {} 没有下载, 报错状态码为: Connection refused".format(key[0]))
                     break
                 time.sleep(30)
@@ -120,7 +128,7 @@ class Download_Viedo():
 
             except Exception as e:
                 ts.status_code = "Connection refused"
-                if time.time() - start > 200:
+                if time.time() - start > 300:
                     print(e, "文件 {} 没有下载, 报错状态码为: {}".format(key[0], ts.status_code))
                     break
                 time.sleep(30)
@@ -130,10 +138,12 @@ class Download_Viedo():
                 ts += b"0"
 
             name = 'clip_{}.ts'.format(str(key[0]).zfill(6))
-            print('开始下载{}'.format(name))
+            # print('开始下载{}'.format(name))
             with open(name, 'wb') as f:
-                # f.write(ts.content)
-                f.write(sprytor.decrypt(ts.content))
+                if not self.iskey:
+                    f.write(ts.content)
+                else:
+                    f.write(sprytor.decrypt(ts.content))
 
             # 能走到这里, 直接退出循环
             break
@@ -142,21 +152,26 @@ class Download_Viedo():
         print("下载完成！总共耗时 %d s" % (time.time()-start_time))
         os.chdir(self.down_viedo)
 
-        # 校验文件是否缺少
+        self.m3u8_len = 6756
+        # 通过m3u8文件长度, 创建一个全list, 用于判断缺少的数
+        m3u8list = ['clip_{}.ts'.format(str(n+1).zfill(6)) for n in range(self.m3u8_len)]
+        # 获取文件夹中的所有文件, list
         dirlist = os.listdir(self.down_final)
-        for i in range(len(os.listdir(self.down_final))):
-            try:
-                import pdb;
-                assert 'clip_{}.ts'.format(str(i+1).zfill(6)) == dirlist[i]
-            except AssertionError:
-                print("当 i == {0} 时, {1} 和 {2} 不一致, 文件片段有问题".format(i, 'clip_{}.ts'.format(str(i+1).zfill(6)), dirlist[i]))
-                continue
+        # 求两个list的差集, 校验文件是否缺少
+        difflist = [item for item in m3u8list if not item in dirlist]
+        if len(difflist) != 0:
+            difftup = []
+            for i in difflist:
+                print("缺少片段 : {}".format(i))
+                difftup.append(int(i[5:-3]))
+
+            self.run(difftup)
 
         print("接下来进行合并……")
         os.system('copy/b {0}\\*.ts {1}\\{2}.ts'.format(self.down_final, self.down_viedo, self.filename))
         print("合并完成，请您欣赏！")
 
-        pdb.set_trace() # 循环从0开始, 固要+1
+        # 循环从0开始, 固要+1
         # 删除片段
         for filename in dirlist:
             del_file = self.down_final + "\\" + filename
@@ -164,7 +179,7 @@ class Download_Viedo():
         print("视频片段已全部删除")
 
 
-    def run(self):
+    def run(self, difftup=[]):
 
         # 获取代理IP列表
         ip_list = self.get_ip_list()
@@ -176,7 +191,7 @@ class Download_Viedo():
         os.chdir(self.down_torrent)
         # 请求m3u8文件, 并保存到本地
         # 解析3eu8文件, 并把加密key和ts存入数据库, 返回一个数据表的名字
-        torrentName = self.get_downUrl_m3u8(cursor)
+        self.torrentName = self.get_downUrl_m3u8(cursor)
         conn.commit()
 
         # 读取数据库, 请求ts, 并保存到本地
@@ -185,13 +200,29 @@ class Download_Viedo():
         poollist = []
         s = requests.session()
         # 创建进程池
-        p = multiprocessing.Pool(100)
-        # 查询数据库
-        start = time.time()
-        for key in cursor.execute("SELECT * FROM {}".format(torrentName)):
-            # self.download_ViedoFile(key, s)
-            p.apply_async(self.download_ViedoFile, args=(key, s, ip_list, proxies))
-            # poollist.append(p.apply_async(self.download_ViedoFile, args=(key, s, ip_list, proxies)))
+        p = multiprocessing.Pool(70)
+
+        if len(difftup) > 0:
+            # 查询数据库
+            start = time.time()
+            print("开始下载视频")
+            if len(difftup) == 1:
+                self.download_ViedoFile([key for key in cursor.execute("SELECT * FROM {} WHERE id = {};".format(self.torrentName, "".join(difftup)))], s, ip_list, proxies)
+            else:
+                print("SELECT * FROM {} WHERE id in {};".format(self.torrentName, tuple(difftup)))
+                for key in cursor.execute("SELECT * FROM {} WHERE id in {};".format(self.torrentName, tuple(difftup))):
+                    # self.download_ViedoFile(key, s)
+                    p.apply_async(self.download_ViedoFile, args=(key, s, ip_list, proxies))
+                    # poollist.append(p.apply_async(self.download_ViedoFile, args=(key, s, ip_list, proxies)))            
+        else:
+            # 查询数据库
+            start = time.time()
+            print("开始下载视频")
+            # for key in cursor.execute("SELECT * FROM {}".format(self.torrentName)):
+            for key in cursor.execute("SELECT * FROM {};".format(self.torrentName)):
+                # self.download_ViedoFile(key, s)
+                p.apply_async(self.download_ViedoFile, args=(key, s, ip_list, proxies))
+                # poollist.append(p.apply_async(self.download_ViedoFile, args=(key, s, ip_list, proxies)))
 
         # for i in poollist:
         #     print(i.get() or '')
@@ -205,10 +236,14 @@ class Download_Viedo():
         self.mergeFile(start)
 
 
+
 if __name__ == '__main__':
-    # url = r"https://www.kpl052.com/Watch-online/146998-1-1.html"
-    url = r"https://videozmcdn.stz8.com:8091/20191105/fhRbUe03/1000kb/hls/index.m3u8"
-    name = "AP-702只能服从没有选择的继女们"
+    url = r"https://videocdn.hndtl.com:8091/20190520/AHJI2TEH859/1000kb/hls/index.m3u8"
+    # http://ttlu70.com/index.php/vod/play/id/25059/sid/1/nid/1.html
+    # url = r"https://youku.haokzy-tudou.com/ppvod/4yf2LZrW.m3u8")
+    name = "NHDTA-859"
     dv = Download_Viedo(url, name)
     # dv.run()
-    dv.mergeFile()
+    dv.mergeFile(time.time())
+
+
