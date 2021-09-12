@@ -224,13 +224,15 @@ class ViedeoCrawler():
 
 
 if __name__=='__main__':
-    url = r"https://www.kpl052.com/Watch-online/146998-1-1.html"
+    # url = r"https://www.kpl052.com/Watch-online/146998-1-1.html"
+    url = r"https://www.gentaji.com:65/20200302/Eq55Wrvp/1200kb/hls/index.m3u8"
+
     crawler = ViedeoCrawler(url)
     conn = sqlite3.connect("viedo_ts.db")
     cursor = conn.cursor()
 
     torrentName = crawler.run(cursor)
-    torrentName = 'SDMU_638'
+    torrentName = '整蛊专家-周星驰'
     s = requests.session()
     p = Pool(50)
     start = time.time()

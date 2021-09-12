@@ -16,7 +16,7 @@ from bs4 import BeautifulSoup
 class Download_Viedo():
 
     # 传入一个m3u8地址, 一个名字(可选)
-    def __init__(self, downUrl, filename="Test"):
+    def __init__(self, downUrl, filename="Test", iskey=False):
         self.downUrl = downUrl
         self.filename = filename
         self.down_viedo = r"D:\\private\\video"     # 存放最后完整的视频
@@ -31,7 +31,7 @@ class Download_Viedo():
             'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36'
         }
         # requests.adapters.DEFAULT_RETRIES = 5
-        self.iskey = True
+        self.iskey = iskey
 
     def get_ip_list(self):
         print("正在获取代理列表...")
@@ -94,7 +94,12 @@ class Download_Viedo():
 
         # 遍历m3u8文件
         for ts in m3u8Obj.segments:
-            tsurl = path + ts.uri
+            try:
+                uri = ts.uri[ts.uri.rindex('/') + 1 : len(ts.uri)] 
+                # print(uri)
+            except Exception as e:
+                uri = ts.uri
+            tsurl = path + uri
             # 查询是否重复, 不重复则存入数据库
             if [d for d in cursor.execute("SELECT * FROM {0} WHERE URI='{1}';".format(torrentName, tsurl))] == []:
                 cursor.execute("INSERT OR IGNORE INTO {torrentName} (id, URI, keyUri) VALUES (?, ?, ?);".format(
@@ -152,7 +157,7 @@ class Download_Viedo():
         print("下载完成！总共耗时 %d s" % (time.time()-start_time))
         os.chdir(self.down_viedo)
 
-        # self.m3u8_len = 6756
+        # self.m3u8_len = 7502
         # 通过m3u8文件长度, 创建一个全list, 用于判断缺少的数
         m3u8list = ['clip_{}.ts'.format(str(n+1).zfill(6)) for n in range(self.m3u8_len)]
         # 获取文件夹中的所有文件, list
@@ -169,14 +174,15 @@ class Download_Viedo():
 
         print("接下来进行合并……")
         os.system('copy/b {0}\\*.ts {1}\\{2}.ts'.format(self.down_final, self.down_viedo, self.filename))
+
         print("合并完成，请您欣赏！")
 
         # 循环从0开始, 固要+1
         # 删除片段
-        for filename in dirlist:
-            del_file = self.down_final + "\\" + filename
-            os.remove(del_file)
-        print("视频片段已全部删除")
+        # for filename in dirlist:
+        #     del_file = self.down_final + "\\" + filename
+        #     os.remove(del_file)
+        # print("视频片段已全部删除")
 
 
     def run(self, difftup=[]):
@@ -207,7 +213,7 @@ class Download_Viedo():
             start = time.time()
             print("开始下载视频")
             if len(difftup) == 1:
-                self.download_ViedoFile([key for key in cursor.execute("SELECT * FROM {} WHERE id = {};".format(self.torrentName, "".join(difftup)))], s, ip_list, proxies)
+                self.download_ViedoFile([key for key in cursor.execute("SELECT * FROM {} WHERE id = {};".format(self.torrentName, difftup[0]))][0], s, ip_list, proxies)
             else:
                 print("SELECT * FROM {} WHERE id in {};".format(self.torrentName, tuple(difftup)))
                 for key in cursor.execute("SELECT * FROM {} WHERE id in {};".format(self.torrentName, tuple(difftup))):
@@ -238,12 +244,12 @@ class Download_Viedo():
 
 
 if __name__ == '__main__':
-    url = r"https://videocdn.hndtl.com:8091/20190520/AHJI2TEH859/1000kb/hls/index.m3u8"
+    url = r"https://videozm.whqhyg.com:8091/20200518/1xuDAJ9J/1000kb/hls/index.m3u8"
     # http://ttlu70.com/index.php/vod/play/id/25059/sid/1/nid/1.html
     # url = r"https://youku.haokzy-tudou.com/ppvod/4yf2LZrW.m3u8")
-    name = "NHDTA-859"
-    dv = Download_Viedo(url, name)
-    # dv.run()
-    dv.mergeFile(time.time())
+    name = "ADN-138"
+    dv = Download_Viedo(url, name, iskey=False)
+    dv.run()
+    # dv.mergeFile(time.time())
 
 

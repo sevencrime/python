@@ -2,7 +2,4 @@
 # -*- coding: utf-8 -*-
 
 
-a = 'https://www.eddidtrust.com#top'
-
-if not a.find('#'):
-    print("Ss")
+a = '在线播放SDMU-638三生三世军多多 ～设计师的健康的的阿萨德 高清 - 高清资源 - 环境撒旦教阿萨德|健身教练的'

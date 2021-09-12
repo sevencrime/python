@@ -1,0 +1,890 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x0000000068807377, pid=7236, tid=10544
+#
+# JRE version: Java(TM) SE Runtime Environment (8.0_60-b27) (build 1.8.0_60-b27)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (25.60-b23 mixed mode windows-amd64 compressed oops)
+# Problematic frame:
+# C  [nio.dll+0x7377]
+#
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000000001d434800):  JavaThread "LittleProxy-34-ClientToProxyWorker-0" [_thread_in_native, id=10544, stack(0x0000000051f00000,0x0000000052000000)]
+
+siginfo: ExceptionCode=0xc0000005, writing address 0x0000000051ff4000
+
+Registers:
+RAX=0x000000000000d0e0, RBX=0x00000000dc062b70, RCX=0x000000001d4349f8, RDX=0x0000000051fff180
+RSP=0x0000000051fff0e8, RBP=0x0000000051ff2120, RSI=0x00000000dc062b70, RDI=0x00000000dc061b58
+R8 =0x000000001d914000, R9 =0x0000000000000002, R10=0x0000000051ff2000, R11=0x0000000051ff4000
+R12=0x0000000000000000, R13=0x0000000000000007, R14=0x00000000dc064cc0, R15=0x000000001d434800
+RIP=0x0000000068807377, EFLAGS=0x0000000000010287
+
+Top of Stack: (sp=0x0000000051fff0e8)
+0x0000000051fff0e8:   0000000002ea6ed2 0000000000000400
+0x0000000051fff0f8:   0000000068806d0a 000000001d434800
+0x0000000051fff108:   00000000dc064cc0 0000000000000007
+0x0000000051fff118:   0000000000000000 00000000dc061b58
+0x0000000051fff128:   00000000dc062b70 0000000051fff1c0
+0x0000000051fff138:   0000000002ea6f50 0000000100000000
+0x0000000051fff148:   00000000dc062b70 0000000020069511
+0x0000000051fff158:   0000000002b29d71 0000000051fff198
+0x0000000051fff168:   0000000051fff1a0 0000000051fff1a8
+0x0000000051fff178:   00000000000003e8 00000000dc05f2e8
+0x0000000051fff188:   00000000688070f2 0000000051fff270
+0x0000000051fff198:   00000000dc061b58 00000000dc062b70
+0x0000000051fff1a8:   00000000dc063b88 00000000dc061348
+0x0000000051fff1b8:   000000000308daf5 00000000dc0e9b68
+0x0000000051fff1c8:   0000000003167714 00000000000003e8
+0x0000000051fff1d8:   0000000000000000 00000000dc0e9668 
+
+Instructions: (pc=0x0000000068807377)
+0x0000000068807357:   d0 4d 0f 42 d3 65 4c 8b 1c 25 10 00 00 00 4d 3b
+0x0000000068807367:   d3 73 16 66 41 81 e2 00 f0 4d 8d 9b 00 f0 ff ff
+0x0000000068807377:   41 c6 03 00 4d 3b d3 75 f0 4c 8b 14 24 4c 8b 5c
+0x0000000068807387:   24 08 48 83 c4 10 c3 cc cc 40 53 48 83 ec 20 b9 
+
+
+Register to memory mapping:
+
+RAX=0x000000000000d0e0 is an unknown value
+RBX=0x00000000dc062b70 is an oop
+[I 
+ - klass: {type array int}
+ - length: 1025
+RCX=0x000000001d4349f8 is an unknown value
+RDX=0x0000000051fff180 is pointing into the stack for thread: 0x000000001d434800
+RSP=0x0000000051fff0e8 is pointing into the stack for thread: 0x000000001d434800
+RBP=0x0000000051ff2120 is pointing into the stack for thread: 0x000000001d434800
+RSI=0x00000000dc062b70 is an oop
+[I 
+ - klass: {type array int}
+ - length: 1025
+RDI=0x00000000dc061b58 is an oop
+[I 
+ - klass: {type array int}
+ - length: 1025
+R8 =0x000000001d914000 is an unknown value
+R9 =0x0000000000000002 is an unknown value
+R10=0x0000000051ff2000 is pointing into the stack for thread: 0x000000001d434800
+R11=0x0000000051ff4000 is pointing into the stack for thread: 0x000000001d434800
+R12=0x0000000000000000 is an unknown value
+R13=0x0000000000000007 is an unknown value
+R14=0x00000000dc064cc0 is an oop
+io.netty.channel.nio.SelectedSelectionKeySet 
+ - klass: 'io/netty/channel/nio/SelectedSelectionKeySet'
+R15=0x000000001d434800 is a thread
+
+
+Stack: [0x0000000051f00000,0x0000000052000000],  sp=0x0000000051fff0e8,  free space=1020k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [nio.dll+0x7377]
+C  [nio.dll+0x6d0a]
+C  0x0000000002ea6f50
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+J 2021  sun.nio.ch.WindowsSelectorImpl$SubSelector.poll0(JI[I[I[IJ)I (0 bytes) @ 0x0000000002ea6ed2 [0x0000000002ea6e40+0x92]
+J 3735 C2 sun.nio.ch.SelectorImpl.lockAndDoSelect(J)I (72 bytes) @ 0x0000000003167714 [0x0000000003167300+0x414]
+J 5913 C2 io.netty.channel.nio.NioEventLoop.select(Z)V (331 bytes) @ 0x00000000037045c0 [0x00000000037043c0+0x200]
+J 6542 C2 io.netty.channel.nio.NioEventLoop.run()V (221 bytes) @ 0x00000000038d3cd0 [0x00000000038d3a60+0x270]
+J 8104 C1 io.netty.util.concurrent.SingleThreadEventExecutor$5.run()V (1664 bytes) @ 0x0000000003d355fc [0x0000000003d35220+0x3dc]
+J 8081 C1 java.lang.Thread.run()V (17 bytes) @ 0x0000000002dc4484 [0x0000000002dc4340+0x144]
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+=>0x000000001d434800 JavaThread "LittleProxy-34-ClientToProxyWorker-0" [_thread_in_native, id=10544, stack(0x0000000051f00000,0x0000000052000000)]
+  0x000000001d434000 JavaThread "LittleProxy-34-ClientToProxyAcceptor-0" [_thread_in_native, id=11636, stack(0x0000000051e00000,0x0000000051f00000)]
+  0x000000001d433000 JavaThread "LittleProxy-33-ProxyToServerWorker-7" [_thread_in_native, id=12476, stack(0x0000000051b00000,0x0000000051c00000)]
+  0x000000001d432800 JavaThread "LittleProxy-33-ClientToProxyWorker-7" [_thread_in_native, id=16400, stack(0x0000000051a00000,0x0000000051b00000)]
+  0x000000001d428800 JavaThread "LittleProxy-33-ProxyToServerWorker-6" [_thread_in_native, id=19184, stack(0x00000000516d0000,0x00000000517d0000)]
+  0x000000001d42f800 JavaThread "LittleProxy-33-ProxyToServerWorker-5" [_thread_in_native, id=6848, stack(0x00000000515d0000,0x00000000516d0000)]
+  0x000000001d42b000 JavaThread "LittleProxy-33-ProxyToServerWorker-4" [_thread_in_native, id=18676, stack(0x00000000514d0000,0x00000000515d0000)]
+  0x000000001d42e800 JavaThread "LittleProxy-33-ClientToProxyWorker-6" [_thread_in_native, id=16104, stack(0x00000000513d0000,0x00000000514d0000)]
+  0x000000001d42e000 JavaThread "LittleProxy-33-ClientToProxyWorker-5" [_thread_in_native, id=21220, stack(0x00000000512d0000,0x00000000513d0000)]
+  0x000000001d42d000 JavaThread "LittleProxy-33-ClientToProxyWorker-4" [_thread_in_native, id=20184, stack(0x00000000511d0000,0x00000000512d0000)]
+  0x000000001d427000 JavaThread "LittleProxy-33-ProxyToServerWorker-3" [_thread_in_native, id=22324, stack(0x00000000510d0000,0x00000000511d0000)]
+  0x000000001d42a000 JavaThread "LittleProxy-33-ClientToProxyWorker-3" [_thread_in_native, id=20704, stack(0x0000000050fd0000,0x00000000510d0000)]
+  0x000000001d428000 JavaThread "LittleProxy-33-ProxyToServerWorker-2" [_thread_in_native, id=10224, stack(0x0000000050ed0000,0x0000000050fd0000)]
+  0x000000001d42c800 JavaThread "LittleProxy-33-ProxyToServerWorker-1" [_thread_in_native, id=15756, stack(0x0000000050dd0000,0x0000000050ed0000)]
+  0x000000001d42b800 JavaThread "LittleProxy-33-ClientToProxyWorker-2" [_thread_in_native, id=9060, stack(0x0000000050cd0000,0x0000000050dd0000)]
+  0x000000001d429800 JavaThread "LittleProxy-33-ClientToProxyWorker-1" [_thread_in_native, id=18516, stack(0x0000000050bd0000,0x0000000050cd0000)]
+  0x000000001d426800 JavaThread "LittleProxy-33-ProxyToServerWorker-0" [_thread_in_native, id=692, stack(0x0000000050ad0000,0x0000000050bd0000)]
+  0x000000001d41f000 JavaThread "LittleProxy-33-ClientToProxyWorker-0" [_thread_in_native, id=9580, stack(0x00000000509d0000,0x0000000050ad0000)]
+  0x000000001d425800 JavaThread "LittleProxy-33-ClientToProxyAcceptor-0" [_thread_in_native, id=19432, stack(0x00000000508d0000,0x00000000509d0000)]
+  0x000000001d425000 JavaThread "LittleProxy-32-ProxyToServerWorker-7" [_thread_in_native, id=22408, stack(0x00000000505d0000,0x00000000506d0000)]
+  0x000000001d424000 JavaThread "LittleProxy-32-ProxyToServerWorker-6" [_thread_in_native, id=20248, stack(0x00000000504d0000,0x00000000505d0000)]
+  0x000000001d41d800 JavaThread "LittleProxy-32-ProxyToServerWorker-5" [_thread_in_native, id=17424, stack(0x00000000503d0000,0x00000000504d0000)]
+  0x000000001d423800 JavaThread "LittleProxy-32-ClientToProxyWorker-7" [_thread_in_native, id=16292, stack(0x00000000502d0000,0x00000000503d0000)]
+  0x000000001d41c000 JavaThread "LittleProxy-32-ClientToProxyWorker-6" [_thread_in_native, id=22360, stack(0x00000000501d0000,0x00000000502d0000)]
+  0x000000001d422800 JavaThread "LittleProxy-32-ClientToProxyWorker-5" [_thread_in_native, id=20608, stack(0x00000000500d0000,0x00000000501d0000)]
+  0x000000001d41c800 JavaThread "LittleProxy-32-ProxyToServerWorker-4" [_thread_in_native, id=20696, stack(0x000000004ffd0000,0x00000000500d0000)]
+  0x000000001d422000 JavaThread "LittleProxy-32-ClientToProxyWorker-4" [_thread_in_native, id=10236, stack(0x000000004fed0000,0x000000004ffd0000)]
+  0x000000001d420800 JavaThread "LittleProxy-32-ProxyToServerWorker-3" [_thread_in_native, id=20212, stack(0x000000004fdd0000,0x000000004fed0000)]
+  0x000000001d41e000 JavaThread "LittleProxy-32-ClientToProxyWorker-3" [_thread_in_native, id=14808, stack(0x000000004fcd0000,0x000000004fdd0000)]
+  0x000000001d41f800 JavaThread "LittleProxy-32-ProxyToServerWorker-2" [_thread_in_native, id=17012, stack(0x000000004fbd0000,0x000000004fcd0000)]
+  0x000000001d421000 JavaThread "LittleProxy-32-ProxyToServerWorker-1" [_thread_in_native, id=20848, stack(0x000000004fad0000,0x000000004fbd0000)]
+  0x000000001d418000 JavaThread "LittleProxy-32-ClientToProxyWorker-2" [_thread_in_native, id=21984, stack(0x000000004f9d0000,0x000000004fad0000)]
+  0x000000001d414800 JavaThread "LittleProxy-32-ClientToProxyWorker-1" [_thread_in_native, id=19376, stack(0x000000004f8d0000,0x000000004f9d0000)]
+  0x000000001d41b000 JavaThread "LittleProxy-32-ProxyToServerWorker-0" [_thread_in_native, id=13452, stack(0x000000004f7d0000,0x000000004f8d0000)]
+  0x000000001d416800 JavaThread "LittleProxy-32-ClientToProxyWorker-0" [_thread_in_native, id=17200, stack(0x000000004f6d0000,0x000000004f7d0000)]
+  0x000000001d416000 JavaThread "LittleProxy-32-ClientToProxyAcceptor-0" [_thread_in_native, id=20296, stack(0x000000004f5d0000,0x000000004f6d0000)]
+  0x000000001d41a800 JavaThread "LittleProxy-31-ProxyToServerWorker-7" [_thread_in_native, id=19492, stack(0x000000004f2d0000,0x000000004f3d0000)]
+  0x000000001d417800 JavaThread "LittleProxy-31-ClientToProxyWorker-7" [_thread_in_native, id=19244, stack(0x000000004f1d0000,0x000000004f2d0000)]
+  0x000000001d415000 JavaThread "LittleProxy-31-ProxyToServerWorker-6" [_thread_in_native, id=7340, stack(0x000000004f0d0000,0x000000004f1d0000)]
+  0x000000001d419800 JavaThread "LittleProxy-31-ProxyToServerWorker-5" [_thread_in_native, id=3520, stack(0x000000004efd0000,0x000000004f0d0000)]
+  0x000000001d419000 JavaThread "LittleProxy-31-ProxyToServerWorker-4" [_thread_in_native, id=18488, stack(0x000000004eed0000,0x000000004efd0000)]
+  0x000000001d749000 JavaThread "LittleProxy-31-ClientToProxyWorker-6" [_thread_in_native, id=19608, stack(0x000000004edd0000,0x000000004eed0000)]
+  0x000000001d748800 JavaThread "LittleProxy-31-ClientToProxyWorker-5" [_thread_in_native, id=19052, stack(0x000000004ecd0000,0x000000004edd0000)]
+  0x000000001d74d000 JavaThread "LittleProxy-31-ProxyToServerWorker-3" [_thread_in_native, id=21956, stack(0x000000004ebd0000,0x000000004ecd0000)]
+  0x000000001d747800 JavaThread "LittleProxy-31-ClientToProxyWorker-4" [_thread_in_native, id=2256, stack(0x000000004ead0000,0x000000004ebd0000)]
+  0x000000001d74c000 JavaThread "LittleProxy-31-ClientToProxyWorker-3" [_thread_in_native, id=6036, stack(0x000000004e9d0000,0x000000004ead0000)]
+  0x000000001d744800 JavaThread "LittleProxy-31-ProxyToServerWorker-2" [_thread_in_native, id=3260, stack(0x000000004e8d0000,0x000000004e9d0000)]
+  0x000000001d747000 JavaThread "LittleProxy-31-ProxyToServerWorker-1" [_thread_in_native, id=8720, stack(0x000000004e7d0000,0x000000004e8d0000)]
+  0x000000001d74b800 JavaThread "LittleProxy-31-ClientToProxyWorker-2" [_thread_in_native, id=21164, stack(0x000000004e6d0000,0x000000004e7d0000)]
+  0x000000001d745800 JavaThread "LittleProxy-31-ClientToProxyWorker-1" [_thread_in_native, id=15524, stack(0x000000004e5d0000,0x000000004e6d0000)]
+  0x000000001d744000 JavaThread "LittleProxy-31-ProxyToServerWorker-0" [_thread_in_native, id=18548, stack(0x000000004e3d0000,0x000000004e4d0000)]
+  0x000000001d74a800 JavaThread "LittleProxy-31-ClientToProxyWorker-0" [_thread_in_native, id=17416, stack(0x000000004e2d0000,0x000000004e3d0000)]
+  0x000000001d74a000 JavaThread "LittleProxy-31-ClientToProxyAcceptor-0" [_thread_in_native, id=20032, stack(0x000000004e1d0000,0x000000004e2d0000)]
+  0x000000001d746000 JavaThread "LittleProxy-30-ProxyToServerWorker-7" [_thread_in_native, id=17616, stack(0x000000004ded0000,0x000000004dfd0000)]
+  0x000000001d73c000 JavaThread "LittleProxy-30-ProxyToServerWorker-6" [_thread_in_native, id=19660, stack(0x000000004ddd0000,0x000000004ded0000)]
+  0x000000001d743000 JavaThread "LittleProxy-30-ProxyToServerWorker-5" [_thread_in_native, id=9584, stack(0x000000004dcd0000,0x000000004ddd0000)]
+  0x000000001d73b800 JavaThread "LittleProxy-30-ClientToProxyWorker-7" [_thread_in_native, id=14124, stack(0x000000004dbd0000,0x000000004dcd0000)]
+  0x000000001d742800 JavaThread "LittleProxy-30-ProxyToServerWorker-4" [_thread_in_native, id=13092, stack(0x000000004dad0000,0x000000004dbd0000)]
+  0x000000001d73d000 JavaThread "LittleProxy-30-ClientToProxyWorker-6" [_thread_in_native, id=2340, stack(0x000000004d9d0000,0x000000004dad0000)]
+  0x000000001d73a800 JavaThread "LittleProxy-30-ClientToProxyWorker-5" [_thread_in_native, id=3868, stack(0x000000004d8d0000,0x000000004d9d0000)]
+  0x000000001d73f000 JavaThread "LittleProxy-30-ClientToProxyWorker-4" [_thread_in_native, id=20668, stack(0x000000004d7d0000,0x000000004d8d0000)]
+  0x000000001d73d800 JavaThread "LittleProxy-30-ProxyToServerWorker-3" [_thread_in_native, id=17592, stack(0x000000004d6d0000,0x000000004d7d0000)]
+  0x000000001d741800 JavaThread "LittleProxy-30-ProxyToServerWorker-2" [_thread_in_native, id=18904, stack(0x000000004d5d0000,0x000000004d6d0000)]
+  0x000000001d740000 JavaThread "LittleProxy-30-ProxyToServerWorker-1" [_thread_in_native, id=16740, stack(0x000000004d4d0000,0x000000004d5d0000)]
+  0x000000001d73e800 JavaThread "LittleProxy-30-ClientToProxyWorker-3" [_thread_in_native, id=7060, stack(0x000000004d3d0000,0x000000004d4d0000)]
+  0x000000001d741000 JavaThread "LittleProxy-30-ClientToProxyWorker-2" [_thread_in_native, id=21056, stack(0x000000004d2d0000,0x000000004d3d0000)]
+  0x000000001d73a000 JavaThread "LittleProxy-30-ClientToProxyWorker-1" [_thread_in_native, id=16460, stack(0x000000004d1d0000,0x000000004d2d0000)]
+  0x000000001d734000 JavaThread "LittleProxy-30-ProxyToServerWorker-0" [_thread_in_native, id=1604, stack(0x000000004cfd0000,0x000000004d0d0000)]
+  0x000000001d733000 JavaThread "LittleProxy-30-ClientToProxyWorker-0" [_thread_in_native, id=22120, stack(0x000000004ced0000,0x000000004cfd0000)]
+  0x000000001d732800 JavaThread "LittleProxy-30-ClientToProxyAcceptor-0" [_thread_in_native, id=19036, stack(0x000000004cdd0000,0x000000004ced0000)]
+  0x000000001d737000 JavaThread "LittleProxy-29-ProxyToServerWorker-7" [_thread_in_native, id=18608, stack(0x000000004cbd0000,0x000000004ccd0000)]
+  0x000000001d737800 JavaThread "LittleProxy-29-ClientToProxyWorker-7" [_thread_in_native, id=7636, stack(0x000000004cad0000,0x000000004cbd0000)]
+  0x000000001d739000 JavaThread "LittleProxy-29-ProxyToServerWorker-6" [_thread_in_native, id=19476, stack(0x000000004c9d0000,0x000000004cad0000)]
+  0x000000001d731800 JavaThread "LittleProxy-29-ProxyToServerWorker-5" [_thread_in_native, id=21600, stack(0x000000004c8d0000,0x000000004c9d0000)]
+  0x000000001d736000 JavaThread "LittleProxy-29-ProxyToServerWorker-4" [_thread_in_native, id=8152, stack(0x000000004c7d0000,0x000000004c8d0000)]
+  0x000000001d735800 JavaThread "LittleProxy-29-ClientToProxyWorker-6" [_thread_in_native, id=15256, stack(0x000000004c6d0000,0x000000004c7d0000)]
+  0x000000001d738800 JavaThread "LittleProxy-29-ClientToProxyWorker-5" [_thread_in_native, id=9160, stack(0x000000004c5d0000,0x000000004c6d0000)]
+  0x000000001d734800 JavaThread "LittleProxy-29-ProxyToServerWorker-3" [_thread_in_native, id=2796, stack(0x000000004c4d0000,0x000000004c5d0000)]
+  0x000000001d72a000 JavaThread "LittleProxy-29-ClientToProxyWorker-4" [_thread_in_native, id=20028, stack(0x000000004c3d0000,0x000000004c4d0000)]
+  0x000000001d731000 JavaThread "LittleProxy-29-ClientToProxyWorker-3" [_thread_in_native, id=19412, stack(0x000000004c2d0000,0x000000004c3d0000)]
+  0x000000001d729800 JavaThread "LittleProxy-29-ProxyToServerWorker-2" [_thread_in_native, id=18204, stack(0x000000004c1d0000,0x000000004c2d0000)]
+  0x000000001d730000 JavaThread "LittleProxy-29-ProxyToServerWorker-1" [_thread_in_native, id=21180, stack(0x000000004c0d0000,0x000000004c1d0000)]
+  0x000000001d72f800 JavaThread "LittleProxy-29-ClientToProxyWorker-2" [_thread_in_native, id=7896, stack(0x000000004bfd0000,0x000000004c0d0000)]
+  0x000000001d728000 JavaThread "LittleProxy-29-ClientToProxyWorker-1" [_thread_in_native, id=20116, stack(0x000000004bed0000,0x000000004bfd0000)]
+  0x000000001d72e800 JavaThread "LittleProxy-29-ProxyToServerWorker-0" [_thread_in_native, id=2284, stack(0x000000004bdd0000,0x000000004bed0000)]
+  0x000000001d72e000 JavaThread "LittleProxy-29-ClientToProxyWorker-0" [_thread_in_native, id=19092, stack(0x000000004bcd0000,0x000000004bdd0000)]
+  0x000000001d727000 JavaThread "LittleProxy-29-ClientToProxyAcceptor-0" [_thread_in_native, id=19700, stack(0x000000004bbd0000,0x000000004bcd0000)]
+  0x000000001d72c800 JavaThread "LittleProxy-28-ProxyToServerWorker-7" [_thread_in_native, id=19676, stack(0x000000004b8d0000,0x000000004b9d0000)]
+  0x000000001d72b800 JavaThread "LittleProxy-28-ClientToProxyWorker-7" [_thread_in_native, id=21604, stack(0x000000004b7d0000,0x000000004b8d0000)]
+  0x000000001d728800 JavaThread "LittleProxy-28-ProxyToServerWorker-6" [_thread_in_native, id=20448, stack(0x000000004b6d0000,0x000000004b7d0000)]
+  0x000000001d726800 JavaThread "LittleProxy-28-ClientToProxyWorker-6" [_thread_in_native, id=16984, stack(0x000000004b5d0000,0x000000004b6d0000)]
+  0x000000001d72d000 JavaThread "LittleProxy-28-ProxyToServerWorker-5" [_thread_in_native, id=3652, stack(0x000000004b4d0000,0x000000004b5d0000)]
+  0x000000001d72b000 JavaThread "LittleProxy-28-ProxyToServerWorker-4" [_thread_in_native, id=19528, stack(0x000000004b3d0000,0x000000004b4d0000)]
+  0x000000001d71f000 JavaThread "LittleProxy-28-ProxyToServerWorker-3" [_thread_in_native, id=19984, stack(0x000000004b2d0000,0x000000004b3d0000)]
+  0x000000001d722000 JavaThread "LittleProxy-28-ClientToProxyWorker-5" [_thread_in_native, id=11400, stack(0x000000004b1d0000,0x000000004b2d0000)]
+  0x000000001d721000 JavaThread "LittleProxy-28-ProxyToServerWorker-2" [_thread_in_native, id=13488, stack(0x000000004b0d0000,0x000000004b1d0000)]
+  0x000000001d71f800 JavaThread "LittleProxy-28-ClientToProxyWorker-4" [_thread_in_native, id=11848, stack(0x000000004afd0000,0x000000004b0d0000)]
+  0x000000001d725800 JavaThread "LittleProxy-28-ClientToProxyWorker-3" [_thread_in_native, id=18400, stack(0x000000004aed0000,0x000000004afd0000)]
+  0x000000001d71e000 JavaThread "LittleProxy-28-ProxyToServerWorker-1" [_thread_in_native, id=13204, stack(0x000000004add0000,0x000000004aed0000)]
+  0x000000001d722800 JavaThread "LittleProxy-28-ClientToProxyWorker-2" [_thread_in_native, id=18004, stack(0x000000004acd0000,0x000000004add0000)]
+  0x000000001d720800 JavaThread "LittleProxy-28-ClientToProxyWorker-1" [_thread_in_native, id=18996, stack(0x000000004abd0000,0x000000004acd0000)]
+  0x000000001d724000 JavaThread "LittleProxy-28-ProxyToServerWorker-0" [_thread_in_native, id=21448, stack(0x000000004aad0000,0x000000004abd0000)]
+  0x000000001d723800 JavaThread "LittleProxy-28-ClientToProxyWorker-0" [_thread_in_native, id=22248, stack(0x000000004a9d0000,0x000000004aad0000)]
+  0x000000001d725000 JavaThread "LittleProxy-28-ClientToProxyAcceptor-0" [_thread_in_native, id=20364, stack(0x000000004a8d0000,0x000000004a9d0000)]
+  0x000000001d71d800 JavaThread "LittleProxy-27-ProxyToServerWorker-7" [_thread_in_native, id=1532, stack(0x000000004a5d0000,0x000000004a6d0000)]
+  0x000000001d75c800 JavaThread "LittleProxy-27-ClientToProxyWorker-7" [_thread_in_native, id=20932, stack(0x000000004a4d0000,0x000000004a5d0000)]
+  0x000000001d75c000 JavaThread "LittleProxy-27-ProxyToServerWorker-6" [_thread_in_native, id=7668, stack(0x000000004a3d0000,0x000000004a4d0000)]
+  0x000000001d757800 JavaThread "LittleProxy-27-ProxyToServerWorker-5" [_thread_in_native, id=9076, stack(0x000000004a2d0000,0x000000004a3d0000)]
+  0x000000001d756800 JavaThread "LittleProxy-27-ProxyToServerWorker-4" [_thread_in_native, id=21272, stack(0x000000004a1d0000,0x000000004a2d0000)]
+  0x000000001d75d800 JavaThread "LittleProxy-27-ClientToProxyWorker-6" [_thread_in_native, id=22332, stack(0x000000004a0d0000,0x000000004a1d0000)]
+  0x000000001d758000 JavaThread "LittleProxy-27-ClientToProxyWorker-5" [_thread_in_native, id=21224, stack(0x0000000049fd0000,0x000000004a0d0000)]
+  0x000000001d75a800 JavaThread "LittleProxy-27-ProxyToServerWorker-3" [_thread_in_native, id=19952, stack(0x0000000049ed0000,0x0000000049fd0000)]
+  0x000000001d75b000 JavaThread "LittleProxy-27-ProxyToServerWorker-2" [_thread_in_native, id=12936, stack(0x0000000049dd0000,0x0000000049ed0000)]
+  0x000000001d759800 JavaThread "LittleProxy-27-ClientToProxyWorker-4" [_thread_in_native, id=4796, stack(0x0000000049cd0000,0x0000000049dd0000)]
+  0x000000001d753800 JavaThread "LittleProxy-27-ClientToProxyWorker-3" [_thread_in_native, id=5508, stack(0x0000000049bd0000,0x0000000049cd0000)]
+  0x000000001d759000 JavaThread "LittleProxy-27-ProxyToServerWorker-1" [_thread_in_native, id=2192, stack(0x0000000049ad0000,0x0000000049bd0000)]
+  0x000000001d756000 JavaThread "LittleProxy-27-ClientToProxyWorker-2" [_thread_in_native, id=12932, stack(0x00000000499d0000,0x0000000049ad0000)]
+  0x000000001d74f000 JavaThread "LittleProxy-27-ClientToProxyWorker-1" [_thread_in_native, id=21320, stack(0x00000000498d0000,0x00000000499d0000)]
+  0x000000001d750000 JavaThread "LittleProxy-27-ProxyToServerWorker-0" [_thread_in_native, id=19900, stack(0x00000000496d0000,0x00000000497d0000)]
+  0x000000001d74e800 JavaThread "LittleProxy-27-ClientToProxyWorker-0" [_thread_in_native, id=20288, stack(0x00000000495d0000,0x00000000496d0000)]
+  0x000000001d753000 JavaThread "LittleProxy-27-ClientToProxyAcceptor-0" [_thread_in_native, id=20452, stack(0x00000000494d0000,0x00000000495d0000)]
+  0x000000001d750800 JavaThread "LittleProxy-26-ClientToProxyAcceptor-0" [_thread_in_native, id=17840, stack(0x00000000493d0000,0x00000000494d0000)]
+  0x000000001d755000 JavaThread "LittleProxy-25-ProxyToServerWorker-7" [_thread_in_native, id=19320, stack(0x00000000490d0000,0x00000000491d0000)]
+  0x000000001d752000 JavaThread "LittleProxy-25-ClientToProxyWorker-7" [_thread_in_native, id=21528, stack(0x0000000048fd0000,0x00000000490d0000)]
+  0x000000001d751800 JavaThread "LittleProxy-25-ProxyToServerWorker-6" [_thread_in_native, id=20484, stack(0x0000000048ed0000,0x0000000048fd0000)]
+  0x000000001d754800 JavaThread "LittleProxy-25-ClientToProxyWorker-6" [_thread_in_native, id=21488, stack(0x0000000048dd0000,0x0000000048ed0000)]
+  0x000000001d74d800 JavaThread "LittleProxy-25-ProxyToServerWorker-5" [_thread_in_native, id=20000, stack(0x0000000048cd0000,0x0000000048dd0000)]
+  0x0000000044f3f000 JavaThread "LittleProxy-25-ProxyToServerWorker-4" [_thread_in_native, id=21404, stack(0x0000000048bd0000,0x0000000048cd0000)]
+  0x0000000044f3e000 JavaThread "LittleProxy-25-ProxyToServerWorker-3" [_thread_in_native, id=16716, stack(0x0000000048ad0000,0x0000000048bd0000)]
+  0x0000000044f3d800 JavaThread "LittleProxy-25-ClientToProxyWorker-5" [_thread_in_native, id=18388, stack(0x00000000489d0000,0x0000000048ad0000)]
+  0x0000000044f3c000 JavaThread "LittleProxy-25-ProxyToServerWorker-2" [_thread_in_native, id=17308, stack(0x00000000488d0000,0x00000000489d0000)]
+  0x0000000044f3b000 JavaThread "LittleProxy-25-ClientToProxyWorker-4" [_thread_in_native, id=16940, stack(0x00000000487d0000,0x00000000488d0000)]
+  0x0000000044f3a800 JavaThread "LittleProxy-25-ClientToProxyWorker-3" [_thread_in_native, id=21780, stack(0x00000000486d0000,0x00000000487d0000)]
+  0x0000000044f3c800 JavaThread "LittleProxy-25-ProxyToServerWorker-1" [_thread_in_native, id=10984, stack(0x00000000485d0000,0x00000000486d0000)]
+  0x0000000044f39800 JavaThread "LittleProxy-25-ClientToProxyWorker-2" [_thread_in_native, id=20864, stack(0x00000000484d0000,0x00000000485d0000)]
+  0x0000000044f32000 JavaThread "LittleProxy-25-ClientToProxyWorker-1" [_thread_in_native, id=9796, stack(0x00000000483d0000,0x00000000484d0000)]
+  0x0000000044f39000 JavaThread "LittleProxy-25-ProxyToServerWorker-0" [_thread_in_native, id=21152, stack(0x00000000482d0000,0x00000000483d0000)]
+  0x0000000044f31800 JavaThread "LittleProxy-25-ClientToProxyWorker-0" [_thread_in_native, id=20256, stack(0x00000000481d0000,0x00000000482d0000)]
+  0x0000000044f38000 JavaThread "LittleProxy-25-ClientToProxyAcceptor-0" [_thread_in_native, id=17068, stack(0x00000000480d0000,0x00000000481d0000)]
+  0x0000000044f37800 JavaThread "LittleProxy-24-ProxyToServerWorker-7" [_thread_in_native, id=18300, stack(0x0000000047dd0000,0x0000000047ed0000)]
+  0x0000000044f30000 JavaThread "LittleProxy-24-ClientToProxyWorker-7" [_thread_in_native, id=13376, stack(0x0000000047cd0000,0x0000000047dd0000)]
+  0x0000000044f36800 JavaThread "LittleProxy-24-ProxyToServerWorker-6" [_thread_in_native, id=3136, stack(0x0000000047bd0000,0x0000000047cd0000)]
+  0x0000000044f35000 JavaThread "LittleProxy-24-ProxyToServerWorker-5" [_thread_in_native, id=21340, stack(0x0000000047ad0000,0x0000000047bd0000)]
+  0x0000000044f33800 JavaThread "LittleProxy-24-ProxyToServerWorker-4" [_thread_in_native, id=20252, stack(0x00000000479d0000,0x0000000047ad0000)]
+  0x0000000044f36000 JavaThread "LittleProxy-24-ClientToProxyWorker-6" [_thread_in_native, id=16764, stack(0x00000000478d0000,0x00000000479d0000)]
+  0x0000000044f34800 JavaThread "LittleProxy-24-ClientToProxyWorker-5" [_thread_in_native, id=17708, stack(0x00000000477d0000,0x00000000478d0000)]
+  0x0000000044f30800 JavaThread "LittleProxy-24-ProxyToServerWorker-3" [_thread_in_native, id=20112, stack(0x00000000476d0000,0x00000000477d0000)]
+  0x0000000044f2d000 JavaThread "LittleProxy-24-ProxyToServerWorker-2" [_thread_in_native, id=11712, stack(0x00000000475d0000,0x00000000476d0000)]
+  0x0000000044f33000 JavaThread "LittleProxy-24-ClientToProxyWorker-4" [_thread_in_native, id=32, stack(0x00000000474d0000,0x00000000475d0000)]
+  0x0000000044f28800 JavaThread "LittleProxy-24-ProxyToServerWorker-1" [_thread_in_native, id=22064, stack(0x00000000473d0000,0x00000000474d0000)]
+  0x0000000044f2b800 JavaThread "LittleProxy-24-ClientToProxyWorker-3" [_thread_in_native, id=9348, stack(0x00000000472d0000,0x00000000473d0000)]
+  0x0000000044f2f000 JavaThread "LittleProxy-24-ClientToProxyWorker-2" [_thread_in_native, id=17044, stack(0x00000000471d0000,0x00000000472d0000)]
+  0x0000000044f2e800 JavaThread "LittleProxy-24-ClientToProxyWorker-1" [_thread_in_native, id=20512, stack(0x00000000470d0000,0x00000000471d0000)]
+  0x0000000044f2a800 JavaThread "LittleProxy-24-ProxyToServerWorker-0" [_thread_in_native, id=7052, stack(0x0000000046fd0000,0x00000000470d0000)]
+  0x0000000044f2d800 JavaThread "LittleProxy-24-ClientToProxyWorker-0" [_thread_in_native, id=19712, stack(0x0000000046ed0000,0x0000000046fd0000)]
+  0x0000000044f2a000 JavaThread "LittleProxy-24-ClientToProxyAcceptor-0" [_thread_in_native, id=12684, stack(0x0000000046dd0000,0x0000000046ed0000)]
+  0x0000000044f29000 JavaThread "LittleProxy-23-ProxyToServerWorker-7" [_thread_in_native, id=21860, stack(0x0000000046bd0000,0x0000000046cd0000)]
+  0x0000000044f2c000 JavaThread "LittleProxy-23-ClientToProxyWorker-7" [_thread_in_native, id=19252, stack(0x0000000046ad0000,0x0000000046bd0000)]
+  0x0000000044f27800 JavaThread "LittleProxy-23-ProxyToServerWorker-6" [_thread_in_native, id=19564, stack(0x00000000469d0000,0x0000000046ad0000)]
+  0x0000000044f27000 JavaThread "LittleProxy-23-ProxyToServerWorker-5" [_thread_in_native, id=16888, stack(0x00000000468d0000,0x00000000469d0000)]
+  0x0000000044f24800 JavaThread "LittleProxy-23-ClientToProxyWorker-6" [_thread_in_native, id=21676, stack(0x00000000467d0000,0x00000000468d0000)]
+  0x0000000044f21800 JavaThread "LittleProxy-23-ProxyToServerWorker-4" [_thread_in_native, id=19452, stack(0x00000000466d0000,0x00000000467d0000)]
+  0x0000000044f24000 JavaThread "LittleProxy-23-ProxyToServerWorker-3" [_thread_in_native, id=21380, stack(0x00000000465d0000,0x00000000466d0000)]
+  0x0000000044f23000 JavaThread "LittleProxy-23-ProxyToServerWorker-2" [_thread_in_native, id=21644, stack(0x00000000464d0000,0x00000000465d0000)]
+  0x0000000044f22800 JavaThread "LittleProxy-23-ClientToProxyWorker-5" [_thread_in_native, id=19868, stack(0x00000000463d0000,0x00000000464d0000)]
+  0x0000000044f26000 JavaThread "LittleProxy-23-ClientToProxyWorker-4" [_thread_in_native, id=13460, stack(0x00000000462d0000,0x00000000463d0000)]
+  0x0000000044f25800 JavaThread "LittleProxy-23-ProxyToServerWorker-1" [_thread_in_native, id=5028, stack(0x00000000461d0000,0x00000000462d0000)]
+  0x0000000044f20000 JavaThread "LittleProxy-23-ClientToProxyWorker-3" [_thread_in_native, id=11500, stack(0x00000000460d0000,0x00000000461d0000)]
+  0x000000001d68e800 JavaThread "LittleProxy-23-ClientToProxyWorker-2" [_thread_in_native, id=12052, stack(0x0000000045fd0000,0x00000000460d0000)]
+  0x000000001d690800 JavaThread "LittleProxy-23-ClientToProxyWorker-1" [_thread_in_native, id=21748, stack(0x0000000045ed0000,0x0000000045fd0000)]
+  0x000000001d68d800 JavaThread "LittleProxy-23-ProxyToServerWorker-0" [_thread_in_native, id=21476, stack(0x0000000044e00000,0x0000000044f00000)]
+  0x000000001d693000 JavaThread "LittleProxy-23-ClientToProxyWorker-0" [_thread_in_native, id=20776, stack(0x0000000044d00000,0x0000000044e00000)]
+  0x000000001d68f000 JavaThread "LittleProxy-23-ClientToProxyAcceptor-0" [_thread_in_native, id=19304, stack(0x0000000044c00000,0x0000000044d00000)]
+  0x000000001d692000 JavaThread "LittleProxy-22-ProxyToServerWorker-7" [_thread_in_native, id=17060, stack(0x0000000044900000,0x0000000044a00000)]
+  0x000000001d690000 JavaThread "LittleProxy-22-ClientToProxyWorker-7" [_thread_in_native, id=18596, stack(0x0000000044800000,0x0000000044900000)]
+  0x000000001d691800 JavaThread "LittleProxy-22-ProxyToServerWorker-6" [_thread_in_native, id=20804, stack(0x0000000044700000,0x0000000044800000)]
+  0x000000001d686000 JavaThread "LittleProxy-22-ProxyToServerWorker-5" [_thread_in_native, id=8464, stack(0x0000000044600000,0x0000000044700000)]
+  0x000000001d68d000 JavaThread "LittleProxy-22-ProxyToServerWorker-4" [_thread_in_native, id=14792, stack(0x0000000044500000,0x0000000044600000)]
+  0x000000001d68c000 JavaThread "LittleProxy-22-ClientToProxyWorker-6" [_thread_in_native, id=16828, stack(0x0000000044400000,0x0000000044500000)]
+  0x000000001d68b800 JavaThread "LittleProxy-22-ClientToProxyWorker-5" [_thread_in_native, id=13164, stack(0x0000000044300000,0x0000000044400000)]
+  0x000000001d685800 JavaThread "LittleProxy-22-ProxyToServerWorker-3" [_thread_in_native, id=19612, stack(0x0000000044200000,0x0000000044300000)]
+  0x000000001d689000 JavaThread "LittleProxy-22-ProxyToServerWorker-2" [_thread_in_native, id=18160, stack(0x0000000044100000,0x0000000044200000)]
+  0x000000001d688800 JavaThread "LittleProxy-22-ClientToProxyWorker-4" [_thread_in_native, id=10192, stack(0x0000000044000000,0x0000000044100000)]
+  0x000000001d687800 JavaThread "LittleProxy-22-ClientToProxyWorker-3" [_thread_in_native, id=14948, stack(0x0000000043f00000,0x0000000044000000)]
+  0x000000001d68a800 JavaThread "LittleProxy-22-ClientToProxyWorker-2" [_thread_in_native, id=16352, stack(0x0000000043e00000,0x0000000043f00000)]
+  0x000000001d687000 JavaThread "LittleProxy-22-ProxyToServerWorker-1" [_thread_in_native, id=19396, stack(0x0000000043d00000,0x0000000043e00000)]
+  0x000000001d68a000 JavaThread "LittleProxy-22-ClientToProxyWorker-1" [_thread_in_native, id=11100, stack(0x0000000043c00000,0x0000000043d00000)]
+  0x000000001d67e000 JavaThread "LittleProxy-22-ProxyToServerWorker-0" [_thread_in_native, id=10468, stack(0x0000000043a00000,0x0000000043b00000)]
+  0x000000001d680000 JavaThread "LittleProxy-22-ClientToProxyWorker-0" [_thread_in_native, id=16720, stack(0x0000000043900000,0x0000000043a00000)]
+  0x000000001d684800 JavaThread "LittleProxy-22-ClientToProxyAcceptor-0" [_thread_in_native, id=19420, stack(0x0000000043800000,0x0000000043900000)]
+  0x000000001d67f800 JavaThread "LittleProxy-21-ProxyToServerWorker-7" [_thread_in_native, id=1792, stack(0x0000000043500000,0x0000000043600000)]
+  0x000000001d67d000 JavaThread "LittleProxy-21-ClientToProxyWorker-7" [_thread_in_native, id=17492, stack(0x0000000043400000,0x0000000043500000)]
+  0x000000001d684000 JavaThread "LittleProxy-21-ProxyToServerWorker-6" [_thread_in_native, id=17260, stack(0x0000000043300000,0x0000000043400000)]
+  0x000000001d681000 JavaThread "LittleProxy-21-ClientToProxyWorker-6" [_thread_in_native, id=20456, stack(0x0000000043200000,0x0000000043300000)]
+  0x000000001d683000 JavaThread "LittleProxy-21-ProxyToServerWorker-5" [_thread_in_native, id=18584, stack(0x0000000043100000,0x0000000043200000)]
+  0x000000001d67e800 JavaThread "LittleProxy-21-ProxyToServerWorker-4" [_thread_in_native, id=19940, stack(0x0000000043000000,0x0000000043100000)]
+  0x000000001d682800 JavaThread "LittleProxy-21-ProxyToServerWorker-3" [_thread_in_native, id=18988, stack(0x0000000042f00000,0x0000000043000000)]
+  0x000000001d681800 JavaThread "LittleProxy-21-ProxyToServerWorker-2" [_thread_in_native, id=4028, stack(0x0000000042e00000,0x0000000042f00000)]
+  0x000000001d67c800 JavaThread "LittleProxy-21-ClientToProxyWorker-5" [_thread_in_native, id=18100, stack(0x0000000042d00000,0x0000000042e00000)]
+  0x000000001d675000 JavaThread "LittleProxy-21-ClientToProxyWorker-4" [_thread_in_native, id=18908, stack(0x0000000042c00000,0x0000000042d00000)]
+  0x000000001d678000 JavaThread "LittleProxy-21-ClientToProxyWorker-3" [_thread_in_native, id=4060, stack(0x0000000042b00000,0x0000000042c00000)]
+  0x000000001d678800 JavaThread "LittleProxy-21-ProxyToServerWorker-1" [_thread_in_native, id=12480, stack(0x0000000042a00000,0x0000000042b00000)]
+  0x000000001d67b800 JavaThread "LittleProxy-21-ClientToProxyWorker-2" [_thread_in_native, id=10932, stack(0x0000000042900000,0x0000000042a00000)]
+  0x000000001d67a000 JavaThread "LittleProxy-21-ClientToProxyWorker-1" [_thread_in_native, id=5592, stack(0x0000000042800000,0x0000000042900000)]
+  0x000000001d674000 JavaThread "LittleProxy-21-ProxyToServerWorker-0" [_thread_in_native, id=5068, stack(0x0000000042600000,0x0000000042700000)]
+  0x000000001d677000 JavaThread "LittleProxy-21-ClientToProxyWorker-0" [_thread_in_native, id=15684, stack(0x0000000042500000,0x0000000042600000)]
+  0x000000001d67b000 JavaThread "LittleProxy-21-ClientToProxyAcceptor-0" [_thread_in_native, id=16428, stack(0x0000000042400000,0x0000000042500000)]
+  0x000000001d679800 JavaThread "LittleProxy-20-ProxyToServerWorker-7" [_thread_in_native, id=5968, stack(0x0000000042300000,0x0000000042400000)]
+  0x000000001d676800 JavaThread "LittleProxy-20-ClientToProxyWorker-7" [_thread_in_native, id=10324, stack(0x0000000042200000,0x0000000042300000)]
+  0x000000001d675800 JavaThread "LittleProxy-20-ProxyToServerWorker-6" [_thread_in_native, id=11108, stack(0x0000000042100000,0x0000000042200000)]
+  0x000000001d5ab000 JavaThread "LittleProxy-20-ClientToProxyWorker-6" [_thread_in_native, id=3544, stack(0x0000000042000000,0x0000000042100000)]
+  0x000000001d5af000 JavaThread "LittleProxy-20-ProxyToServerWorker-4" [_thread_in_native, id=9008, stack(0x0000000041f00000,0x0000000042000000)]
+  0x000000001d5aa800 JavaThread "LittleProxy-20-ProxyToServerWorker-5" [_thread_in_native, id=10620, stack(0x0000000041e00000,0x0000000041f00000)]
+  0x000000001d5ac800 JavaThread "LittleProxy-20-ProxyToServerWorker-3" [_thread_in_native, id=796, stack(0x0000000041d00000,0x0000000041e00000)]
+  0x000000001d5a9800 JavaThread "LittleProxy-20-ClientToProxyWorker-5" [_thread_in_native, id=8348, stack(0x0000000041c00000,0x0000000041d00000)]
+  0x000000001d5a9000 JavaThread "LittleProxy-20-ClientToProxyWorker-4" [_thread_in_native, id=5368, stack(0x0000000041b00000,0x0000000041c00000)]
+  0x000000001d5a8000 JavaThread "LittleProxy-20-ProxyToServerWorker-2" [_thread_in_native, id=9880, stack(0x0000000041a00000,0x0000000041b00000)]
+  0x000000001d5ac000 JavaThread "LittleProxy-20-ProxyToServerWorker-1" [_thread_in_native, id=10000, stack(0x0000000041900000,0x0000000041a00000)]
+  0x000000001d5ae000 JavaThread "LittleProxy-20-ClientToProxyWorker-3" [_thread_in_native, id=8872, stack(0x0000000041800000,0x0000000041900000)]
+  0x000000001d5ad800 JavaThread "LittleProxy-20-ClientToProxyWorker-2" [_thread_in_native, id=10048, stack(0x0000000041700000,0x0000000041800000)]
+  0x000000001d5a0800 JavaThread "LittleProxy-20-ClientToProxyWorker-1" [_thread_in_native, id=1960, stack(0x0000000041600000,0x0000000041700000)]
+  0x000000001d5a2800 JavaThread "LittleProxy-20-ProxyToServerWorker-0" [_thread_in_native, id=2988, stack(0x0000000041500000,0x0000000041600000)]
+  0x000000001d5a7800 JavaThread "LittleProxy-20-ClientToProxyWorker-0" [_thread_in_native, id=6524, stack(0x0000000041400000,0x0000000041500000)]
+  0x000000001d5a2000 JavaThread "LittleProxy-20-ClientToProxyAcceptor-0" [_thread_in_native, id=12268, stack(0x0000000041300000,0x0000000041400000)]
+  0x000000001d5a6800 JavaThread "LittleProxy-19-ProxyToServerWorker-7" [_thread_in_native, id=6356, stack(0x0000000041000000,0x0000000041100000)]
+  0x000000001d59f800 JavaThread "LittleProxy-19-ClientToProxyWorker-7" [_thread_in_native, id=3140, stack(0x0000000040f00000,0x0000000041000000)]
+  0x000000001d59f000 JavaThread "LittleProxy-19-ProxyToServerWorker-6" [_thread_in_native, id=10096, stack(0x0000000040e00000,0x0000000040f00000)]
+  0x000000001d5a4000 JavaThread "LittleProxy-19-ClientToProxyWorker-6" [_thread_in_native, id=3736, stack(0x0000000040d00000,0x0000000040e00000)]
+  0x000000001d5a5800 JavaThread "LittleProxy-19-ProxyToServerWorker-5" [_thread_in_native, id=13388, stack(0x0000000040c00000,0x0000000040d00000)]
+  0x000000001d5a5000 JavaThread "LittleProxy-19-ProxyToServerWorker-4" [_thread_in_native, id=11600, stack(0x0000000040b00000,0x0000000040c00000)]
+  0x000000001d5a3800 JavaThread "LittleProxy-19-ProxyToServerWorker-3" [_thread_in_native, id=16024, stack(0x0000000040a00000,0x0000000040b00000)]
+  0x000000001d5a1000 JavaThread "LittleProxy-19-ProxyToServerWorker-2" [_thread_in_native, id=18096, stack(0x0000000040900000,0x0000000040a00000)]
+  0x000000001d59a800 JavaThread "LittleProxy-19-ClientToProxyWorker-5" [_thread_in_native, id=16372, stack(0x0000000040800000,0x0000000040900000)]
+  0x000000001d59d800 JavaThread "LittleProxy-19-ClientToProxyWorker-4" [_thread_in_native, id=18424, stack(0x0000000040700000,0x0000000040800000)]
+  0x000000001d59e000 JavaThread "LittleProxy-19-ClientToProxyWorker-3" [_thread_in_native, id=7732, stack(0x0000000040600000,0x0000000040700000)]
+  0x000000001d59c800 JavaThread "LittleProxy-19-ProxyToServerWorker-1" [_thread_in_native, id=11376, stack(0x0000000040500000,0x0000000040600000)]
+  0x000000001d599000 JavaThread "LittleProxy-19-ClientToProxyWorker-2" [_thread_in_native, id=17436, stack(0x0000000040400000,0x0000000040500000)]
+  0x000000001d598000 JavaThread "LittleProxy-19-ClientToProxyWorker-1" [_thread_in_native, id=17400, stack(0x0000000040300000,0x0000000040400000)]
+  0x000000001d599800 JavaThread "LittleProxy-19-ProxyToServerWorker-0" [_thread_in_native, id=416, stack(0x0000000040100000,0x0000000040200000)]
+  0x000000001d59b000 JavaThread "LittleProxy-19-ClientToProxyWorker-0" [_thread_in_native, id=11964, stack(0x0000000040000000,0x0000000040100000)]
+  0x000000001d59c000 JavaThread "LittleProxy-19-ClientToProxyAcceptor-0" [_thread_in_native, id=18224, stack(0x000000003ff00000,0x0000000040000000)]
+  0x000000001d590800 JavaThread "LittleProxy-18-ProxyToServerWorker-0" [_thread_in_native, id=1472, stack(0x000000003fd00000,0x000000003fe00000)]
+  0x000000001d597800 JavaThread "LittleProxy-18-ClientToProxyWorker-0" [_thread_in_native, id=15332, stack(0x000000003fc00000,0x000000003fd00000)]
+  0x000000001d596800 JavaThread "LittleProxy-18-ClientToProxyAcceptor-0" [_thread_in_native, id=17836, stack(0x000000003fb00000,0x000000003fc00000)]
+  0x000000001d590000 JavaThread "LittleProxy-17-ProxyToServerWorker-7" [_thread_in_native, id=15528, stack(0x000000003f800000,0x000000003f900000)]
+  0x000000001d596000 JavaThread "LittleProxy-17-ClientToProxyWorker-7" [_thread_in_native, id=15108, stack(0x000000003f700000,0x000000003f800000)]
+  0x000000001d593800 JavaThread "LittleProxy-17-ProxyToServerWorker-6" [_thread_in_native, id=12676, stack(0x000000003f600000,0x000000003f700000)]
+  0x000000001d592000 JavaThread "LittleProxy-17-ProxyToServerWorker-5" [_thread_in_native, id=7460, stack(0x000000003f500000,0x000000003f600000)]
+  0x000000001d593000 JavaThread "LittleProxy-17-ClientToProxyWorker-6" [_thread_in_native, id=1628, stack(0x000000003f400000,0x000000003f500000)]
+  0x000000001d595000 JavaThread "LittleProxy-17-ProxyToServerWorker-4" [_thread_in_native, id=7768, stack(0x000000003f300000,0x000000003f400000)]
+  0x000000001d591800 JavaThread "LittleProxy-17-ProxyToServerWorker-3" [_thread_in_native, id=1572, stack(0x000000003f200000,0x000000003f300000)]
+  0x000000001d594800 JavaThread "LittleProxy-17-ClientToProxyWorker-5" [_thread_in_native, id=18356, stack(0x000000003f100000,0x000000003f200000)]
+  0x000000001d578000 JavaThread "LittleProxy-17-ClientToProxyWorker-4" [_thread_in_native, id=18208, stack(0x000000003f000000,0x000000003f100000)]
+  0x000000001d577000 JavaThread "LittleProxy-17-ClientToProxyWorker-3" [_thread_in_native, id=13296, stack(0x000000003ef00000,0x000000003f000000)]
+  0x000000001d576800 JavaThread "LittleProxy-17-ProxyToServerWorker-2" [_thread_in_native, id=2408, stack(0x000000003ee00000,0x000000003ef00000)]
+  0x000000001d575000 JavaThread "LittleProxy-17-ProxyToServerWorker-1" [_thread_in_native, id=2596, stack(0x000000003ed00000,0x000000003ee00000)]
+  0x000000001d56f800 JavaThread "LittleProxy-17-ClientToProxyWorker-2" [_thread_in_native, id=10864, stack(0x000000003ec00000,0x000000003ed00000)]
+  0x000000001d575800 JavaThread "LittleProxy-17-ClientToProxyWorker-1" [_thread_in_native, id=12900, stack(0x000000003eb00000,0x000000003ec00000)]
+  0x000000001d571000 JavaThread "LittleProxy-17-ProxyToServerWorker-0" [_thread_in_native, id=17268, stack(0x000000003e660000,0x000000003e760000)]
+  0x000000001d56e000 JavaThread "LittleProxy-17-ClientToProxyWorker-0" [_thread_in_native, id=16852, stack(0x000000003e560000,0x000000003e660000)]
+  0x000000001d572800 JavaThread "LittleProxy-17-ClientToProxyAcceptor-0" [_thread_in_native, id=15652, stack(0x000000003e460000,0x000000003e560000)]
+  0x000000001d574000 JavaThread "LittleProxy-16-ProxyToServerWorker-0" [_thread_in_native, id=7304, stack(0x000000003e160000,0x000000003e260000)]
+  0x000000001d572000 JavaThread "LittleProxy-16-ClientToProxyWorker-0" [_thread_in_native, id=16628, stack(0x000000003e060000,0x000000003e160000)]
+  0x000000001d56f000 JavaThread "LittleProxy-16-ClientToProxyAcceptor-0" [_thread_in_native, id=17872, stack(0x000000003df60000,0x000000003e060000)]
+  0x000000001d570800 JavaThread "LittleProxy-15-ProxyToServerWorker-7" [_thread_in_native, id=17540, stack(0x000000003de60000,0x000000003df60000)]
+  0x000000001d573800 JavaThread "LittleProxy-15-ClientToProxyWorker-7" [_thread_in_native, id=17472, stack(0x000000003dd60000,0x000000003de60000)]
+  0x000000001d566000 JavaThread "LittleProxy-15-ProxyToServerWorker-6" [_thread_in_native, id=17468, stack(0x000000003dc60000,0x000000003dd60000)]
+  0x000000001d56c800 JavaThread "LittleProxy-15-ProxyToServerWorker-5" [_thread_in_native, id=17464, stack(0x000000003db60000,0x000000003dc60000)]
+  0x000000001d56b000 JavaThread "LittleProxy-15-ClientToProxyWorker-6" [_thread_in_native, id=17460, stack(0x000000003da60000,0x000000003db60000)]
+  0x000000001d569000 JavaThread "LittleProxy-15-ClientToProxyWorker-5" [_thread_in_native, id=17456, stack(0x000000003d960000,0x000000003da60000)]
+  0x000000001d569800 JavaThread "LittleProxy-15-ProxyToServerWorker-4" [_thread_in_native, id=17452, stack(0x000000003d860000,0x000000003d960000)]
+  0x000000001d567800 JavaThread "LittleProxy-15-ProxyToServerWorker-3" [_thread_in_native, id=17448, stack(0x000000003d760000,0x000000003d860000)]
+  0x000000001d565000 JavaThread "LittleProxy-15-ClientToProxyWorker-4" [_thread_in_native, id=17444, stack(0x000000003d660000,0x000000003d760000)]
+  0x000000001d568000 JavaThread "LittleProxy-15-ClientToProxyWorker-3" [_thread_in_native, id=17440, stack(0x000000003d560000,0x000000003d660000)]
+  0x000000001d566800 JavaThread "LittleProxy-15-ProxyToServerWorker-2" [_thread_in_native, id=13628, stack(0x000000003d460000,0x000000003d560000)]
+  0x000000001d56c000 JavaThread "LittleProxy-15-ProxyToServerWorker-1" [_thread_in_native, id=2764, stack(0x000000003d360000,0x000000003d460000)]
+  0x000000001d55d800 JavaThread "LittleProxy-15-ClientToProxyWorker-2" [_thread_in_native, id=13324, stack(0x000000003d260000,0x000000003d360000)]
+  0x000000001d564800 JavaThread "LittleProxy-15-ClientToProxyWorker-1" [_thread_in_native, id=13052, stack(0x000000003d160000,0x000000003d260000)]
+  0x000000001d561800 JavaThread "LittleProxy-15-ProxyToServerWorker-0" [_thread_in_native, id=12768, stack(0x000000003d060000,0x000000003d160000)]
+  0x000000001d562000 JavaThread "LittleProxy-15-ClientToProxyWorker-0" [_thread_in_native, id=3004, stack(0x000000003cf60000,0x000000003d060000)]
+  0x000000001d563000 JavaThread "LittleProxy-15-ClientToProxyAcceptor-0" [_thread_in_native, id=5880, stack(0x000000003ce60000,0x000000003cf60000)]
+  0x000000001d55e800 JavaThread "LittleProxy-14-ProxyToServerWorker-7" [_thread_in_native, id=16956, stack(0x000000003cc60000,0x000000003cd60000)]
+  0x000000001d55f000 JavaThread "LittleProxy-14-ClientToProxyWorker-7" [_thread_in_native, id=16636, stack(0x000000003cb60000,0x000000003cc60000)]
+  0x000000001d563800 JavaThread "LittleProxy-14-ProxyToServerWorker-6" [_thread_in_native, id=3944, stack(0x000000003ca60000,0x000000003cb60000)]
+  0x000000001d560800 JavaThread "LittleProxy-14-ProxyToServerWorker-5" [_thread_in_native, id=15796, stack(0x000000003c960000,0x000000003ca60000)]
+  0x000000001d55a800 JavaThread "LittleProxy-14-ClientToProxyWorker-6" [_thread_in_native, id=12100, stack(0x000000003c860000,0x000000003c960000)]
+  0x000000001d55d000 JavaThread "LittleProxy-14-ProxyToServerWorker-4" [_thread_in_native, id=844, stack(0x000000003c760000,0x000000003c860000)]
+  0x000000001d55b800 JavaThread "LittleProxy-14-ProxyToServerWorker-3" [_thread_in_native, id=8312, stack(0x000000003c660000,0x000000003c760000)]
+  0x000000001d560000 JavaThread "LittleProxy-14-ClientToProxyWorker-5" [_thread_in_native, id=16672, stack(0x000000003c560000,0x000000003c660000)]
+  0x000000001d559000 JavaThread "LittleProxy-14-ClientToProxyWorker-4" [_thread_in_native, id=17084, stack(0x000000003c460000,0x000000003c560000)]
+  0x000000001d55c000 JavaThread "LittleProxy-14-ProxyToServerWorker-2" [_thread_in_native, id=13240, stack(0x000000003c360000,0x000000003c460000)]
+  0x000000001d55a000 JavaThread "LittleProxy-14-ClientToProxyWorker-3" [_thread_in_native, id=16612, stack(0x000000003c260000,0x000000003c360000)]
+  0x000000001d516800 JavaThread "LittleProxy-14-ProxyToServerWorker-1" [_thread_in_native, id=4000, stack(0x000000003c160000,0x000000003c260000)]
+  0x000000001d515800 JavaThread "LittleProxy-14-ClientToProxyWorker-2" [_thread_in_native, id=16584, stack(0x000000003c060000,0x000000003c160000)]
+  0x000000001d50e000 JavaThread "LittleProxy-14-ClientToProxyWorker-1" [_thread_in_native, id=9932, stack(0x000000003bf60000,0x000000003c060000)]
+  0x000000001d515000 JavaThread "LittleProxy-14-ProxyToServerWorker-0" [_thread_in_native, id=5348, stack(0x000000003be60000,0x000000003bf60000)]
+  0x000000001d513800 JavaThread "LittleProxy-14-ClientToProxyWorker-0" [_thread_in_native, id=8892, stack(0x000000003bd60000,0x000000003be60000)]
+  0x000000001d512800 JavaThread "LittleProxy-14-ClientToProxyAcceptor-0" [_thread_in_native, id=6064, stack(0x000000003bc60000,0x000000003bd60000)]
+  0x000000001d512000 JavaThread "LittleProxy-13-ProxyToServerWorker-7" [_thread_in_native, id=16912, stack(0x000000003b960000,0x000000003ba60000)]
+  0x000000001d514000 JavaThread "LittleProxy-13-ClientToProxyWorker-7" [_thread_in_native, id=13380, stack(0x000000003b860000,0x000000003b960000)]
+  0x000000001d50a800 JavaThread "LittleProxy-13-ProxyToServerWorker-6" [_thread_in_native, id=13064, stack(0x000000003b760000,0x000000003b860000)]
+  0x000000001d511000 JavaThread "LittleProxy-13-ProxyToServerWorker-5" [_thread_in_native, id=14204, stack(0x000000003b660000,0x000000003b760000)]
+  0x000000001d50b000 JavaThread "LittleProxy-13-ProxyToServerWorker-4" [_thread_in_native, id=12680, stack(0x000000003b560000,0x000000003b660000)]
+  0x000000001d50c800 JavaThread "LittleProxy-13-ClientToProxyWorker-6" [_thread_in_native, id=12764, stack(0x000000003b460000,0x000000003b560000)]
+  0x000000001d50d800 JavaThread "LittleProxy-13-ClientToProxyWorker-5" [_thread_in_native, id=15172, stack(0x000000003b360000,0x000000003b460000)]
+  0x000000001d510800 JavaThread "LittleProxy-13-ProxyToServerWorker-3" [_thread_in_native, id=15072, stack(0x000000003b260000,0x000000003b360000)]
+  0x000000001d50c000 JavaThread "LittleProxy-13-ProxyToServerWorker-2" [_thread_in_native, id=5500, stack(0x000000003b160000,0x000000003b260000)]
+  0x000000001d50f800 JavaThread "LittleProxy-13-ClientToProxyWorker-4" [_thread_in_native, id=16800, stack(0x000000003b060000,0x000000003b160000)]
+  0x000000001d50f000 JavaThread "LittleProxy-13-ClientToProxyWorker-3" [_thread_in_native, id=1244, stack(0x000000003af60000,0x000000003b060000)]
+  0x000000001d508800 JavaThread "LittleProxy-13-ProxyToServerWorker-1" [_thread_in_native, id=13836, stack(0x000000003ae60000,0x000000003af60000)]
+  0x000000001d509800 JavaThread "LittleProxy-13-ClientToProxyWorker-2" [_thread_in_native, id=10232, stack(0x000000003ad60000,0x000000003ae60000)]
+  0x000000001d507000 JavaThread "LittleProxy-13-ClientToProxyWorker-1" [_thread_in_native, id=17156, stack(0x000000003ac60000,0x000000003ad60000)]
+  0x000000001d508000 JavaThread "LittleProxy-13-ProxyToServerWorker-0" [_thread_in_native, id=15992, stack(0x000000003aa60000,0x000000003ab60000)]
+  0x000000001b22e000 JavaThread "LittleProxy-13-ClientToProxyWorker-0" [_thread_in_native, id=4160, stack(0x000000003a960000,0x000000003aa60000)]
+  0x000000001b22d000 JavaThread "LittleProxy-13-ClientToProxyAcceptor-0" [_thread_in_native, id=14380, stack(0x000000003a860000,0x000000003a960000)]
+  0x000000001b22c800 JavaThread "LittleProxy-12-ProxyToServerWorker-7" [_thread_in_native, id=16392, stack(0x000000003a560000,0x000000003a660000)]
+  0x000000001b22b800 JavaThread "LittleProxy-12-ClientToProxyWorker-7" [_thread_in_native, id=8932, stack(0x000000003a460000,0x000000003a560000)]
+  0x000000001b224000 JavaThread "LittleProxy-12-ProxyToServerWorker-6" [_thread_in_native, id=17152, stack(0x000000003a360000,0x000000003a460000)]
+  0x000000001b22b000 JavaThread "LittleProxy-12-ProxyToServerWorker-5" [_thread_in_native, id=4880, stack(0x000000003a260000,0x000000003a360000)]
+  0x000000001b22a000 JavaThread "LittleProxy-12-ProxyToServerWorker-4" [_thread_in_native, id=9000, stack(0x000000003a160000,0x000000003a260000)]
+  0x000000001b229800 JavaThread "LittleProxy-12-ClientToProxyWorker-6" [_thread_in_native, id=6160, stack(0x000000003a060000,0x000000003a160000)]
+  0x000000001b228000 JavaThread "LittleProxy-12-ClientToProxyWorker-5" [_thread_in_native, id=6912, stack(0x0000000039f60000,0x000000003a060000)]
+  0x000000001b222800 JavaThread "LittleProxy-12-ProxyToServerWorker-3" [_thread_in_native, id=9180, stack(0x0000000039e60000,0x0000000039f60000)]
+  0x000000001b228800 JavaThread "LittleProxy-12-ClientToProxyWorker-4" [_thread_in_native, id=5540, stack(0x0000000039d60000,0x0000000039e60000)]
+  0x000000001b221000 JavaThread "LittleProxy-12-ClientToProxyWorker-3" [_thread_in_native, id=5056, stack(0x0000000039c60000,0x0000000039d60000)]
+  0x000000001b223800 JavaThread "LittleProxy-12-ProxyToServerWorker-2" [_thread_in_native, id=16552, stack(0x0000000039b60000,0x0000000039c60000)]
+  0x000000001b227000 JavaThread "LittleProxy-12-ProxyToServerWorker-1" [_thread_in_native, id=1756, stack(0x0000000039a60000,0x0000000039b60000)]
+  0x000000001b226800 JavaThread "LittleProxy-12-ClientToProxyWorker-2" [_thread_in_native, id=16640, stack(0x0000000039960000,0x0000000039a60000)]
+  0x000000001b222000 JavaThread "LittleProxy-12-ClientToProxyWorker-1" [_thread_in_native, id=11352, stack(0x0000000039860000,0x0000000039960000)]
+  0x000000001b21f000 JavaThread "LittleProxy-12-ProxyToServerWorker-0" [_thread_in_native, id=12812, stack(0x0000000039760000,0x0000000039860000)]
+  0x000000001b21f800 JavaThread "LittleProxy-12-ClientToProxyWorker-0" [_thread_in_native, id=11464, stack(0x0000000039660000,0x0000000039760000)]
+  0x000000001b220800 JavaThread "LittleProxy-12-ClientToProxyAcceptor-0" [_thread_in_native, id=13408, stack(0x0000000039560000,0x0000000039660000)]
+  0x000000001b225000 JavaThread "LittleProxy-11-ProxyToServerWorker-7" [_thread_in_native, id=14732, stack(0x0000000039360000,0x0000000039460000)]
+  0x000000001bafd000 JavaThread "LittleProxy-11-ClientToProxyWorker-7" [_thread_in_native, id=1896, stack(0x0000000039260000,0x0000000039360000)]
+  0x0000000019aff800 JavaThread "LittleProxy-11-ProxyToServerWorker-6" [_thread_in_native, id=12124, stack(0x0000000039160000,0x0000000039260000)]
+  0x0000000019afe800 JavaThread "LittleProxy-11-ProxyToServerWorker-5" [_thread_in_native, id=16824, stack(0x0000000039060000,0x0000000039160000)]
+  0x0000000019afe000 JavaThread "LittleProxy-11-ProxyToServerWorker-4" [_thread_in_native, id=6720, stack(0x0000000038f60000,0x0000000039060000)]
+  0x0000000019afd000 JavaThread "LittleProxy-11-ClientToProxyWorker-6" [_thread_in_native, id=7532, stack(0x0000000038e60000,0x0000000038f60000)]
+  0x0000000019af5800 JavaThread "LittleProxy-11-ClientToProxyWorker-5" [_thread_in_native, id=17364, stack(0x0000000038d60000,0x0000000038e60000)]
+  0x0000000019afc800 JavaThread "LittleProxy-11-ProxyToServerWorker-3" [_thread_in_native, id=5316, stack(0x0000000038c60000,0x0000000038d60000)]
+  0x0000000019afb800 JavaThread "LittleProxy-11-ClientToProxyWorker-4" [_thread_in_native, id=15040, stack(0x0000000038b60000,0x0000000038c60000)]
+  0x0000000019af4000 JavaThread "LittleProxy-11-ClientToProxyWorker-3" [_thread_in_native, id=15344, stack(0x0000000038a60000,0x0000000038b60000)]
+  0x0000000019afa000 JavaThread "LittleProxy-11-ProxyToServerWorker-2" [_thread_in_native, id=15896, stack(0x0000000038960000,0x0000000038a60000)]
+  0x0000000019af8800 JavaThread "LittleProxy-11-ProxyToServerWorker-1" [_thread_in_native, id=17240, stack(0x0000000038860000,0x0000000038960000)]
+  0x0000000019af8000 JavaThread "LittleProxy-11-ClientToProxyWorker-2" [_thread_in_native, id=1552, stack(0x0000000038760000,0x0000000038860000)]
+  0x0000000019af9800 JavaThread "LittleProxy-11-ClientToProxyWorker-1" [_thread_in_native, id=13600, stack(0x0000000038660000,0x0000000038760000)]
+  0x0000000019af1000 JavaThread "LittleProxy-11-ProxyToServerWorker-0" [_thread_in_native, id=11896, stack(0x0000000038560000,0x0000000038660000)]
+  0x0000000019af7000 JavaThread "LittleProxy-11-ClientToProxyWorker-0" [_thread_in_native, id=8604, stack(0x0000000038460000,0x0000000038560000)]
+  0x0000000019af5000 JavaThread "LittleProxy-11-ClientToProxyAcceptor-0" [_thread_in_native, id=4416, stack(0x0000000038360000,0x0000000038460000)]
+  0x0000000019af2000 JavaThread "LittleProxy-10-ProxyToServerWorker-7" [_thread_in_native, id=10308, stack(0x0000000038060000,0x0000000038160000)]
+  0x0000000019af0800 JavaThread "LittleProxy-10-ClientToProxyWorker-7" [_thread_in_native, id=3768, stack(0x0000000037f60000,0x0000000038060000)]
+  0x0000000019af3800 JavaThread "LittleProxy-10-ProxyToServerWorker-6" [_thread_in_native, id=8336, stack(0x0000000037e60000,0x0000000037f60000)]
+  0x0000000019af6800 JavaThread "LittleProxy-10-ProxyToServerWorker-5" [_thread_in_native, id=10980, stack(0x0000000037d60000,0x0000000037e60000)]
+  0x0000000019af2800 JavaThread "LittleProxy-10-ClientToProxyWorker-6" [_thread_in_native, id=13416, stack(0x0000000037c60000,0x0000000037d60000)]
+  0x0000000019270800 JavaThread "LittleProxy-10-ProxyToServerWorker-4" [_thread_in_native, id=6100, stack(0x0000000037b60000,0x0000000037c60000)]
+  0x000000001bb03000 JavaThread "LittleProxy-10-ClientToProxyWorker-5" [_thread_in_native, id=12452, stack(0x0000000037a60000,0x0000000037b60000)]
+  0x000000001bb02800 JavaThread "LittleProxy-10-ProxyToServerWorker-3" [_thread_in_native, id=16296, stack(0x0000000037960000,0x0000000037a60000)]
+  0x000000001bb01800 JavaThread "LittleProxy-10-ClientToProxyWorker-4" [_thread_in_native, id=15300, stack(0x0000000037860000,0x0000000037960000)]
+  0x000000001bb04800 JavaThread "LittleProxy-10-ClientToProxyWorker-3" [_thread_in_native, id=15600, stack(0x0000000037760000,0x0000000037860000)]
+  0x000000001bb00000 JavaThread "LittleProxy-10-ProxyToServerWorker-2" [_thread_in_native, id=16076, stack(0x0000000037660000,0x0000000037760000)]
+  0x000000001bb04000 JavaThread "LittleProxy-10-ProxyToServerWorker-1" [_thread_in_native, id=17076, stack(0x0000000037560000,0x0000000037660000)]
+  0x000000001bb01000 JavaThread "LittleProxy-10-ClientToProxyWorker-2" [_thread_in_native, id=15972, stack(0x0000000037460000,0x0000000037560000)]
+  0x000000001bb05800 JavaThread "LittleProxy-10-ClientToProxyWorker-1" [_thread_in_native, id=14088, stack(0x0000000037360000,0x0000000037460000)]
+  0x000000001baff800 JavaThread "LittleProxy-10-ProxyToServerWorker-0" [_thread_in_native, id=15976, stack(0x0000000037260000,0x0000000037360000)]
+  0x000000001bafc800 JavaThread "LittleProxy-10-ClientToProxyWorker-0" [_thread_in_native, id=6068, stack(0x0000000037160000,0x0000000037260000)]
+  0x000000001baf8800 JavaThread "LittleProxy-10-ClientToProxyAcceptor-0" [_thread_in_native, id=10944, stack(0x0000000037060000,0x0000000037160000)]
+  0x000000001bafb000 JavaThread "LittleProxy-9-ProxyToServerWorker-7" [_thread_in_native, id=8972, stack(0x0000000036460000,0x0000000036560000)]
+  0x000000001bafe800 JavaThread "LittleProxy-9-ClientToProxyWorker-7" [_thread_in_native, id=10280, stack(0x0000000036360000,0x0000000036460000)]
+  0x000000001bafe000 JavaThread "LittleProxy-9-ProxyToServerWorker-6" [_thread_in_native, id=14728, stack(0x0000000036260000,0x0000000036360000)]
+  0x000000001baf7000 JavaThread "LittleProxy-9-ProxyToServerWorker-5" [_thread_in_native, id=16432, stack(0x0000000036160000,0x0000000036260000)]
+  0x000000001baf6800 JavaThread "LittleProxy-9-ProxyToServerWorker-4" [_thread_in_native, id=8852, stack(0x0000000036060000,0x0000000036160000)]
+  0x000000001bafa000 JavaThread "LittleProxy-9-ProxyToServerWorker-3" [_thread_in_native, id=13640, stack(0x0000000035f60000,0x0000000036060000)]
+  0x000000001bafb800 JavaThread "LittleProxy-9-ClientToProxyWorker-6" [_thread_in_native, id=17128, stack(0x0000000035e60000,0x0000000035f60000)]
+  0x000000001baf9800 JavaThread "LittleProxy-9-ClientToProxyWorker-5" [_thread_in_native, id=4336, stack(0x0000000035d60000,0x0000000035e60000)]
+  0x000000001baf8000 JavaThread "LittleProxy-9-ClientToProxyWorker-4" [_thread_in_native, id=16480, stack(0x0000000035c60000,0x0000000035d60000)]
+  0x0000000019cce800 JavaThread "LittleProxy-9-ClientToProxyWorker-3" [_thread_in_native, id=10552, stack(0x0000000035b60000,0x0000000035c60000)]
+  0x0000000019cd1800 JavaThread "LittleProxy-9-ProxyToServerWorker-2" [_thread_in_native, id=16856, stack(0x0000000035a60000,0x0000000035b60000)]
+  0x0000000019cd4000 JavaThread "LittleProxy-9-ProxyToServerWorker-1" [_thread_in_native, id=6256, stack(0x0000000035960000,0x0000000035a60000)]
+  0x0000000019cd3000 JavaThread "LittleProxy-9-ClientToProxyWorker-2" [_thread_in_native, id=17328, stack(0x0000000035860000,0x0000000035960000)]
+  0x0000000019cd1000 JavaThread "LittleProxy-9-ClientToProxyWorker-1" [_thread_in_native, id=16812, stack(0x0000000035760000,0x0000000035860000)]
+  0x0000000019cd0000 JavaThread "LittleProxy-9-ProxyToServerWorker-0" [_thread_in_native, id=9368, stack(0x0000000035660000,0x0000000035760000)]
+  0x0000000019cd2800 JavaThread "LittleProxy-9-ClientToProxyWorker-0" [_thread_in_native, id=2496, stack(0x0000000035560000,0x0000000035660000)]
+  0x0000000019cce000 JavaThread "LittleProxy-9-ClientToProxyAcceptor-0" [_thread_in_native, id=14996, stack(0x0000000035460000,0x0000000035560000)]
+  0x0000000019cc6800 JavaThread "LittleProxy-8-ProxyToServerWorker-7" [_thread_in_native, id=14148, stack(0x0000000035160000,0x0000000035260000)]
+  0x0000000019ccd000 JavaThread "LittleProxy-8-ProxyToServerWorker-6" [_thread_in_native, id=5888, stack(0x0000000035060000,0x0000000035160000)]
+  0x0000000019cc5800 JavaThread "LittleProxy-8-ProxyToServerWorker-5" [_thread_in_native, id=7436, stack(0x0000000034f60000,0x0000000035060000)]
+  0x0000000019ccb800 JavaThread "LittleProxy-8-ProxyToServerWorker-4" [_thread_in_native, id=2124, stack(0x0000000034e60000,0x0000000034f60000)]
+  0x0000000019cc8800 JavaThread "LittleProxy-8-ClientToProxyWorker-7" [_thread_in_native, id=17144, stack(0x0000000034d60000,0x0000000034e60000)]
+  0x0000000019ccc800 JavaThread "LittleProxy-8-ProxyToServerWorker-3" [_thread_in_native, id=17056, stack(0x0000000034c60000,0x0000000034d60000)]
+  0x0000000019ccb000 JavaThread "LittleProxy-8-ClientToProxyWorker-6" [_thread_in_native, id=15236, stack(0x0000000034b60000,0x0000000034c60000)]
+  0x0000000019cc7000 JavaThread "LittleProxy-8-ClientToProxyWorker-5" [_thread_in_native, id=3080, stack(0x0000000034a60000,0x0000000034b60000)]
+  0x0000000019cca000 JavaThread "LittleProxy-8-ClientToProxyWorker-4" [_thread_in_native, id=5360, stack(0x0000000034960000,0x0000000034a60000)]
+  0x0000000019cc5000 JavaThread "LittleProxy-8-ClientToProxyWorker-3" [_thread_in_native, id=10080, stack(0x0000000034860000,0x0000000034960000)]
+  0x0000000019cc8000 JavaThread "LittleProxy-8-ProxyToServerWorker-2" [_thread_in_native, id=17256, stack(0x0000000034760000,0x0000000034860000)]
+  0x0000000019cc9800 JavaThread "LittleProxy-8-ProxyToServerWorker-1" [_thread_in_native, id=16528, stack(0x0000000034660000,0x0000000034760000)]
+  0x0000000019b68000 JavaThread "LittleProxy-8-ClientToProxyWorker-2" [_thread_in_native, id=17324, stack(0x0000000034560000,0x0000000034660000)]
+  0x0000000019b67800 JavaThread "LittleProxy-8-ClientToProxyWorker-1" [_thread_in_native, id=17292, stack(0x0000000034460000,0x0000000034560000)]
+  0x0000000019b66800 JavaThread "LittleProxy-8-ProxyToServerWorker-0" [_thread_in_native, id=14432, stack(0x0000000034260000,0x0000000034360000)]
+  0x0000000019b5f000 JavaThread "LittleProxy-8-ClientToProxyWorker-0" [_thread_in_native, id=17120, stack(0x0000000034160000,0x0000000034260000)]
+  0x0000000019b66000 JavaThread "LittleProxy-8-ClientToProxyAcceptor-0" [_thread_in_native, id=14260, stack(0x0000000034060000,0x0000000034160000)]
+  0x0000000019b65000 JavaThread "LittleProxy-7-ProxyToServerWorker-4" [_thread_in_native, id=9992, stack(0x0000000033d60000,0x0000000033e60000)]
+  0x0000000019b5d800 JavaThread "LittleProxy-7-ClientToProxyWorker-4" [_thread_in_native, id=6840, stack(0x0000000033c60000,0x0000000033d60000)]
+  0x0000000019b5e800 JavaThread "LittleProxy-7-ProxyToServerWorker-3" [_thread_in_native, id=9144, stack(0x0000000033b60000,0x0000000033c60000)]
+  0x0000000019b64800 JavaThread "LittleProxy-7-ProxyToServerWorker-2" [_thread_in_native, id=11240, stack(0x0000000033a60000,0x0000000033b60000)]
+  0x0000000019b5d000 JavaThread "LittleProxy-7-ProxyToServerWorker-1" [_thread_in_native, id=12928, stack(0x0000000033960000,0x0000000033a60000)]
+  0x0000000019b63800 JavaThread "LittleProxy-7-ClientToProxyWorker-3" [_thread_in_native, id=15544, stack(0x0000000033860000,0x0000000033960000)]
+  0x0000000019b63000 JavaThread "LittleProxy-7-ClientToProxyWorker-2" [_thread_in_native, id=6048, stack(0x0000000033760000,0x0000000033860000)]
+  0x0000000019b62000 JavaThread "LittleProxy-7-ClientToProxyWorker-1" [_thread_in_native, id=12732, stack(0x0000000033660000,0x0000000033760000)]
+  0x0000000019b60800 JavaThread "LittleProxy-7-ProxyToServerWorker-0" [_thread_in_native, id=15036, stack(0x0000000033560000,0x0000000033660000)]
+  0x0000000019b61800 JavaThread "LittleProxy-7-ClientToProxyWorker-0" [_thread_in_native, id=9352, stack(0x0000000033460000,0x0000000033560000)]
+  0x0000000019b59000 JavaThread "LittleProxy-7-ClientToProxyAcceptor-0" [_thread_in_native, id=8744, stack(0x0000000033360000,0x0000000033460000)]
+  0x0000000019b5a000 JavaThread "LittleProxy-6-ProxyToServerWorker-7" [_thread_in_native, id=2332, stack(0x0000000033160000,0x0000000033260000)]
+  0x0000000019b5a800 JavaThread "LittleProxy-6-ProxyToServerWorker-6" [_thread_in_native, id=8444, stack(0x0000000033060000,0x0000000033160000)]
+  0x0000000019b5c000 JavaThread "LittleProxy-6-ProxyToServerWorker-5" [_thread_in_native, id=2892, stack(0x0000000032f60000,0x0000000033060000)]
+  0x0000000019b60000 JavaThread "LittleProxy-6-ProxyToServerWorker-4" [_thread_in_native, id=3828, stack(0x0000000032e60000,0x0000000032f60000)]
+  0x0000000019b5b800 JavaThread "LittleProxy-6-ClientToProxyWorker-7" [_thread_in_native, id=15772, stack(0x0000000032d60000,0x0000000032e60000)]
+  0x000000001a1e5800 JavaThread "LittleProxy-6-ClientToProxyWorker-6" [_thread_in_native, id=10500, stack(0x0000000032c60000,0x0000000032d60000)]
+  0x000000001a1e2000 JavaThread "LittleProxy-6-ClientToProxyWorker-5" [_thread_in_native, id=13264, stack(0x0000000032b60000,0x0000000032c60000)]
+  0x000000001a1e8000 JavaThread "LittleProxy-6-ClientToProxyWorker-4" [_thread_in_native, id=9560, stack(0x0000000032a60000,0x0000000032b60000)]
+  0x000000001a1e0800 JavaThread "LittleProxy-6-ProxyToServerWorker-3" [_thread_in_native, id=16324, stack(0x0000000032960000,0x0000000032a60000)]
+  0x000000001a1e2800 JavaThread "LittleProxy-6-ClientToProxyWorker-3" [_thread_in_native, id=496, stack(0x0000000032860000,0x0000000032960000)]
+  0x000000001a1e3800 JavaThread "LittleProxy-6-ProxyToServerWorker-2" [_thread_in_native, id=11624, stack(0x0000000032760000,0x0000000032860000)]
+  0x000000001a1e7000 JavaThread "LittleProxy-6-ProxyToServerWorker-1" [_thread_in_native, id=5660, stack(0x0000000032660000,0x0000000032760000)]
+  0x000000001a1e5000 JavaThread "LittleProxy-6-ClientToProxyWorker-2" [_thread_in_native, id=10748, stack(0x0000000032560000,0x0000000032660000)]
+  0x000000001a1e4000 JavaThread "LittleProxy-6-ClientToProxyWorker-1" [_thread_in_native, id=7924, stack(0x0000000032460000,0x0000000032560000)]
+  0x000000001a1e1000 JavaThread "LittleProxy-6-ProxyToServerWorker-0" [_thread_in_native, id=2684, stack(0x0000000032360000,0x0000000032460000)]
+  0x000000001a1e6800 JavaThread "LittleProxy-6-ClientToProxyWorker-0" [_thread_in_native, id=11452, stack(0x0000000032260000,0x0000000032360000)]
+  0x000000001a1df800 JavaThread "LittleProxy-6-ClientToProxyAcceptor-0" [_thread_in_native, id=5076, stack(0x0000000032160000,0x0000000032260000)]
+  0x000000001a1d9000 JavaThread "LittleProxy-5-ProxyToServerWorker-6" [_thread_in_native, id=14928, stack(0x0000000031e60000,0x0000000031f60000)]
+  0x000000001a1df000 JavaThread "LittleProxy-5-ProxyToServerWorker-7" [_thread_in_native, id=7616, stack(0x0000000031d60000,0x0000000031e60000)]
+  0x000000001a1de000 JavaThread "LittleProxy-5-ProxyToServerWorker-5" [_thread_in_native, id=988, stack(0x0000000031c60000,0x0000000031d60000)]
+  0x000000001a1dc800 JavaThread "LittleProxy-5-ProxyToServerWorker-4" [_thread_in_native, id=11644, stack(0x0000000031b60000,0x0000000031c60000)]
+  0x000000001a1dc000 JavaThread "LittleProxy-5-ClientToProxyWorker-7" [_thread_in_native, id=960, stack(0x0000000031a60000,0x0000000031b60000)]
+  0x000000001a1db000 JavaThread "LittleProxy-5-ClientToProxyWorker-6" [_thread_in_native, id=15700, stack(0x0000000031960000,0x0000000031a60000)]
+  0x000000001a1d9800 JavaThread "LittleProxy-5-ClientToProxyWorker-5" [_thread_in_native, id=2108, stack(0x0000000031860000,0x0000000031960000)]
+  0x000000001a1da800 JavaThread "LittleProxy-5-ClientToProxyWorker-4" [_thread_in_native, id=6152, stack(0x0000000031760000,0x0000000031860000)]
+  0x000000001a1dd800 JavaThread "LittleProxy-5-ProxyToServerWorker-3" [_thread_in_native, id=2164, stack(0x0000000031660000,0x0000000031760000)]
+  0x000000001926f000 JavaThread "LittleProxy-5-ClientToProxyWorker-3" [_thread_in_native, id=13780, stack(0x0000000031560000,0x0000000031660000)]
+  0x000000001926e800 JavaThread "LittleProxy-5-ProxyToServerWorker-2" [_thread_in_native, id=9228, stack(0x0000000031460000,0x0000000031560000)]
+  0x0000000019270000 JavaThread "LittleProxy-5-ProxyToServerWorker-1" [_thread_in_native, id=1268, stack(0x0000000031360000,0x0000000031460000)]
+  0x000000001926d800 JavaThread "LittleProxy-5-ClientToProxyWorker-2" [_thread_in_native, id=13572, stack(0x0000000031260000,0x0000000031360000)]
+  0x000000001926b800 JavaThread "LittleProxy-5-ClientToProxyWorker-1" [_thread_in_native, id=3348, stack(0x0000000031160000,0x0000000031260000)]
+  0x000000001926c000 JavaThread "LittleProxy-5-ProxyToServerWorker-0" [_thread_in_native, id=5488, stack(0x0000000031060000,0x0000000031160000)]
+  0x000000001926d000 JavaThread "LittleProxy-5-ClientToProxyWorker-0" [_thread_in_native, id=14484, stack(0x0000000030f60000,0x0000000031060000)]
+  0x000000001926a800 JavaThread "LittleProxy-5-ClientToProxyAcceptor-0" [_thread_in_native, id=11976, stack(0x0000000030e60000,0x0000000030f60000)]
+  0x0000000019263000 JavaThread "LittleProxy-4-ProxyToServerWorker-7" [_thread_in_native, id=13576, stack(0x0000000030a60000,0x0000000030b60000)]
+  0x000000001926a000 JavaThread "LittleProxy-4-ProxyToServerWorker-6" [_thread_in_native, id=12400, stack(0x0000000030960000,0x0000000030a60000)]
+  0x0000000019269000 JavaThread "LittleProxy-4-ProxyToServerWorker-5" [_thread_in_native, id=12716, stack(0x0000000030860000,0x0000000030960000)]
+  0x0000000019261800 JavaThread "LittleProxy-4-ProxyToServerWorker-4" [_thread_in_native, id=7176, stack(0x0000000030760000,0x0000000030860000)]
+  0x0000000019267000 JavaThread "LittleProxy-4-ProxyToServerWorker-3" [_thread_in_native, id=13784, stack(0x0000000030660000,0x0000000030760000)]
+  0x0000000019266000 JavaThread "LittleProxy-4-ClientToProxyWorker-7" [_thread_in_native, id=7076, stack(0x0000000030560000,0x0000000030660000)]
+  0x0000000019265800 JavaThread "LittleProxy-4-ClientToProxyWorker-6" [_thread_in_native, id=4316, stack(0x0000000030460000,0x0000000030560000)]
+  0x0000000019262800 JavaThread "LittleProxy-4-ClientToProxyWorker-5" [_thread_in_native, id=14612, stack(0x0000000030360000,0x0000000030460000)]
+  0x0000000019264800 JavaThread "LittleProxy-4-ClientToProxyWorker-4" [_thread_in_native, id=11668, stack(0x0000000030260000,0x0000000030360000)]
+  0x0000000019264000 JavaThread "LittleProxy-4-ClientToProxyWorker-3" [_thread_in_native, id=3856, stack(0x0000000030160000,0x0000000030260000)]
+  0x0000000019268800 JavaThread "LittleProxy-4-ProxyToServerWorker-2" [_thread_in_native, id=16112, stack(0x0000000030060000,0x0000000030160000)]
+  0x0000000019267800 JavaThread "LittleProxy-4-ProxyToServerWorker-1" [_thread_in_native, id=6008, stack(0x000000002ff60000,0x0000000030060000)]
+  0x000000001ad1e000 JavaThread "LittleProxy-4-ClientToProxyWorker-2" [_thread_in_native, id=9592, stack(0x000000002fe60000,0x000000002ff60000)]
+  0x000000001ad1d000 JavaThread "LittleProxy-4-ClientToProxyWorker-1" [_thread_in_native, id=1712, stack(0x000000002fd60000,0x000000002fe60000)]
+  0x000000001ad1c800 JavaThread "LittleProxy-4-ProxyToServerWorker-0" [_thread_in_native, id=12552, stack(0x000000002fc60000,0x000000002fd60000)]
+  0x000000001ad1b800 JavaThread "LittleProxy-4-ClientToProxyWorker-0" [_thread_in_native, id=11720, stack(0x000000002fb60000,0x000000002fc60000)]
+  0x000000001ad1b000 JavaThread "LittleProxy-4-ClientToProxyAcceptor-0" [_thread_in_native, id=5008, stack(0x000000002fa60000,0x000000002fb60000)]
+  0x000000001ad13800 JavaThread "LittleProxy-3-ProxyToServerWorker-7" [_thread_in_native, id=10188, stack(0x0000000029700000,0x0000000029800000)]
+  0x000000001ad1a000 JavaThread "LittleProxy-3-ProxyToServerWorker-6" [_thread_in_native, id=7972, stack(0x0000000029600000,0x0000000029700000)]
+  0x000000001ad15800 JavaThread "LittleProxy-3-ProxyToServerWorker-5" [_thread_in_native, id=9716, stack(0x0000000029500000,0x0000000029600000)]
+  0x000000001ad18800 JavaThread "LittleProxy-3-ProxyToServerWorker-4" [_thread_in_native, id=5676, stack(0x0000000029400000,0x0000000029500000)]
+  0x000000001ad18000 JavaThread "LittleProxy-3-ProxyToServerWorker-3" [_thread_in_native, id=9684, stack(0x0000000029300000,0x0000000029400000)]
+  0x000000001ad19800 JavaThread "LittleProxy-3-ClientToProxyWorker-7" [_thread_in_native, id=2644, stack(0x00000000261d0000,0x00000000262d0000)]
+  0x000000001ad12800 JavaThread "LittleProxy-3-ClientToProxyWorker-6" [_thread_in_native, id=13512, stack(0x00000000250c0000,0x00000000251c0000)]
+  0x000000001ad11000 JavaThread "LittleProxy-3-ClientToProxyWorker-5" [_thread_in_native, id=15768, stack(0x0000000023fb0000,0x00000000240b0000)]
+  0x000000001ad17000 JavaThread "LittleProxy-3-ClientToProxyWorker-4" [_thread_in_native, id=4196, stack(0x0000000023eb0000,0x0000000023fb0000)]
+  0x000000001ad14000 JavaThread "LittleProxy-3-ClientToProxyWorker-3" [_thread_in_native, id=7092, stack(0x0000000023db0000,0x0000000023eb0000)]
+  0x000000001ad15000 JavaThread "LittleProxy-3-ProxyToServerWorker-2" [_thread_in_native, id=8580, stack(0x0000000021c90000,0x0000000021d90000)]
+  0x000000001ad16800 JavaThread "LittleProxy-3-ProxyToServerWorker-1" [_thread_in_native, id=15376, stack(0x0000000021b90000,0x0000000021c90000)]
+  0x000000001ad0f000 JavaThread "LittleProxy-3-ClientToProxyWorker-2" [_thread_in_native, id=7944, stack(0x000000001fa70000,0x000000001fb70000)]
+  0x000000001ad12000 JavaThread "LittleProxy-3-ClientToProxyWorker-1" [_thread_in_native, id=14096, stack(0x000000001f970000,0x000000001fa70000)]
+  0x000000001ad10800 JavaThread "LittleProxy-3-ProxyToServerWorker-0" [_thread_in_native, id=6532, stack(0x000000001f770000,0x000000001f870000)]
+  0x000000001ad0f800 JavaThread "threadDeathWatcher-2-1" daemon [_thread_blocked, id=8552, stack(0x000000001e660000,0x000000001e760000)]
+  0x0000000019cac800 JavaThread "LittleProxy-3-ClientToProxyWorker-0" [_thread_in_native, id=11384, stack(0x000000001e560000,0x000000001e660000)]
+  0x0000000019ca9800 JavaThread "LittleProxy-3-ClientToProxyAcceptor-0" [_thread_in_native, id=15480, stack(0x000000001e460000,0x000000001e560000)]
+  0x0000000019cab800 JavaThread "LittleProxy-2-ClientToProxyAcceptor-0" [_thread_in_native, id=5588, stack(0x000000001e080000,0x000000001e180000)]
+  0x0000000019cab000 JavaThread "LittleProxy-1-ClientToProxyAcceptor-0" [_thread_in_native, id=6744, stack(0x000000001df80000,0x000000001e080000)]
+  0x0000000019caa000 JavaThread "LittleProxy-0-ClientToProxyAcceptor-0" [_thread_in_native, id=13668, stack(0x000000001dc80000,0x000000001dd80000)]
+  0x000000001afa8800 JavaThread "qtp838812606-22" [_thread_blocked, id=9272, stack(0x000000001c4b0000,0x000000001c5b0000)]
+  0x000000001afa8000 JavaThread "qtp838812606-21" [_thread_blocked, id=13608, stack(0x000000001c3b0000,0x000000001c4b0000)]
+  0x000000001b21e000 JavaThread "qtp838812606-20" [_thread_blocked, id=11980, stack(0x000000001c2b0000,0x000000001c3b0000)]
+  0x000000001b21d000 JavaThread "qtp838812606-19" [_thread_blocked, id=6092, stack(0x000000001c1b0000,0x000000001c2b0000)]
+  0x000000001a28d000 JavaThread "qtp838812606-18" [_thread_in_native, id=4412, stack(0x000000001c0b0000,0x000000001c1b0000)]
+  0x000000001a28c800 JavaThread "qtp838812606-17" [_thread_blocked, id=12020, stack(0x000000001bfb0000,0x000000001c0b0000)]
+  0x000000001af34800 JavaThread "qtp838812606-16 - Acceptor0 SelectChannelConnector@0.0.0.0:8080" [_thread_in_native, id=10528, stack(0x000000001beb0000,0x000000001bfb0000)]
+  0x000000001af34000 JavaThread "qtp838812606-15" [_thread_blocked, id=7428, stack(0x000000001bdb0000,0x000000001beb0000)]
+  0x000000001ac29000 JavaThread "HashSessionScavenger-0" daemon [_thread_blocked, id=6852, stack(0x000000001aa60000,0x000000001ab60000)]
+  0x00000000192c4000 JavaThread "com.google.inject.internal.util.$Finalizer" daemon [_thread_blocked, id=1560, stack(0x000000001a2f0000,0x000000001a3f0000)]
+  0x0000000018fdf000 JavaThread "Service Thread" daemon [_thread_blocked, id=7840, stack(0x00000000198f0000,0x00000000199f0000)]
+  0x0000000018f83800 JavaThread "C1 CompilerThread3" daemon [_thread_blocked, id=4972, stack(0x00000000197f0000,0x00000000198f0000)]
+  0x0000000018f7a000 JavaThread "C2 CompilerThread2" daemon [_thread_blocked, id=14224, stack(0x00000000196f0000,0x00000000197f0000)]
+  0x0000000018f79000 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=14756, stack(0x00000000195f0000,0x00000000196f0000)]
+  0x0000000018f77000 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=11572, stack(0x00000000194f0000,0x00000000195f0000)]
+  0x0000000018f71800 JavaThread "Attach Listener" daemon [_thread_blocked, id=5568, stack(0x00000000193f0000,0x00000000194f0000)]
+  0x0000000018f70800 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=12340, stack(0x00000000192f0000,0x00000000193f0000)]
+  0x00000000027c8800 JavaThread "Finalizer" daemon [_thread_blocked, id=14160, stack(0x0000000018d80000,0x0000000018e80000)]
+  0x00000000027c2000 JavaThread "Reference Handler" daemon [_thread_blocked, id=8332, stack(0x0000000018c80000,0x0000000018d80000)]
+  0x000000000281d800 JavaThread "main" [_thread_blocked, id=9328, stack(0x0000000002260000,0x0000000002360000)]
+
+Other Threads:
+  0x0000000016eb9800 VMThread [stack: 0x0000000018b80000,0x0000000018c80000] [id=4852]
+  0x0000000019070800 WatcherThread [stack: 0x00000000199f0000,0x0000000019af0000] [id=16284]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap:
+ PSYoungGen      total 61952K, used 25620K [0x00000000daf80000, 0x00000000df880000, 0x0000000100000000)
+  eden space 54272K, 33% used [0x00000000daf80000,0x00000000dc1096d8,0x00000000de480000)
+  from space 7680K, 99% used [0x00000000de580000,0x00000000decfbb08,0x00000000ded00000)
+  to   space 10240K, 0% used [0x00000000dee80000,0x00000000dee80000,0x00000000df880000)
+ ParOldGen       total 227328K, used 214106K [0x0000000090e00000, 0x000000009ec00000, 0x00000000daf80000)
+  object space 227328K, 94% used [0x0000000090e00000,0x000000009df169f0,0x000000009ec00000)
+ Metaspace       used 34871K, capacity 35380K, committed 35456K, reserved 1081344K
+  class space    used 4072K, capacity 4210K, committed 4224K, reserved 1048576K
+
+Card table byte_map: [0x0000000011be0000,0x0000000011f60000] byte_map_base: 0x0000000011759000
+
+Marking Bits: (ParMarkBitMap*) 0x000000006754a5b0
+ Begin Bits: [0x00000000129c0000, 0x0000000014588000)
+ End Bits:   [0x0000000014588000, 0x0000000016150000)
+
+Polling page: 0x00000000026b0000
+
+CodeCache: size=245760Kb used=24058Kb max_used=24064Kb free=221701Kb
+ bounds [0x0000000002820000, 0x0000000003fe0000, 0x0000000011820000]
+ total_blobs=7728 nmethods=7223 adapters=417
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 193241.731 Thread 0x0000000018f83800 8964       1       org.eclipse.jetty.http.HttpBuffers::getRequestBuffers (5 bytes)
+Event: 193241.732 Thread 0x0000000018f83800 nmethod 8964 0x0000000003f97390 code [0x0000000003f974e0, 0x0000000003f975f0]
+Event: 193241.732 Thread 0x0000000018f83800 8965       1       org.eclipse.jetty.server.Server::getMaxCookieVersion (5 bytes)
+Event: 193241.732 Thread 0x0000000018f83800 nmethod 8965 0x0000000003fc02d0 code [0x0000000003fc0420, 0x0000000003fc0530]
+Event: 193241.732 Thread 0x0000000018f83800 8966       1       org.eclipse.jetty.server.AbstractConnector::getResolveNames (5 bytes)
+Event: 193241.732 Thread 0x0000000018f83800 nmethod 8966 0x0000000003fa88d0 code [0x0000000003fa8a20, 0x0000000003fa8b30]
+Event: 193241.732 Thread 0x0000000018f83800 8967       1       org.eclipse.jetty.http.HttpBuffers::getResponseBuffers (5 bytes)
+Event: 193241.732 Thread 0x0000000018f83800 nmethod 8967 0x0000000002a28c50 code [0x0000000002a28da0, 0x0000000002a28eb0]
+Event: 193241.732 Thread 0x0000000018f83800 8968       1       org.eclipse.jetty.server.Server::getSendServerVersion (5 bytes)
+Event: 193241.732 Thread 0x0000000018f83800 nmethod 8968 0x0000000002a28990 code [0x0000000002a28ae0, 0x0000000002a28bf0]
+
+GC Heap History (10 events):
+Event: 192909.756 GC heap before
+{Heap before GC invocations=198 (full 13):
+ PSYoungGen      total 48128K, used 41840K [0x00000000daf80000, 0x00000000dee00000, 0x0000000100000000)
+  eden space 38400K, 100% used [0x00000000daf80000,0x00000000dd500000,0x00000000dd500000)
+  from space 9728K, 35% used [0x00000000dde00000,0x00000000de15c138,0x00000000de780000)
+  to   space 9216K, 0% used [0x00000000dd500000,0x00000000dd500000,0x00000000dde00000)
+ ParOldGen       total 227328K, used 198546K [0x0000000090e00000, 0x000000009ec00000, 0x00000000daf80000)
+  object space 227328K, 87% used [0x0000000090e00000,0x000000009cfe4948,0x000000009ec00000)
+ Metaspace       used 34858K, capacity 35380K, committed 35456K, reserved 1081344K
+  class space    used 4072K, capacity 4210K, committed 4224K, reserved 1048576K
+Event: 192909.761 GC heap after
+Heap after GC invocations=198 (full 13):
+ PSYoungGen      total 47616K, used 1441K [0x00000000daf80000, 0x00000000dee80000, 0x0000000100000000)
+  eden space 38400K, 0% used [0x00000000daf80000,0x00000000daf80000,0x00000000dd500000)
+  from space 9216K, 15% used [0x00000000dd500000,0x00000000dd6684d8,0x00000000dde00000)
+  to   space 9216K, 0% used [0x00000000de580000,0x00000000de580000,0x00000000dee80000)
+ ParOldGen       total 227328K, used 201533K [0x0000000090e00000, 0x000000009ec00000, 0x00000000daf80000)
+  object space 227328K, 88% used [0x0000000090e00000,0x000000009d2cf570,0x000000009ec00000)
+ Metaspace       used 34858K, capacity 35380K, committed 35456K, reserved 1081344K
+  class space    used 4072K, capacity 4210K, committed 4224K, reserved 1048576K
+}
+Event: 192910.041 GC heap before
+{Heap before GC invocations=199 (full 13):
+ PSYoungGen      total 47616K, used 39830K [0x00000000daf80000, 0x00000000dee80000, 0x0000000100000000)
+  eden space 38400K, 99% used [0x00000000daf80000,0x00000000dd4fd400,0x00000000dd500000)
+  from space 9216K, 15% used [0x00000000dd500000,0x00000000dd6684d8,0x00000000dde00000)
+  to   space 9216K, 0% used [0x00000000de580000,0x00000000de580000,0x00000000dee80000)
+ ParOldGen       total 227328K, used 201533K [0x0000000090e00000, 0x000000009ec00000, 0x00000000daf80000)
+  object space 227328K, 88% used [0x0000000090e00000,0x000000009d2cf570,0x000000009ec00000)
+ Metaspace       used 34858K, capacity 35380K, committed 35456K, reserved 1081344K
+  class space    used 4072K, capacity 4210K, committed 4224K, reserved 1048576K
+Event: 192910.045 GC heap after
+Heap after GC invocations=199 (full 13):
+ PSYoungGen      total 54272K, used 1994K [0x00000000daf80000, 0x00000000ded80000, 0x0000000100000000)
+  eden space 46080K, 0% used [0x00000000daf80000,0x00000000daf80000,0x00000000ddc80000)
+  from space 8192K, 24% used [0x00000000de580000,0x00000000de772b80,0x00000000ded80000)
+  to   space 8704K, 0% used [0x00000000ddc80000,0x00000000ddc80000,0x00000000de500000)
+ ParOldGen       total 227328K, used 202572K [0x0000000090e00000, 0x000000009ec00000, 0x00000000daf80000)
+  object space 227328K, 89% used [0x0000000090e00000,0x000000009d3d3118,0x000000009ec00000)
+ Metaspace       used 34858K, capacity 35380K, committed 35456K, reserved 1081344K
+  class space    used 4072K, capacity 4210K, committed 4224K, reserved 1048576K
+}
+Event: 192910.666 GC heap before
+{Heap before GC invocations=200 (full 13):
+ PSYoungGen      total 54272K, used 48074K [0x00000000daf80000, 0x00000000ded80000, 0x0000000100000000)
+  eden space 46080K, 100% used [0x00000000daf80000,0x00000000ddc80000,0x00000000ddc80000)
+  from space 8192K, 24% used [0x00000000de580000,0x00000000de772b80,0x00000000ded80000)
+  to   space 8704K, 0% used [0x00000000ddc80000,0x00000000ddc80000,0x00000000de500000)
+ ParOldGen       total 227328K, used 202572K [0x0000000090e00000, 0x000000009ec00000, 0x00000000daf80000)
+  object space 227328K, 89% used [0x0000000090e00000,0x000000009d3d3118,0x000000009ec00000)
+ Metaspace       used 34863K, capacity 35380K, committed 35456K, reserved 1081344K
+  class space    used 4072K, capacity 4210K, committed 4224K, reserved 1048576K
+Event: 192910.675 GC heap after
+Heap after GC invocations=200 (full 13):
+ PSYoungGen      total 54784K, used 7850K [0x00000000daf80000, 0x00000000df880000, 0x0000000100000000)
+  eden space 46080K, 0% used [0x00000000daf80000,0x00000000daf80000,0x00000000ddc80000)
+  from space 8704K, 90% used [0x00000000ddc80000,0x00000000de42a8e0,0x00000000de500000)
+  to   space 9728K, 0% used [0x00000000def00000,0x00000000def00000,0x00000000df880000)
+ ParOldGen       total 227328K, used 203518K [0x0000000090e00000, 0x000000009ec00000, 0x00000000daf80000)
+  object space 227328K, 89% used [0x0000000090e00000,0x000000009d4bf810,0x000000009ec00000)
+ Metaspace       used 34863K, capacity 35380K, committed 35456K, reserved 1081344K
+  class space    used 4072K, capacity 4210K, committed 4224K, reserved 1048576K
+}
+Event: 192911.982 GC heap before
+{Heap before GC invocations=201 (full 13):
+ PSYoungGen      total 54784K, used 53930K [0x00000000daf80000, 0x00000000df880000, 0x0000000100000000)
+  eden space 46080K, 100% used [0x00000000daf80000,0x00000000ddc80000,0x00000000ddc80000)
+  from space 8704K, 90% used [0x00000000ddc80000,0x00000000de42a8e0,0x00000000de500000)
+  to   space 9728K, 0% used [0x00000000def00000,0x00000000def00000,0x00000000df880000)
+ ParOldGen       total 227328K, used 203518K [0x0000000090e00000, 0x000000009ec00000, 0x00000000daf80000)
+  object space 227328K, 89% used [0x0000000090e00000,0x000000009d4bf810,0x000000009ec00000)
+ Metaspace       used 34863K, capacity 35380K, committed 35456K, reserved 1081344K
+  class space    used 4072K, capacity 4210K, committed 4224K, reserved 1048576K
+Event: 192911.988 GC heap after
+Heap after GC invocations=201 (full 13):
+ PSYoungGen      total 65024K, used 4294K [0x00000000daf80000, 0x00000000df880000, 0x0000000100000000)
+  eden space 55296K, 0% used [0x00000000daf80000,0x00000000daf80000,0x00000000de580000)
+  from space 9728K, 44% used [0x00000000def00000,0x00000000df3318a0,0x00000000df880000)
+  to   space 9728K, 0% used [0x00000000de580000,0x00000000de580000,0x00000000def00000)
+ ParOldGen       total 227328K, used 211116K [0x0000000090e00000, 0x000000009ec00000, 0x00000000daf80000)
+  object space 227328K, 92% used [0x0000000090e00000,0x000000009dc2b240,0x000000009ec00000)
+ Metaspace       used 34863K, capacity 35380K, committed 35456K, reserved 1081344K
+  class space    used 4072K, capacity 4210K, committed 4224K, reserved 1048576K
+}
+Event: 192913.860 GC heap before
+{Heap before GC invocations=202 (full 13):
+ PSYoungGen      total 65024K, used 59590K [0x00000000daf80000, 0x00000000df880000, 0x0000000100000000)
+  eden space 55296K, 100% used [0x00000000daf80000,0x00000000de580000,0x00000000de580000)
+  from space 9728K, 44% used [0x00000000def00000,0x00000000df3318a0,0x00000000df880000)
+  to   space 9728K, 0% used [0x00000000de580000,0x00000000de580000,0x00000000def00000)
+ ParOldGen       total 227328K, used 211116K [0x0000000090e00000, 0x000000009ec00000, 0x00000000daf80000)
+  object space 227328K, 92% used [0x0000000090e00000,0x000000009dc2b240,0x000000009ec00000)
+ Metaspace       used 34865K, capacity 35380K, committed 35456K, reserved 1081344K
+  class space    used 4072K, capacity 4210K, committed 4224K, reserved 1048576K
+Event: 192913.868 GC heap after
+Heap after GC invocations=202 (full 13):
+ PSYoungGen      total 61952K, used 7662K [0x00000000daf80000, 0x00000000df880000, 0x0000000100000000)
+  eden space 54272K, 0% used [0x00000000daf80000,0x00000000daf80000,0x00000000de480000)
+  from space 7680K, 99% used [0x00000000de580000,0x00000000decfbb08,0x00000000ded00000)
+  to   space 10240K, 0% used [0x00000000dee80000,0x00000000dee80000,0x00000000df880000)
+ ParOldGen       total 227328K, used 214106K [0x0000000090e00000, 0x000000009ec00000, 0x00000000daf80000)
+  object space 227328K, 94% used [0x0000000090e00000,0x000000009df169f0,0x000000009ec00000)
+ Metaspace       used 34865K, capacity 35380K, committed 35456K, reserved 1081344K
+  class space    used 4072K, capacity 4210K, committed 4224K, reserved 1048576K
+}
+
+Deoptimization events (10 events):
+Event: 103529.302 Thread 0x000000001afa8800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00000000031ca7a4 method=java.util.Calendar.complete()V @ 4
+Event: 103532.099 Thread 0x000000001afa8800 Uncommon trap: reason=predicate action=maybe_recompile pc=0x000000000294c4a4 method=java.util.AbstractCollection.toArray([Ljava/lang/Object;)[Ljava/lang/Object; @ 49
+Event: 103645.784 Thread 0x000000001afa8000 Uncommon trap: reason=array_check action=maybe_recompile pc=0x0000000003008d38 method=java.util.AbstractCollection.toArray([Ljava/lang/Object;)[Ljava/lang/Object; @ 119
+Event: 103645.784 Thread 0x000000001afa8000 Uncommon trap: reason=array_check action=maybe_recompile pc=0x0000000003008d38 method=java.util.AbstractCollection.toArray([Ljava/lang/Object;)[Ljava/lang/Object; @ 119
+Event: 103645.784 Thread 0x000000001afa8000 Uncommon trap: reason=array_check action=maybe_recompile pc=0x0000000003008d38 method=java.util.AbstractCollection.toArray([Ljava/lang/Object;)[Ljava/lang/Object; @ 119
+Event: 103645.784 Thread 0x000000001afa8000 Uncommon trap: reason=array_check action=maybe_recompile pc=0x0000000003008d38 method=java.util.AbstractCollection.toArray([Ljava/lang/Object;)[Ljava/lang/Object; @ 119
+Event: 103654.587 Thread 0x0000000044f22800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x0000000003940598 method=io.netty.buffer.AbstractReferenceCountedByteBuf.retain0(I)Lio/netty/buffer/ByteBuf; @ 33
+Event: 103850.247 Thread 0x000000001b21e000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x0000000002e26b18 method=org.eclipse.jetty.util.BlockingArrayQueue.poll()Ljava/lang/Object; @ 7
+Event: 103865.698 Thread 0x000000001b21d000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x0000000003b5bda0 method=com.fasterxml.jackson.core.json.UTF8JsonGenerator.writeStartObject(Ljava/lang/Object;)V @ 56
+Event: 191172.265 Thread 0x000000001d720800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x0000000003b0eab0 method=java.math.BitSieve.retrieve(Ljava/math/BigInteger;ILjava/util/Random;)Ljava/math/BigInteger; @ 13
+
+Internal exceptions (10 events):
+Event: 192914.796 Thread 0x000000001d41f000 Exception <a 'java/io/IOException'> (0x00000000dbfdf960) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u60\4407\hotspot\src\share\vm\prims\jni.cpp, line 709]
+Event: 192914.796 Thread 0x000000001d429800 Exception <a 'java/io/IOException'> (0x00000000dbff0600) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u60\4407\hotspot\src\share\vm\prims\jni.cpp, line 709]
+Event: 192914.796 Thread 0x000000001d42e000 Exception <a 'java/io/IOException'> (0x00000000dbf5ef28) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u60\4407\hotspot\src\share\vm\prims\jni.cpp, line 709]
+Event: 192914.797 Thread 0x000000001d41f000 Exception <a 'java/io/IOException'> (0x00000000dbfe03f8) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u60\4407\hotspot\src\share\vm\prims\jni.cpp, line 709]
+Event: 192914.797 Thread 0x000000001d42e000 Exception <a 'java/io/IOException'> (0x00000000dbf618a8) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u60\4407\hotspot\src\share\vm\prims\jni.cpp, line 709]
+Event: 192914.797 Thread 0x000000001d41f000 Exception <a 'java/io/IOException'> (0x00000000dbfe2b68) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u60\4407\hotspot\src\share\vm\prims\jni.cpp, line 709]
+Event: 192914.797 Thread 0x000000001d42e800 Exception <a 'java/io/IOException'> (0x00000000dbf93fa0) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u60\4407\hotspot\src\share\vm\prims\jni.cpp, line 709]
+Event: 192914.797 Thread 0x000000001d42e800 Exception <a 'java/io/IOException'> (0x00000000dbf96750) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u60\4407\hotspot\src\share\vm\prims\jni.cpp, line 709]
+Event: 192922.729 Thread 0x000000001d426800 Exception <a 'java/net/ConnectException': Connection timed out: no further information> (0x00000000dbff5680) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u60\4407\hotspot\src\share\vm\prims\jni.cpp, line 735]
+Event: 192922.730 Thread 0x000000001d41f000 Exception <a 'java/io/IOException'> (0x00000000dbfe34a8) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u60\4407\hotspot\src\share\vm\prims\jni.cpp, line 709]
+
+Events (10 events):
+Event: 192914.690 Executing VM operation: RevokeBias
+Event: 192914.692 Executing VM operation: RevokeBias done
+Event: 192920.678 Thread 0x0000000019ccd000 DEOPT PACKING pc=0x00000000034ae0a1 sp=0x000000003515f4c0
+Event: 192920.679 Thread 0x0000000019ccd000 DEOPT UNPACKING pc=0x000000000286747f sp=0x000000003515f1f8 mode 0
+Event: 193241.706 Executing VM operation: RevokeBias
+Event: 193241.708 Executing VM operation: RevokeBias done
+Event: 193241.729 Executing VM operation: RevokeBias
+Event: 193241.731 Executing VM operation: RevokeBias done
+Event: 193241.753 Thread 0x000000001d434000 Thread added: 0x000000001d434000
+Event: 193243.378 Thread 0x000000001d434800 Thread added: 0x000000001d434800
+
+
+Dynamic libraries:
+0x00007ff727b10000 - 0x00007ff727b47000 	C:\ProgramData\Oracle\Java\javapath\java.exe
+0x00007fff62410000 - 0x00007fff625fd000 	C:\Windows\SYSTEM32\ntdll.dll
+0x00007fff5ff90000 - 0x00007fff60043000 	C:\Windows\System32\KERNEL32.DLL
+0x00007fff5efb0000 - 0x00007fff5f243000 	C:\Windows\System32\KERNELBASE.dll
+0x00007fff5f9f0000 - 0x00007fff5fa93000 	C:\Windows\System32\ADVAPI32.dll
+0x00007fff60240000 - 0x00007fff602de000 	C:\Windows\System32\msvcrt.dll
+0x00007fff603d0000 - 0x00007fff6046e000 	C:\Windows\System32\sechost.dll
+0x00007fff5fb50000 - 0x00007fff5fc72000 	C:\Windows\System32\RPCRT4.dll
+0x00007fff61b00000 - 0x00007fff61c97000 	C:\Windows\System32\USER32.dll
+0x00007fff5ef90000 - 0x00007fff5efb0000 	C:\Windows\System32\win32u.dll
+0x00007fff60470000 - 0x00007fff60499000 	C:\Windows\System32\GDI32.dll
+0x00007fff5ecd0000 - 0x00007fff5ee69000 	C:\Windows\System32\gdi32full.dll
+0x00007fff5f500000 - 0x00007fff5f5a0000 	C:\Windows\System32\msvcp_win.dll
+0x00007fff5ee90000 - 0x00007fff5ef8a000 	C:\Windows\System32\ucrtbase.dll
+0x00007fff4a3a0000 - 0x00007fff4a619000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.17763.802_none_05b1445c0722d2cc\COMCTL32.dll
+0x00007fff5f630000 - 0x00007fff5f95c000 	C:\Windows\System32\combase.dll
+0x00007fff5f480000 - 0x00007fff5f4fe000 	C:\Windows\System32\bcryptPrimitives.dll
+0x00007fff5f960000 - 0x00007fff5f98e000 	C:\Windows\System32\IMM32.DLL
+0x00000000688a0000 - 0x0000000068972000 	C:\Program Files\Java\jre1.8.0_60\bin\msvcr100.dll
+0x0000000066d40000 - 0x00000000675c9000 	C:\Program Files\Java\jre1.8.0_60\bin\server\jvm.dll
+0x00007fff619c0000 - 0x00007fff619c8000 	C:\Windows\System32\PSAPI.DLL
+0x00007fff58af0000 - 0x00007fff58afa000 	C:\Windows\SYSTEM32\VERSION.dll
+0x00007fff5bb40000 - 0x00007fff5bb64000 	C:\Windows\SYSTEM32\WINMM.dll
+0x00007fff4a660000 - 0x00007fff4a669000 	C:\Windows\SYSTEM32\WSOCK32.dll
+0x00007fff602e0000 - 0x00007fff6034d000 	C:\Windows\System32\WS2_32.dll
+0x00007fff5bb10000 - 0x00007fff5bb3d000 	C:\Windows\SYSTEM32\WINMMBASE.dll
+0x00007fff5f430000 - 0x00007fff5f47a000 	C:\Windows\System32\cfgmgr32.dll
+0x0000000068890000 - 0x000000006889f000 	C:\Program Files\Java\jre1.8.0_60\bin\verify.dll
+0x0000000068860000 - 0x0000000068889000 	C:\Program Files\Java\jre1.8.0_60\bin\java.dll
+0x0000000068840000 - 0x0000000068856000 	C:\Program Files\Java\jre1.8.0_60\bin\zip.dll
+0x00007fff604b0000 - 0x00007fff619a4000 	C:\Windows\System32\SHELL32.dll
+0x00007fff5faa0000 - 0x00007fff5fb48000 	C:\Windows\System32\shcore.dll
+0x00007fff5e4d0000 - 0x00007fff5ec1d000 	C:\Windows\System32\windows.storage.dll
+0x00007fff5e4a0000 - 0x00007fff5e4c4000 	C:\Windows\System32\profapi.dll
+0x00007fff5e420000 - 0x00007fff5e47d000 	C:\Windows\System32\powrprof.dll
+0x00007fff61ca0000 - 0x00007fff61cf2000 	C:\Windows\System32\shlwapi.dll
+0x00007fff5e400000 - 0x00007fff5e411000 	C:\Windows\System32\kernel.appcore.dll
+0x00007fff5ee70000 - 0x00007fff5ee87000 	C:\Windows\System32\cryptsp.dll
+0x0000000068820000 - 0x000000006883a000 	C:\Program Files\Java\jre1.8.0_60\bin\net.dll
+0x00007fff5dc10000 - 0x00007fff5dc77000 	C:\Windows\system32\mswsock.dll
+0x0000000068800000 - 0x0000000068811000 	C:\Program Files\Java\jre1.8.0_60\bin\nio.dll
+0x00000000687f0000 - 0x00000000687fd000 	C:\Program Files\Java\jre1.8.0_60\bin\management.dll
+0x00007fff49630000 - 0x00007fff49646000 	C:\Windows\system32\napinsp.dll
+0x00007fff49610000 - 0x00007fff4962a000 	C:\Windows\system32\pnrpnsp.dll
+0x00007fff5d970000 - 0x00007fff5da36000 	C:\Windows\SYSTEM32\DNSAPI.dll
+0x00007fff619b0000 - 0x00007fff619b8000 	C:\Windows\System32\NSI.dll
+0x00007fff5d930000 - 0x00007fff5d96d000 	C:\Windows\SYSTEM32\IPHLPAPI.DLL
+0x00007fff49600000 - 0x00007fff4960e000 	C:\Windows\System32\winrnr.dll
+0x00007fff54870000 - 0x00007fff5488b000 	C:\Windows\system32\NLAapi.dll
+0x00007fff58d00000 - 0x00007fff58d15000 	C:\Windows\system32\wshbth.dll
+0x000000006a9c0000 - 0x000000006a9e6000 	C:\Program Files\Bonjour\mdnsNSP.dll
+0x00007fff51ae0000 - 0x00007fff51aea000 	C:\Windows\System32\rasadhlp.dll
+0x00007fff51af0000 - 0x00007fff51b69000 	C:\Windows\System32\fwpuclnt.dll
+0x00007fff5f5a0000 - 0x00007fff5f5c6000 	C:\Windows\System32\bcrypt.dll
+0x00007fff5d790000 - 0x00007fff5d7c3000 	C:\Windows\system32\rsaenh.dll
+0x00007fff5e330000 - 0x00007fff5e358000 	C:\Windows\SYSTEM32\USERENV.dll
+0x00007fff5dde0000 - 0x00007fff5ddec000 	C:\Windows\SYSTEM32\CRYPTBASE.dll
+0x00007fff53d80000 - 0x00007fff53d96000 	C:\Windows\SYSTEM32\dhcpcsvc6.DLL
+0x00007fff54010000 - 0x00007fff5402c000 	C:\Windows\SYSTEM32\dhcpcsvc.DLL
+0x00000000687c0000 - 0x00000000687e4000 	C:\Program Files\Java\jre1.8.0_60\bin\sunec.dll
+0x00000000687b0000 - 0x00000000687bb000 	C:\Program Files\Java\jre1.8.0_60\bin\sunmscapi.dll
+0x00007fff5f250000 - 0x00007fff5f42b000 	C:\Windows\System32\CRYPT32.dll
+0x00007fff5e480000 - 0x00007fff5e492000 	C:\Windows\System32\MSASN1.dll
+0x00007fff5cc70000 - 0x00007fff5ce5d000 	C:\Windows\SYSTEM32\dbghelp.dll
+
+VM Arguments:
+jvm_args: -Dapp.name=browsermob-proxy -Dapp.repo=D:\下载\browsermob-proxy-2.1.4\bin\\..\lib -Dbasedir=D:\下载\browsermob-proxy-2.1.4\bin\\.. 
+java_command: net.lightbody.bmp.proxy.Main --port=8080
+java_class_path (initial): ;D:\下载\browsermob-proxy-2.1.4\bin\\..\etc;D:\下载\browsermob-proxy-2.1.4\bin\\..\lib\browsermob-dist-2.1.4.jar
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+CLASSPATH="D:\下载\browsermob-proxy-2.1.4\bin\\.."\etc;"D:\下载\browsermob-proxy-2.1.4\bin\\..\lib"\*
+PATH=C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\Java\jdk1.8.0_60;C:\Program Files\Java\jdk1.8.0_60\bin;D:\Git\cmd;D:\node.js\;C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe;D:\python\Lib\site-packages\allure2-2.12.1;D:\android-sdk\tools;D:\android-sdk\platform-tools;D:\projectdemo\allure-2.10.0\bin;D:\python\Scripts\;D:\python\;C:\Users\onedi\AppData\Local\Microsoft\WindowsApps;D:\PyCharm 2019.1.1\bin;D:\Microsoft VS Code\bin;C:\Users\onedi\AppData\Roaming\npm;D:\Fiddler;D:\python\Lib\site-packages\allure\bin;C:\Users\onedi\AppData\Local\BypassRuntm;D:\python\lib\site-packages\pywin32_system32
+USERNAME=onedi
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=AMD64 Family 23 Model 24 Stepping 1, AuthenticAMD
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10.0 , 64 bit Build 17763 (10.0.17763.475)
+
+CPU:total 8 (8 cores per cpu, 1 threads per core) family 23 model 24 stepping 1, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, mmxext, 3dnowpref, lzcnt, sse4a, tsc, tscinvbit, tscinv, bmi1
+
+Memory: 4k page, physical 7277196k(415888k free), swap 17762952k(1772k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (25.60-b23) for windows-amd64 JRE (1.8.0_60-b27), built on Aug  4 2015 11:06:27 by "java_re" with MS VC++ 10.0 (VS2010)
+
+time: Mon Nov 25 23:17:01 2019
+elapsed time: 193243 seconds (2d 5h 40m 43s)
+

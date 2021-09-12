@@ -1,0 +1,105 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+
+## 全面屏壁纸 网站
+
+import os
+import asyncio
+import time
+
+import aiohttp
+import aiofiles
+from bs4 import BeautifulSoup  
+from lxml import html
+from PIL import Image
+from fake_useragent import UserAgent
+
+
+
+path_index = 'https://www.bizhizj.com/'
+path_mn = 'https://www.bizhizj.com/mn/'
+dir_file_path = "D:/自媒体素材/壁纸/壁纸之家/"
+
+
+
+
+async def save(session, path, dir_path):
+	print("开始请求图片地址 : {}".format(path))
+	try:
+		async with session.get(path, headers=get_random_ua()) as response:
+			if response.status == 200:
+				img = await response.read()
+				async with aiofiles.open(dir_path, mode='wb') as f:
+					await f.write(img)
+					await f.close()
+			else:
+				print("图片请求非200, {}".format(response))
+	except Exception as e:
+		print("请求图片时错误")
+		print(e)
+		time.sleep(10)
+
+async def get_details(session, path, name):
+	print("详情页")
+	response = await session.get(path, headers=get_random_ua())
+	if response.status == 200:
+		source_text = await response.text(encoding='utf-8')
+		soup = BeautifulSoup(source_text, "lxml")
+		img_tag_list = soup.find_all("img", alt=name)
+		for img in img_tag_list:
+			img_detail_url = img.get("src")
+			dir_path_folder = dir_file_path + ''.join(e for e in name if e.isalnum()) + "/"
+			if not os.path.exists(dir_path_folder):
+				os.mkdir(dir_path_folder)
+			dir_path = dir_path_folder + img_detail_url.rsplit("/", 1)[1]
+			await save(session, img_detail_url, dir_path)
+
+	else:
+		print("图片请求非200, {}".format(response))
+
+
+
+async def get(session, page):
+	url = path_mn + page
+	print("开始请求网页 : {}".format(url))
+	resp = await session.get(url, headers=get_random_ua())
+	if resp.status == 200:
+		source_text = await resp.text(encoding='utf-8')
+		soup = BeautifulSoup(source_text, "lxml")
+		tag_list = soup.find_all("a", target="_blank")
+		for tag in tag_list:
+			img_details = path_index[:-1] + tag.get("href")
+			img_name = tag.find_all("img")[0].get("alt")
+			for i in range(5):
+				img_details_page = ""
+				if i > 0 :
+					img_details_page = img_details.replace(".html", "_{}.html".format(i+1))
+
+				await get_details(session, img_details_page or img_details, img_name)
+
+	else:
+		print("请求非200, {}".format(resp))
+
+# 随机生成User-Agent
+def get_random_ua():
+	ua = UserAgent()        # 创建User-Agent对象
+	useragent = ua.random
+	headers = {"user-agent" : useragent}
+	return headers
+
+
+async def main():
+	headers = get_random_ua()
+	async with aiohttp.ClientSession(headers=headers) as session:
+		for page in range(100):
+			if page == 0:
+				u_path = ""
+			else:
+				u_path = "index_{}.html".format(page + 1)
+			await get(session, u_path)
+
+
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())

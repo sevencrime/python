@@ -1,0 +1,32 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import time
+
+from selenium import webdriver
+from bs4 import BeautifulSoup  
+from lxml import html
+
+
+driver = webdriver.Chrome('C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver')
+driver.set_page_load_timeout(5)
+driver.set_script_timeout(5)
+
+driver.get("https://www.zhihu.com/question/453323523/answer/1821676921")
+cookie = {"cookie": 'd_c0="AEApkkxSVw-PTqe953I8P8X_zHpfBANoFyA=|1556338083"; q_c1=203bc7b036ba4ed5a1df77c86ad2231e|1556338084000|1556338084000; _xsrf=T2KMai3N20UixTczedMKmycsdbSyoDiE; _ga=GA1.2.596108358.1582696942; _zap=dceb903b-179f-4bb4-9072-ef90a01b04f0; __snaker__id=1W0EXK8Vq59XlLor; captcha_session_v2="2|1:0|10:1620909198|18:captcha_session_v2|88:aGtNZUlTOXdTSG13b2sydW5nTGVLdWs1dSt1WUV3Tm5SWGRSenBST01IcDFybEZuRWVuWWV3Njgvb1NUV1MwSQ==|53b4d7aa8b30881faf7a9691b957a627d754623b433f3b5885390331e1430c3c"; SESSIONID=3B76wUaJdXvNx47OkSAjk19Xx2WWLrPykk42I9p7KBQ; JOID=Vl4cAE6Baobhtm2ICYZ52RR9cQ8VsCe70cA65knkMP-lyFi9SRxzF4a1YI0FgqMoeoVw3cTUd9FQJGKeHjJWayc=; osd=VF4VAkODao_ju2-IAIR02xR0cwIXsC653MI670vpMv-sylW_SRVxGoS1aY8IgKMheIhy3c3WetNQLWCTHDJfaSo=; gdxidpyhxdE=Q2ZRYNLjyoG1f6NooS4ZcLbVoXqXbNtD%5CC3YPtn1pu1kjmXAHk%5CSYB8ANNpBmhxGyzP5SlzhgJRAkYkCvjCOEZqmxDuMZdnMyzPsfm5EzORhbWTO9wMgUnh82bY%2FIXCvVL0BtAM5b5Dg0zUJeuHwJXpMkQn5aIqCbJ6wL6YPMVcCSl8n%3A1620910102601; _9755xjdesxxd_=32; YD00517437729195%3AWM_NI=%2F9TFvuY6SWhs9Fvgn4VqVvZ4T5wj7IgbTWksirMJa2vNfrTlAWgP9r%2BwFKMJ1tIL4rRm%2Bo8Ndw0phVdRqHZxF7zRHC5uKsl9IXrtLZhE9yCSi4Yg%2Br7we2VKkNUxOdw2VUc%3D; YD00517437729195%3AWM_NIKE=9ca17ae2e6ffcda170e2e6eeafe47483e89b9ae65e89b88aa7d84e839f8faef474abf0a68bb12185b9ffabd42af0fea7c3b92aede79ca7f57f9bea9db8eb79fb9aba88ed4096af9a97d94098ebb98bb643a5be9cb8ea79abae83abe43ab692aa93d7688389a9b1bc7ae9a98aacd042f3ac87adb77a92b3e590bb46a8a90091eb5ea88ebfa9d97486e9b6b3cb49f7ab8594ef338b88be95cf52ac9bf79ac259abec9788aa7af5a9abd3d541a9929b99ce70b5ee9ab6e237e2a3; YD00517437729195%3AWM_TID=t8TWJvTM3AZBREBQUFNrxmly3nrWlhJB; captcha_ticket_v2="2|1:0|10:1620909208|17:captcha_ticket_v2|704:eyJ2YWxpZGF0ZSI6IkNOMzFfT3BRVExBdkVJbmZwYWRhMi5KQkt0MjhVQlVsWDdINmtwVkNENnlSdzJmOWp4eE54dG9SWXU5dXROMWtSREtmQ0hvdml5RFE2NmlzWHhiQnpudG1ubnlvZkR6d0dJT2o0Nm1MVVNfaDQySUZfYmV6c29sLVpDOFc4MXJQby4yMEFWb1NSQ2xuWV9Va2U1S1N0cUVrWkJETXc2Rk14Y3J4Y3g1WWNQY3VnRXMyOXFJMkNWV1c5ZVhEalJIMjdwVmFRTUR2QVJhWExtWm5haWh6SnlPOW1LdDVxQkc4T2lkcGNFNy1Cbk1HeW1KRFJMSVI2Zmowb0RtbGJUU0ljZmlUbEkwblBDUTc2bE5kOEpVZkVXaGpNcVlBQWtJMFNMUmwtVy4yUWVTeENKQ0xxTVpkcnFwNWFNd1ZsejdKb2FiZzRHMjdKeEx2ZDc1bmFlQncxSlEuMTU3T1lCRUFNcWhmT0hWNl9vSmcydlBVbF9zUkxiTm5XTlgyYUpfR0JNeGdETmptSjctS0QteVBtcklYWTdzb3ZZTWxCRGlNZnc5LkswQ2NNcmpqME4xQWJ3UHdGTHBXdktBZmZ4VndvOHRUXzhsak01YkRnbW81TXMucV9DRUJmOXpwMWRLTldPWHV5a0lXdTRwdUJrUVQ5anRjeklGNTZpTElhYjdqMyJ9|06034ce292da5926fdc5e7994fe6ed1a589cc2527353ea6e8116cb21d697bf88"; z_c0="2|1:0|10:1620909226|4:z_c0|92:Mi4xU0NzNEF3QUFBQUFBUUNtU1RGSlhEeVlBQUFCZ0FsVk5xbXFLWVFEOGJzd2xWZkhNWkNFUmYwOGVwTXMtV2x0Zy1n|59ea0df0303b336527c87b8909e509c75fa47dc9d9cef7c3668da22300216406"; tst=r; Hm_lvt_98beee57fd2ef70ccdd5ca52b9740c49=1620920070,1620920368,1620920405,1620920930; Hm_lpvt_98beee57fd2ef70ccdd5ca52b9740c49=1620920930; KLBRSID=975d56862ba86eb589d21e89c8d1e74e|1620921726|1620907244'}
+
+driver.add_cookie(cookie)
+
+html = driver.page_source
+
+soup = BeautifulSoup(html, "lxml")
+img_tag = soup.select("figure img")
+for img in img_tag:
+	print(img)
+	print("##################33")
+
+
+
+time.sleep(5)
+print('结束脚本')
+driver.quit()
